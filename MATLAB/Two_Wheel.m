@@ -1,0 +1,106 @@
+%%%%%%%%%%%%%%%%TWO WHEEL%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+clc;
+clear all;
+close all;
+%% Initialization
+
+%define parameters
+syms g r d l m_b m_l m_w Gamma_w_xx Gamma_w_yy Gamma_w_zz Gamma_b_xx Gamma_b_yy Gamma_b_zz
+Gamma_w = diag([Gamma_w_xx Gamma_w_yy Gamma_w_zz]);
+Gamma_b = diag([Gamma_b_xx Gamma_b_yy Gamma_b_zz]);
+assume(g,'real');
+assume(r,'real');
+assume(d,'real');
+assume(l,'real');
+assume(m_b,'real');
+assume(m_l,'real');
+assume(m_w,'real');
+assume(Gamma_w,'real');
+assume(Gamma_b,'real');
+%define variables
+syms t p(t) theta_y(t) theta_z(t) f M_y M_z
+
+assume(t,'real');
+
+u = [p(t); theta_y(t); theta_z(t)];
+u_dot = arrayfun(@(ii) diff(u(ii),t),1:3);
+u_dot = conj(u_dot');
+u_ddot = arrayfun(@(ii) diff(u_dot(ii),t),1:3);
+u_ddot = conj(u_ddot');
+
+%define fisical variable
+syms theta_r(t) theta_l(t) M_r M_l
+q = [theta_r(t); theta_l(t)];
+% q_dot = T*u_dot
+T = [1/r -1 d/(2*r); 1/r -1 -d/2*r];
+T_inv = simplify(pinv(T));
+%tau = T_f * gamma
+T_f = [ Gamma_w_yy/(r*(2*m_w+m_b)) -1 Gamma_w_yy*d/(2*r*(Gamma_b_yy+Gamma_w_yy*d));
+        Gamma_w_yy/(r*(2*m_w+m_b)) -1 -Gamma_w_yy*d/(2*r*(Gamma_b_yy+Gamma_w_yy*d))];
+%% Kinematic
+
+
+
+%% Dynamic
+
+
+omega3 = [0; u_dot(2); u_dot(3)];
+
+% v1 = u_dot(1) + u_dot(3) * d/2;
+% v2 = u_dot(1) - u_dot(3) * d/2;
+v1 = norm([u_dot(1);0;0] + cross(omega3, [0;d/2;0]));
+v2 = norm([u_dot(1);0;0] + cross(omega3, [0;-d/2;0]));
+v3 = u_dot(1) + l*u_dot(2);     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Questionable
+
+omega1 = [0; v1/r; u_dot(3)];
+omega2 = [0; v2/r; u_dot(3)];
+
+v3_real = norm([u_dot(1);0;0]+ cross(omega3, [0;0;l]));
+
+K1 = 1/2 * m_w * v1^2 + 1/2 * omega1' * Gamma_w * omega1;
+K2 = 1/2 * m_w * v2^2 + 1/2 * omega2' * Gamma_w * omega2;
+K3 = 1/2 * m_b * v3_real^2 + 1/2 * omega3' * Gamma_b * omega3;
+
+K = K1 + K2 + K3;
+U = l*cos(u(2))*g;
+%% Lagrange
+
+L = simplify(K - U);
+L_latex = latex(L);
+
+for n = 1 : 3
+    dL_du_dot(n) = diff(L, u_dot(n));
+    dL_du(n) = diff(L,u(n));
+    DE(n) = simplify(diff(dL_du_dot(n),t));
+end
+dL_du = conj(dL_du');
+EL = simplify(DE - dL_du);
+EL_latex = latex(EL);
+
+% X={u(1), u_dot(1), u(2), u_dot(2),u(3), u_dot(3)};
+% Qi = {0 0 0};
+% % Qe = {(Gamma_w_yy*r*(m_b + 2*m_w)*(M_l + M_r))/(2*(Gamma_w_yy^2 + m_b^2*r^2 + 4*m_b*m_w*r^2 + 4*m_w^2*r^2))     -(r^2*(m_b + 2*m_w)^2*(M_l + M_r))/(2*(Gamma_w_yy^2 + m_b^2*r^2 + 4*m_b*m_w*r^2 + 4*m_w^2*r^2))     -(r*(M_l - M_r)*(Gamma_b_yy + Gamma_w_yy*d))/(Gamma_w_yy*d)};
+% Qe = {f M_y M_z};
+% R = 0;
+% par = {g r d l m_b m_l m_w Gamma_w_xx Gamma_w_yy Gamma_w_zz Gamma_b_xx Gamma_b_yy Gamma_b_zz};
+% VF  = EulerLagrange(L,X,Qi,Qe,R,par,'s','Two_Wheel_model');
+
+%From DE we ca+n build B
+
+B= [3*m_w+2*Gamma_w_yy/(2*r^2),   l*m_w,            0;
+   l*m_w,                  Gamma_b_yy+l^2*m_w,     0;
+    0                       0                       Gamma_b_zz+2*Gamma_w_zz+d^2*m_w/2+Gamma_w_yy*d^2/(2*r^2)];
+%C results to be 0
+%g
+G = [0;-g*l*sin(u(2));0];
+
+EL = B*u_ddot + G - [f; M_y; M_z] == zeros(3,1);
+
+[VF,Ysubs] = odeToVectorField(EL);
+
+par = {g r d l m_b m_l m_w Gamma_w_xx Gamma_w_yy Gamma_w_zz Gamma_b_xx Gamma_b_yy Gamma_b_zz};
+open_system("Two_Wheel_PI");
+matlabFunctionBlock("Two_Wheel_PI/Subsystem/Two_Wheel_model_block",VF,...
+    'vars',       [{'t','Y'}, f, M_y, M_z, par],...
+    'outputs',     {'dYdt'});
+save_system ("Two_Wheel_PI")
