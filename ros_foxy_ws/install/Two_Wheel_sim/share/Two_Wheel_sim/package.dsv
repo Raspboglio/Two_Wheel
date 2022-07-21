@@ -1,0 +1,4 @@
+source;share/Two_Wheel_sim/hook/cmake_prefix_path.dsv
+source;share/Two_Wheel_sim/hook/cmake_prefix_path.sh
+source;share/Two_Wheel_sim/local_setup.dsv
+source;share/Two_Wheel_sim/local_setup.sh
