@@ -38,6 +38,13 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/Two_Wheel_sim" TYPE DIRECTORY FILES
+    "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/Two_Wheel_sim/urdf"
+    "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/Two_Wheel_sim/launch"
+    )
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/Two_Wheel_sim/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/Two_Wheel_sim")
 endif()
 
