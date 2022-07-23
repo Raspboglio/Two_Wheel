@@ -1,0 +1,14 @@
+source;share/two_wheel_sim/hook/cmake_prefix_path.ps1
+source;share/two_wheel_sim/hook/cmake_prefix_path.dsv
+source;share/two_wheel_sim/hook/cmake_prefix_path.sh
+source;share/two_wheel_sim/hook/ld_library_path_lib.ps1
+source;share/two_wheel_sim/hook/ld_library_path_lib.dsv
+source;share/two_wheel_sim/hook/ld_library_path_lib.sh
+source;share/two_wheel_sim/hook/pythonpath.ps1
+source;share/two_wheel_sim/hook/pythonpath.dsv
+source;share/two_wheel_sim/hook/pythonpath.sh
+source;share/two_wheel_sim/local_setup.bash
+source;share/two_wheel_sim/local_setup.dsv
+source;share/two_wheel_sim/local_setup.ps1
+source;share/two_wheel_sim/local_setup.sh
+source;share/two_wheel_sim/local_setup.zsh

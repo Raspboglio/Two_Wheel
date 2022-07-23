@@ -1,0 +1,292 @@
+[0.304s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.304s] DEBUG:colcon:Parsed command line arguments: Namespace(allow_overriding=[], ament_cmake_args=None, base_paths=['.'], build_base='build', catkin_cmake_args=None, catkin_skip_building_tests=False, cmake_args=None, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, cmake_target=None, cmake_target_skip_unavailable=False, continue_on_error=False, event_handlers=None, executor='parallel', ignore_user_meta=False, install_base='install', log_base=None, log_level=None, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7f91ff8bcd00>>, merge_install=False, metas=['./colcon.meta'], packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=None, packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, parallel_workers=4, paths=None, symlink_install=False, test_result_base=None, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7f91ff8bcd00>, verb_name='build', verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f91ff8c72b0>)
+[0.358s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.358s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.359s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.359s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.359s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.359s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.359s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/lorenzo/Two_Wheel/ros_foxy_ws'
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.387s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.387s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.387s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.387s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.387s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.387s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.387s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.387s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.388s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.389s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) by extensions ['ignore', 'ignore_ament_install']
+[0.390s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) by extension 'ignore'
+[0.390s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) ignored
+[0.390s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) by extensions ['ignore', 'ignore_ament_install']
+[0.390s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) by extension 'ignore'
+[0.390s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) ignored
+[0.390s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) by extensions ['ignore', 'ignore_ament_install']
+[0.390s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) by extension 'ignore'
+[0.390s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) ignored
+[0.390s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control) by extensions ['ignore', 'ignore_ament_install']
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control) by extension 'ignore'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control) by extension 'ignore_ament_install'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control) by extensions ['colcon_pkg']
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control) by extension 'colcon_pkg'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control) by extensions ['colcon_meta']
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control) by extension 'colcon_meta'
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control) by extensions ['ros']
+[0.391s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control) by extension 'ros'
+[0.395s] DEBUG:colcon.colcon_core.package_identification:Package 'src/two_wheel_control' with type 'ros.ament_cmake' and name 'two_wheel_control'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control_msgs) by extension 'ignore'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control_msgs) by extension 'ignore_ament_install'
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control_msgs) by extensions ['colcon_pkg']
+[0.395s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control_msgs) by extension 'colcon_pkg'
+[0.396s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control_msgs) by extensions ['colcon_meta']
+[0.396s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control_msgs) by extension 'colcon_meta'
+[0.396s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control_msgs) by extensions ['ros']
+[0.396s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_control_msgs) by extension 'ros'
+[0.397s] DEBUG:colcon.colcon_core.package_identification:Package 'src/two_wheel_control_msgs' with type 'ros.ament_cmake' and name 'two_wheel_control_msgs'
+[0.397s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_sim) by extensions ['ignore', 'ignore_ament_install']
+[0.397s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_sim) by extension 'ignore'
+[0.397s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_sim) by extension 'ignore_ament_install'
+[0.397s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_sim) by extensions ['colcon_pkg']
+[0.397s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_sim) by extension 'colcon_pkg'
+[0.397s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_sim) by extensions ['colcon_meta']
+[0.397s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_sim) by extension 'colcon_meta'
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_sim) by extensions ['ros']
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/two_wheel_sim) by extension 'ros'
+[0.398s] DEBUG:colcon.colcon_core.package_identification:Package 'src/two_wheel_sim' with type 'ros.ament_cmake' and name 'two_wheel_sim'
+[0.398s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.398s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.398s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.399s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.399s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.432s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.432s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.435s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/Two_Wheel_sim' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.435s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/Two_Wheel_sim' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.439s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 3 installed packages in /home/lorenzo/Two_Wheel/ros_foxy_ws/install
+[0.444s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 270 installed packages in /opt/ros/foxy
+[0.446s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.587s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control_msgs' build argument 'cmake_args' from command line to 'None'
+[0.587s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control_msgs' build argument 'cmake_target' from command line to 'None'
+[0.587s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.587s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[0.587s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[0.587s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[0.587s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[0.587s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[0.587s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.587s] DEBUG:colcon.colcon_core.verb:Building package 'two_wheel_control_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs', 'merge_install': False, 'path': '/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control_msgs', 'symlink_install': False, 'test_result_base': None}
+[0.589s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_sim' build argument 'cmake_args' from command line to 'None'
+[0.589s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_sim' build argument 'cmake_target' from command line to 'None'
+[0.589s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_sim' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.589s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_sim' build argument 'cmake_clean_cache' from command line to 'False'
+[0.589s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_sim' build argument 'cmake_clean_first' from command line to 'False'
+[0.590s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_sim' build argument 'cmake_force_configure' from command line to 'False'
+[0.590s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_sim' build argument 'ament_cmake_args' from command line to 'None'
+[0.590s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_sim' build argument 'catkin_cmake_args' from command line to 'None'
+[0.590s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_sim' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.590s] DEBUG:colcon.colcon_core.verb:Building package 'two_wheel_sim' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim', 'merge_install': False, 'path': '/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim', 'symlink_install': False, 'test_result_base': None}
+[0.592s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control' build argument 'cmake_args' from command line to 'None'
+[0.592s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control' build argument 'cmake_target' from command line to 'None'
+[0.592s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.592s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control' build argument 'cmake_clean_cache' from command line to 'False'
+[0.592s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control' build argument 'cmake_clean_first' from command line to 'False'
+[0.592s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control' build argument 'cmake_force_configure' from command line to 'False'
+[0.592s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control' build argument 'ament_cmake_args' from command line to 'None'
+[0.592s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control' build argument 'catkin_cmake_args' from command line to 'None'
+[0.592s] Level 5:colcon.colcon_core.verb:set package 'two_wheel_control' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.592s] DEBUG:colcon.colcon_core.verb:Building package 'two_wheel_control' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control', 'merge_install': False, 'path': '/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control', 'symlink_install': False, 'test_result_base': None}
+[0.594s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.603s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.604s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control_msgs' with build type 'ament_cmake'
+[0.604s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control_msgs'
+[0.616s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.616s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.616s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.627s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim' with build type 'ament_cmake'
+[0.628s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim'
+[0.632s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.632s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.651s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs -- -j4 -l4
+[0.662s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim -- -j4 -l4
+[0.723s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim -- -j4 -l4
+[0.823s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim
+[0.860s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(two_wheel_sim)
+[0.861s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim
+[0.892s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim' for CMake module files
+[0.893s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim' for CMake config files
+[0.894s] Level 1:colcon.colcon_core.shell:create_environment_hook('two_wheel_sim', 'cmake_prefix_path')
+[0.901s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/hook/cmake_prefix_path.ps1'
+[0.902s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/hook/cmake_prefix_path.dsv'
+[0.903s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/hook/cmake_prefix_path.sh'
+[0.905s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/bin'
+[0.906s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/lib/pkgconfig/two_wheel_sim.pc'
+[0.906s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/lib/python3.8/site-packages'
+[0.907s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/bin'
+[0.913s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/package.ps1'
+[0.914s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/package.dsv'
+[0.915s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/package.sh'
+[0.916s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/package.bash'
+[0.917s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/package.zsh'
+[0.918s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/colcon-core/packages/two_wheel_sim)
+[0.968s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(two_wheel_sim)
+[0.977s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim' for CMake module files
+[0.978s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim' for CMake config files
+[0.979s] Level 1:colcon.colcon_core.shell:create_environment_hook('two_wheel_sim', 'cmake_prefix_path')
+[0.984s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/hook/cmake_prefix_path.ps1'
+[0.985s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/hook/cmake_prefix_path.dsv'
+[0.986s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/hook/cmake_prefix_path.sh'
+[0.987s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/bin'
+[0.987s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/lib/pkgconfig/two_wheel_sim.pc'
+[0.988s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/lib/python3.8/site-packages'
+[0.989s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/bin'
+[0.996s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/package.ps1'
+[0.997s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/package.dsv'
+[0.998s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/package.sh'
+[0.999s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/package.bash'
+[1.000s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/two_wheel_sim/package.zsh'
+[1.001s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim/share/colcon-core/packages/two_wheel_sim)
+[1.133s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs -- -j4 -l4
+[1.211s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs
+[1.294s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(two_wheel_control_msgs)
+[1.299s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs' for CMake module files
+[1.300s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs
+[1.301s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs' for CMake config files
+[1.301s] Level 1:colcon.colcon_core.shell:create_environment_hook('two_wheel_control_msgs', 'cmake_prefix_path')
+[1.304s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/cmake_prefix_path.ps1'
+[1.305s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/cmake_prefix_path.dsv'
+[1.306s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/cmake_prefix_path.sh'
+[1.307s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib'
+[1.307s] Level 1:colcon.colcon_core.shell:create_environment_hook('two_wheel_control_msgs', 'ld_library_path_lib')
+[1.311s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/ld_library_path_lib.ps1'
+[1.311s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/ld_library_path_lib.dsv'
+[1.312s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/ld_library_path_lib.sh'
+[1.313s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/bin'
+[1.313s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/pkgconfig/two_wheel_control_msgs.pc'
+[1.313s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages'
+[1.313s] Level 1:colcon.colcon_core.shell:create_environment_hook('two_wheel_control_msgs', 'pythonpath')
+[1.317s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/pythonpath.ps1'
+[1.318s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/pythonpath.dsv'
+[1.318s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/pythonpath.sh'
+[1.319s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/bin'
+[1.323s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.ps1'
+[1.324s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.dsv'
+[1.325s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.sh'
+[1.326s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.bash'
+[1.327s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.zsh'
+[1.327s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/colcon-core/packages/two_wheel_control_msgs)
+[1.401s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(two_wheel_control_msgs)
+[1.407s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs' for CMake module files
+[1.409s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs' for CMake config files
+[1.409s] Level 1:colcon.colcon_core.shell:create_environment_hook('two_wheel_control_msgs', 'cmake_prefix_path')
+[1.413s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/cmake_prefix_path.ps1'
+[1.413s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/cmake_prefix_path.dsv'
+[1.414s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/cmake_prefix_path.sh'
+[1.415s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib'
+[1.415s] Level 1:colcon.colcon_core.shell:create_environment_hook('two_wheel_control_msgs', 'ld_library_path_lib')
+[1.418s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/ld_library_path_lib.ps1'
+[1.419s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/ld_library_path_lib.dsv'
+[1.419s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/ld_library_path_lib.sh'
+[1.420s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/bin'
+[1.420s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/pkgconfig/two_wheel_control_msgs.pc'
+[1.420s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages'
+[1.420s] Level 1:colcon.colcon_core.shell:create_environment_hook('two_wheel_control_msgs', 'pythonpath')
+[1.424s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/pythonpath.ps1'
+[1.425s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/pythonpath.dsv'
+[1.425s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/hook/pythonpath.sh'
+[1.426s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/bin'
+[1.430s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.ps1'
+[1.432s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.dsv'
+[1.432s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.sh'
+[1.433s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.bash'
+[1.434s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.zsh'
+[1.434s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/colcon-core/packages/two_wheel_control_msgs)
+[1.435s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control' with build type 'ament_cmake'
+[1.435s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control'
+[1.438s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.438s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.463s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control -- -j4 -l4
+[1.529s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control -- -j4 -l4
+[1.566s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control
+[1.585s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(two_wheel_control)
+[1.593s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control' for CMake module files
+[1.594s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control
+[1.594s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control' for CMake config files
+[1.595s] Level 1:colcon.colcon_core.shell:create_environment_hook('two_wheel_control', 'cmake_prefix_path')
+[1.598s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/hook/cmake_prefix_path.ps1'
+[1.599s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/hook/cmake_prefix_path.dsv'
+[1.599s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/hook/cmake_prefix_path.sh'
+[1.600s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/bin'
+[1.600s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/lib/pkgconfig/two_wheel_control.pc'
+[1.600s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/lib/python3.8/site-packages'
+[1.601s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/bin'
+[1.604s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/package.ps1'
+[1.605s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/package.dsv'
+[1.606s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/package.sh'
+[1.607s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/package.bash'
+[1.607s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/package.zsh'
+[1.608s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/colcon-core/packages/two_wheel_control)
+[1.649s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(two_wheel_control)
+[1.655s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control' for CMake module files
+[1.656s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control' for CMake config files
+[1.657s] Level 1:colcon.colcon_core.shell:create_environment_hook('two_wheel_control', 'cmake_prefix_path')
+[1.660s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/hook/cmake_prefix_path.ps1'
+[1.661s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/hook/cmake_prefix_path.dsv'
+[1.661s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/hook/cmake_prefix_path.sh'
+[1.662s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/bin'
+[1.662s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/lib/pkgconfig/two_wheel_control.pc'
+[1.663s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/lib/python3.8/site-packages'
+[1.663s] Level 1:colcon.colcon_core.environment:checking '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/bin'
+[1.667s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/package.ps1'
+[1.667s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/package.dsv'
+[1.668s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/package.sh'
+[1.669s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/package.bash'
+[1.670s] INFO:colcon.colcon_core.shell:Creating package script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/two_wheel_control/package.zsh'
+[1.670s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control/share/colcon-core/packages/two_wheel_control)
+[1.671s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.672s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.672s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[1.672s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.684s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[1.684s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[1.684s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[1.715s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[1.718s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/local_setup.ps1'
+[1.720s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/_local_setup_util_ps1.py'
+[1.722s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/setup.ps1'
+[1.725s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/local_setup.sh'
+[1.726s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/_local_setup_util_sh.py'
+[1.727s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/setup.sh'
+[1.731s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/local_setup.bash'
+[1.732s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/setup.bash'
+[1.734s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/local_setup.zsh'
+[1.735s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/setup.zsh'

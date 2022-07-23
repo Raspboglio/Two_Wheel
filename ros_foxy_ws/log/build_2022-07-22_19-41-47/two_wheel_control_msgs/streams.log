@@ -1,0 +1,213 @@
+[0.041s] Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake /home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control_msgs -DCMAKE_INSTALL_PREFIX=/home/lorenzo/Two_Wheel/ros_foxy_ws/install
+[0.147s] -- The C compiler identification is GNU 9.4.0
+[0.327s] -- The CXX compiler identification is GNU 9.4.0
+[0.335s] -- Check for working C compiler: /usr/bin/cc
+[0.435s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.439s] -- Detecting C compiler ABI info
+[0.627s] -- Detecting C compiler ABI info - done
+[0.649s] -- Detecting C compile features
+[0.649s] -- Detecting C compile features - done
+[0.655s] -- Check for working CXX compiler: /usr/bin/c++
+[0.789s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.791s] -- Detecting CXX compiler ABI info
+[0.937s] -- Detecting CXX compiler ABI info - done
+[0.954s] -- Detecting CXX compile features
+[0.955s] -- Detecting CXX compile features - done
+[0.958s] -- Found ament_cmake: 0.9.9 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.994s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.994s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.349s] -- Found rosidl_default_generators: 1.0.1 (/opt/ros/foxy/share/rosidl_default_generators/cmake)
+[1.355s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.365s] -- Found rosidl_adapter: 1.2.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[1.524s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[1.565s] -- Found FastRTPS: /opt/ros/foxy/include  
+[1.692s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.776s] -- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+[1.966s] -- Found ament_cmake_ros: 0.9.2 (/opt/ros/foxy/share/ament_cmake_ros/cmake)
+[2.087s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.098s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.132s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") 
+[2.134s] -- Found python_cmake_module: 0.8.1 (/opt/ros/foxy/share/python_cmake_module/cmake)
+[2.173s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.8.so (found suitable version "3.8.10", minimum required is "3.5") 
+[2.173s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[2.174s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8
+[2.174s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+[2.211s] -- Found PythonExtra: .so  
+[2.281s] -- Found ament_lint_auto: 0.9.6 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+[2.313s] -- Added test 'copyright' to check source files copyright and LICENSE
+[2.320s] -- Added test 'lint_cmake' to check CMake code style
+[2.320s] -- Added test 'xmllint' to check XML markup files
+[2.331s] -- Configuring done
+[2.396s] -- Generating done
+[2.403s] -- Build files have been written to: /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs
+[2.420s] Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake /home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control_msgs -DCMAKE_INSTALL_PREFIX=/home/lorenzo/Two_Wheel/ros_foxy_ws/install
+[2.429s] Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs -- -j4 -l4
+[2.518s] [35m[1mScanning dependencies of target two_wheel_control_msgs__cpp[0m
+[2.560s] [  3%] [34m[1mGenerating C code for ROS interfaces[0m
+[2.638s] [  6%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[3.090s] [35m[1mScanning dependencies of target two_wheel_control_msgs__rosidl_generator_c[0m
+[3.093s] [  6%] Built target two_wheel_control_msgs__cpp
+[3.112s] [  9%] [32mBuilding C object CMakeFiles/two_wheel_control_msgs__rosidl_generator_c.dir/rosidl_generator_c/two_wheel_control_msgs/msg/detail/command__functions.c.o[0m
+[3.112s] [ 12%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[3.115s] [ 16%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[3.118s] [ 19%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[3.199s] [ 22%] [32m[1mLinking C shared library libtwo_wheel_control_msgs__rosidl_generator_c.so[0m
+[3.288s] [ 22%] Built target two_wheel_control_msgs__rosidl_generator_c
+[3.379s] [ 25%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[3.629s] [35m[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_cpp[0m
+[3.660s] [ 29%] [32mBuilding CXX object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/two_wheel_control_msgs/msg/command__type_support.cpp.o[0m
+[3.670s] [35m[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_introspection_cpp[0m
+[3.698s] [ 32%] [32mBuilding CXX object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/two_wheel_control_msgs/msg/detail/command__type_support.cpp.o[0m
+[3.735s] [35m[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp[0m
+[3.778s] [ 35%] [32mBuilding CXX object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/two_wheel_control_msgs/msg/detail/dds_fastrtps/command__type_support.cpp.o[0m
+[4.326s] [35m[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_introspection_c[0m
+[4.396s] [ 38%] [32mBuilding C object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/two_wheel_control_msgs/msg/detail/command__type_support.c.o[0m
+[4.424s] [ 41%] [32m[1mLinking CXX shared library libtwo_wheel_control_msgs__rosidl_typesupport_cpp.so[0m
+[4.510s] [ 45%] [32m[1mLinking C shared library libtwo_wheel_control_msgs__rosidl_typesupport_introspection_c.so[0m
+[4.673s] [ 45%] Built target two_wheel_control_msgs__rosidl_typesupport_cpp
+[4.698s] [ 45%] Built target two_wheel_control_msgs__rosidl_typesupport_introspection_c
+[4.761s] [ 48%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[4.769s] [ 51%] [32m[1mLinking CXX shared library libtwo_wheel_control_msgs__rosidl_typesupport_introspection_cpp.so[0m
+[5.052s] [ 51%] Built target two_wheel_control_msgs__rosidl_typesupport_introspection_cpp
+[5.246s] [ 54%] [32m[1mLinking CXX shared library libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp.so[0m
+[5.361s] [35m[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_c[0m
+[5.448s] [ 58%] [32mBuilding CXX object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/two_wheel_control_msgs/msg/command__type_support.cpp.o[0m
+[5.466s] [ 58%] Built target two_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp
+[5.486s] [ 61%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[5.494s] [ 64%] [32m[1mLinking CXX shared library libtwo_wheel_control_msgs__rosidl_typesupport_c.so[0m
+[5.559s] [ 64%] Built target two_wheel_control_msgs__rosidl_typesupport_c
+[5.838s] [35m[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_fastrtps_c[0m
+[5.862s] [ 67%] [32mBuilding CXX object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/two_wheel_control_msgs/msg/detail/command__type_support_c.cpp.o[0m
+[6.496s] [ 70%] [32m[1mLinking CXX shared library libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_c.so[0m
+[6.702s] [ 70%] Built target two_wheel_control_msgs__rosidl_typesupport_fastrtps_c
+[6.722s] [35m[1mScanning dependencies of target two_wheel_control_msgs[0m
+[6.743s] [ 70%] Built target two_wheel_control_msgs
+[6.758s] [35m[1mScanning dependencies of target two_wheel_control_msgs__py[0m
+[6.773s] [ 74%] [34m[1mGenerating Python code for ROS interfaces[0m
+[7.630s] [ 74%] Built target two_wheel_control_msgs__py
+[7.646s] [35m[1mScanning dependencies of target two_wheel_control_msgs__python[0m
+[7.690s] [ 77%] [32mBuilding C object CMakeFiles/two_wheel_control_msgs__python.dir/rosidl_generator_py/two_wheel_control_msgs/msg/_command_s.c.o[0m
+[7.845s] [ 80%] [32m[1mLinking C shared library rosidl_generator_py/two_wheel_control_msgs/libtwo_wheel_control_msgs__python.so[0m
+[7.903s] [ 80%] Built target two_wheel_control_msgs__python
+[7.923s] [35m[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_introspection_c__pyext[0m
+[7.924s] [35m[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_c__pyext[0m
+[7.926s] [35m[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_fastrtps_c__pyext[0m
+[7.978s] [ 83%] [32mBuilding C object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/two_wheel_control_msgs/_two_wheel_control_msgs_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[7.978s] [ 87%] [32mBuilding C object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/two_wheel_control_msgs/_two_wheel_control_msgs_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[7.980s] [ 90%] [32mBuilding C object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/two_wheel_control_msgs/_two_wheel_control_msgs_s.ep.rosidl_typesupport_c.c.o[0m
+[8.166s] [ 93%] [32m[1mLinking C shared library rosidl_generator_py/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so[0m
+[8.170s] [ 96%] [32m[1mLinking C shared library rosidl_generator_py/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so[0m
+[8.176s] [100%] [32m[1mLinking CXX shared library rosidl_generator_py/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so[0m
+[8.239s] [100%] Built target two_wheel_control_msgs__rosidl_typesupport_c__pyext
+[8.247s] [100%] Built target two_wheel_control_msgs__rosidl_typesupport_introspection_c__pyext
+[8.302s] [100%] Built target two_wheel_control_msgs__rosidl_typesupport_fastrtps_c__pyext
+[8.319s] Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs -- -j4 -l4
+[8.406s] Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs
+[8.425s] -- Install configuration: ""
+[8.425s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/ament_index/resource_index/rosidl_interfaces/two_wheel_control_msgs
+[8.425s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs
+[8.426s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg
+[8.426s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/command.h
+[8.426s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/rosidl_generator_c__visibility_control.h
+[8.426s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail
+[8.427s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__functions.h
+[8.427s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__functions.c
+[8.427s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__type_support.h
+[8.427s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__struct.h
+[8.428s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/environment/library_path.sh
+[8.428s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/environment/library_path.dsv
+[8.428s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_generator_c.so
+[8.429s] -- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_generator_c.so" to ""
+[8.429s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs
+[8.430s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg
+[8.430s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[8.430s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail
+[8.430s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__rosidl_typesupport_fastrtps_c.h
+[8.430s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_c.so
+[8.431s] -- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_c.so" to ""
+[8.431s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs
+[8.432s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg
+[8.432s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail
+[8.432s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__rosidl_typesupport_fastrtps_cpp.hpp
+[8.432s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/dds_fastrtps
+[8.432s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[8.433s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp.so
+[8.433s] -- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp.so" to ""
+[8.433s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs
+[8.434s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg
+[8.434s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[8.434s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail
+[8.434s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__type_support.c
+[8.435s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__rosidl_typesupport_introspection_c.h
+[8.436s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_introspection_c.so
+[8.436s] -- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_introspection_c.so" to ""
+[8.436s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_c.so
+[8.442s] -- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_c.so" to ""
+[8.442s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs
+[8.442s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg
+[8.443s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/command.hpp
+[8.443s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail
+[8.443s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__traits.hpp
+[8.443s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__builder.hpp
+[8.443s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__struct.hpp
+[8.443s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs
+[8.444s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg
+[8.444s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail
+[8.444s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__rosidl_typesupport_introspection_cpp.hpp
+[8.444s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/two_wheel_control_msgs/msg/detail/command__type_support.cpp
+[8.445s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_introspection_cpp.so
+[8.445s] -- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_introspection_cpp.so" to ""
+[8.445s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_cpp.so
+[8.445s] -- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__rosidl_typesupport_cpp.so" to ""
+[8.445s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/environment/pythonpath.sh
+[8.446s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/environment/pythonpath.dsv
+[8.446s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/__init__.py
+[8.491s] Compiling '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/__init__.py'...
+[8.497s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/msg
+[8.497s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/msg/__init__.py
+[8.497s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/msg/_command.py
+[8.497s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/msg/_command_s.c
+[8.498s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so
+[8.499s] -- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so" to ""
+[8.499s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so
+[8.500s] -- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so" to ""
+[8.501s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so
+[8.502s] -- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so" to ""
+[8.502s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__python.so
+[8.503s] -- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/libtwo_wheel_control_msgs__python.so" to ""
+[8.503s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/msg/Command.idl
+[8.503s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/msg/Command.msg
+[8.504s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/ament_index/resource_index/package_run_dependencies/two_wheel_control_msgs
+[8.504s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/ament_index/resource_index/parent_prefix_path/two_wheel_control_msgs
+[8.505s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/environment/ament_prefix_path.sh
+[8.505s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/environment/ament_prefix_path.dsv
+[8.505s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/environment/path.sh
+[8.506s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/environment/path.dsv
+[8.506s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/local_setup.bash
+[8.506s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/local_setup.sh
+[8.507s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/local_setup.zsh
+[8.507s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/local_setup.dsv
+[8.507s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/package.dsv
+[8.507s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/ament_index/resource_index/packages/two_wheel_control_msgs
+[8.508s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_generator_cExport.cmake
+[8.508s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_generator_cExport-noconfig.cmake
+[8.509s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_introspection_cExport.cmake
+[8.509s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[8.510s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_cExport.cmake
+[8.510s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_cExport-noconfig.cmake
+[8.510s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_generator_cppExport.cmake
+[8.511s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_introspection_cppExport.cmake
+[8.511s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[8.512s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_cppExport.cmake
+[8.512s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_cppExport-noconfig.cmake
+[8.512s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/rosidl_cmake-extras.cmake
+[8.512s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/ament_cmake_export_dependencies-extras.cmake
+[8.513s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/ament_cmake_export_libraries-extras.cmake
+[8.513s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/ament_cmake_export_targets-extras.cmake
+[8.513s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/ament_cmake_export_include_directories-extras.cmake
+[8.514s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[8.514s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[8.514s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgsConfig.cmake
+[8.515s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake/two_wheel_control_msgsConfig-version.cmake
+[8.515s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/package.xml
+[8.525s] Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs

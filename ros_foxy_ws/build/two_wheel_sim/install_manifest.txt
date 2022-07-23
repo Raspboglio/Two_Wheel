@@ -1,0 +1,17 @@
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/urdf/two_wheel.xacro.urdf
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/launch/two_wheel_sim.launch.py
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/ament_index/resource_index/package_run_dependencies/two_wheel_sim
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/ament_index/resource_index/parent_prefix_path/two_wheel_sim
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/environment/ament_prefix_path.sh
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/environment/ament_prefix_path.dsv
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/environment/path.sh
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/environment/path.dsv
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/local_setup.bash
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/local_setup.sh
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/local_setup.zsh
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/local_setup.dsv
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/package.dsv
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/ament_index/resource_index/packages/two_wheel_sim
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/cmake/two_wheel_simConfig.cmake
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/cmake/two_wheel_simConfig-version.cmake
+/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_sim/package.xml

@@ -1,0 +1,4 @@
+Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim -- -j4 -l4
+Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim -- -j4 -l4
+Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim
+Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim

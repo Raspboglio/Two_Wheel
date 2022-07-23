@@ -1,0 +1,278 @@
+[0.000000] (-) TimerEvent: {}
+[0.000589] (-) JobUnselected: {'identifier': 'two_wheel_control'}
+[0.000673] (-) JobUnselected: {'identifier': 'two_wheel_sim'}
+[0.001016] (two_wheel_control_msgs) JobQueued: {'identifier': 'two_wheel_control_msgs', 'dependencies': OrderedDict()}
+[0.001299] (two_wheel_control_msgs) JobStarted: {'identifier': 'two_wheel_control_msgs'}
+[0.024124] (two_wheel_control_msgs) JobProgress: {'identifier': 'two_wheel_control_msgs', 'progress': 'cmake'}
+[0.025137] (two_wheel_control_msgs) JobProgress: {'identifier': 'two_wheel_control_msgs', 'progress': 'build'}
+[0.026021] (two_wheel_control_msgs) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs', '--', '-j4', '-l4'], 'cwd': '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'it:en'), ('USER', 'lorenzo'), ('LC_TIME', 'en_US.UTF-8'), ('SSH_AGENT_PID', '2467'), ('XDG_SESSION_TYPE', 'x11'), ('KIGITHUB', 'https://github.com/KiCad'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib'), ('HOME', '/home/lorenzo'), ('OLDPWD', '/home/lorenzo/Two_Wheel/ros_foxy_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'en_US.UTF-8'), ('MANAGERPID', '2284'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('QSYS_ROOTDIR', '/home/lorenzo/intelFPGA_lite/20.1/quartus/sopc_builder/bin'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3426'), ('MANDATORY_PATH', '/usr/share/gconf/ubuntu.mandatory.path'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/lorenzo/Two_Wheel/ros_foxy_ws/install'), ('ROS_DISTRO', 'foxy'), ('LOGNAME', 'lorenzo'), ('ALACRITTY_SOCKET', '/run/user/1000/Alacritty-:0-3426.sock'), ('WINDOWID', '14680068'), ('JOURNAL_STREAM', '9:54182'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('DEFAULTS_PATH', '/usr/share/gconf/ubuntu.default.path'), ('USERNAME', 'lorenzo'), ('TERM', 'xterm-256color'), ('ALACRITTY_LOG', '/tmp/Alacritty-3426.log'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/foxy/bin:/home/lorenzo/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('SESSION_MANAGER', 'local/lorenzo-ThinkPad-X1-Carbon-3rd:@/tmp/.ICE-unix/2511,unix/lorenzo-ThinkPad-X1-Carbon-3rd:/tmp/.ICE-unix/2511'), ('INVOCATION_ID', 'ede0f7e740f24cebb3980dfdf9721fe8'), ('PAPERSIZE', 'letter'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'en_US.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'it_IT.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'en_US.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/Two_Wheel_sim:/opt/ros/foxy'), ('SHELL', '/bin/bash'), ('LC_NAME', 'en_US.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('_JAVA_AWT_WM_NONREPARENTING', '1;'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'en_US.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('LC_IDENTIFICATION', 'en_US.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs'), ('KICAD_PATH', '/usr/share/kicad'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('LC_NUMERIC', 'en_US.UTF-8'), ('LC_PAPER', 'en_US.UTF-8'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/Two_Wheel_sim:/opt/ros/foxy')]), 'shell': False}
+[0.064056] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Found ament_cmake: 0.9.9 (/opt/ros/foxy/share/ament_cmake/cmake)\n'}
+[0.092400] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[0.099446] (-) TimerEvent: {}
+[0.199852] (-) TimerEvent: {}
+[0.300222] (-) TimerEvent: {}
+[0.380092] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.0.1 (/opt/ros/foxy/share/rosidl_default_generators/cmake)\n'}
+[0.383407] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.388155] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Found rosidl_adapter: 1.2.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)\n'}
+[0.400335] (-) TimerEvent: {}
+[0.500737] (-) TimerEvent: {}
+[0.573981] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.600858] (-) TimerEvent: {}
+[0.649903] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") \n'}
+[0.700977] (-) TimerEvent: {}
+[0.802061] (-) TimerEvent: {}
+[0.811055] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.9.2 (/opt/ros/foxy/share/ament_cmake_ros/cmake)\n'}
+[0.902171] (-) TimerEvent: {}
+[0.934685] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.946551] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.979954] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") \n'}
+[0.982910] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Found python_cmake_module: 0.8.1 (/opt/ros/foxy/share/python_cmake_module/cmake)\n'}
+[1.002295] (-) TimerEvent: {}
+[1.024608] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.8.so (found suitable version "3.8.10", minimum required is "3.5") \n'}
+[1.025211] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[1.025506] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8\n'}
+[1.025765] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.8.so\n'}
+[1.053962] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Found PythonExtra: .so  \n'}
+[1.102409] (-) TimerEvent: {}
+[1.109470] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.9.6 (/opt/ros/foxy/share/ament_lint_auto/cmake)\n'}
+[1.131213] (two_wheel_control_msgs) StdoutLine: {'line': b"-- Added test 'copyright' to check source files copyright and LICENSE\n"}
+[1.133707] (two_wheel_control_msgs) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[1.135146] (two_wheel_control_msgs) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[1.141247] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Configuring done\n'}
+[1.196083] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Generating done\n'}
+[1.202521] (-) TimerEvent: {}
+[1.203991] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Build files have been written to: /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs\n'}
+[1.239962] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__cpp\x1b[0m\n'}
+[1.244864] (two_wheel_control_msgs) StdoutLine: {'line': b'[  3%] \x1b[34m\x1b[1mGenerating C code for ROS interfaces\x1b[0m\n'}
+[1.255479] (two_wheel_control_msgs) StdoutLine: {'line': b'[  6%] \x1b[34m\x1b[1mGenerating C++ code for ROS interfaces\x1b[0m\n'}
+[1.302636] (-) TimerEvent: {}
+[1.405115] (-) TimerEvent: {}
+[1.505467] (-) TimerEvent: {}
+[1.605864] (-) TimerEvent: {}
+[1.706800] (-) TimerEvent: {}
+[1.808892] (-) TimerEvent: {}
+[1.909221] (-) TimerEvent: {}
+[1.924299] (two_wheel_control_msgs) StdoutLine: {'line': b'[  6%] Built target two_wheel_control_msgs__cpp\n'}
+[1.942042] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__rosidl_generator_c\x1b[0m\n'}
+[1.943240] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 12%] \x1b[34m\x1b[1mGenerating C++ introspection for ROS interfaces\x1b[0m\n'}
+[1.943597] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 12%] \x1b[34m\x1b[1mGenerating C++ type support dispatch for ROS interfaces\x1b[0m\n'}
+[1.945440] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 16%] \x1b[34m\x1b[1mGenerating C++ type support for eProsima Fast-RTPS\x1b[0m\n'}
+[1.971394] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 19%] \x1b[32mBuilding C object CMakeFiles/two_wheel_control_msgs__rosidl_generator_c.dir/rosidl_generator_c/two_wheel_control_msgs/msg/detail/command__functions.c.o\x1b[0m\n'}
+[2.009321] (-) TimerEvent: {}
+[2.058073] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 22%] \x1b[32m\x1b[1mLinking C shared library libtwo_wheel_control_msgs__rosidl_generator_c.so\x1b[0m\n'}
+[2.109432] (-) TimerEvent: {}
+[2.209831] (-) TimerEvent: {}
+[2.212106] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 22%] Built target two_wheel_control_msgs__rosidl_generator_c\n'}
+[2.295416] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 25%] \x1b[34m\x1b[1mGenerating C introspection for ROS interfaces\x1b[0m\n'}
+[2.309939] (-) TimerEvent: {}
+[2.410390] (-) TimerEvent: {}
+[2.511287] (-) TimerEvent: {}
+[2.611778] (-) TimerEvent: {}
+[2.635015] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_cpp\x1b[0m\n'}
+[2.649142] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp\x1b[0m\n'}
+[2.677124] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_introspection_cpp\x1b[0m\n'}
+[2.683157] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 29%] \x1b[32mBuilding CXX object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/two_wheel_control_msgs/msg/command__type_support.cpp.o\x1b[0m\n'}
+[2.702296] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 32%] \x1b[32mBuilding CXX object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/two_wheel_control_msgs/msg/detail/dds_fastrtps/command__type_support.cpp.o\x1b[0m\n'}
+[2.709894] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 35%] \x1b[32mBuilding CXX object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/two_wheel_control_msgs/msg/detail/command__type_support.cpp.o\x1b[0m\n'}
+[2.711886] (-) TimerEvent: {}
+[2.812251] (-) TimerEvent: {}
+[2.913154] (-) TimerEvent: {}
+[3.013589] (-) TimerEvent: {}
+[3.102345] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_introspection_c\x1b[0m\n'}
+[3.114055] (-) TimerEvent: {}
+[3.186528] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 38%] \x1b[32mBuilding C object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/two_wheel_control_msgs/msg/detail/command__type_support.c.o\x1b[0m\n'}
+[3.214193] (-) TimerEvent: {}
+[3.314628] (-) TimerEvent: {}
+[3.374727] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 41%] \x1b[32m\x1b[1mLinking C shared library libtwo_wheel_control_msgs__rosidl_typesupport_introspection_c.so\x1b[0m\n'}
+[3.414763] (-) TimerEvent: {}
+[3.461299] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 45%] \x1b[32m\x1b[1mLinking CXX shared library libtwo_wheel_control_msgs__rosidl_typesupport_cpp.so\x1b[0m\n'}
+[3.494194] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 45%] Built target two_wheel_control_msgs__rosidl_typesupport_introspection_c\n'}
+[3.514884] (-) TimerEvent: {}
+[3.522433] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 48%] \x1b[34m\x1b[1mGenerating C type support dispatch for ROS interfaces\x1b[0m\n'}
+[3.607310] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 48%] Built target two_wheel_control_msgs__rosidl_typesupport_cpp\n'}
+[3.615002] (-) TimerEvent: {}
+[3.622346] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 51%] \x1b[32m\x1b[1mLinking CXX shared library libtwo_wheel_control_msgs__rosidl_typesupport_introspection_cpp.so\x1b[0m\n'}
+[3.715144] (-) TimerEvent: {}
+[3.774979] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 51%] Built target two_wheel_control_msgs__rosidl_typesupport_introspection_cpp\n'}
+[3.815244] (-) TimerEvent: {}
+[3.917378] (-) TimerEvent: {}
+[3.973550] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 54%] \x1b[32m\x1b[1mLinking CXX shared library libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp.so\x1b[0m\n'}
+[4.017499] (-) TimerEvent: {}
+[4.083670] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_c\x1b[0m\n'}
+[4.109023] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 58%] \x1b[32mBuilding CXX object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/two_wheel_control_msgs/msg/command__type_support.cpp.o\x1b[0m\n'}
+[4.117622] (-) TimerEvent: {}
+[4.168899] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 61%] \x1b[32m\x1b[1mLinking CXX shared library libtwo_wheel_control_msgs__rosidl_typesupport_c.so\x1b[0m\n'}
+[4.169411] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 61%] Built target two_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp\n'}
+[4.187403] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 64%] \x1b[34m\x1b[1mGenerating C type support for eProsima Fast-RTPS\x1b[0m\n'}
+[4.217748] (-) TimerEvent: {}
+[4.249134] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 64%] Built target two_wheel_control_msgs__rosidl_typesupport_c\n'}
+[4.317862] (-) TimerEvent: {}
+[4.418266] (-) TimerEvent: {}
+[4.518622] (-) TimerEvent: {}
+[4.616606] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_fastrtps_c\x1b[0m\n'}
+[4.618744] (-) TimerEvent: {}
+[4.644570] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 67%] \x1b[32mBuilding CXX object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/two_wheel_control_msgs/msg/detail/command__type_support_c.cpp.o\x1b[0m\n'}
+[4.718858] (-) TimerEvent: {}
+[4.820859] (-) TimerEvent: {}
+[4.926137] (-) TimerEvent: {}
+[5.026560] (-) TimerEvent: {}
+[5.127004] (-) TimerEvent: {}
+[5.168100] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 70%] \x1b[32m\x1b[1mLinking CXX shared library libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_c.so\x1b[0m\n'}
+[5.227189] (-) TimerEvent: {}
+[5.309157] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 70%] Built target two_wheel_control_msgs__rosidl_typesupport_fastrtps_c\n'}
+[5.327093] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs\x1b[0m\n'}
+[5.327637] (-) TimerEvent: {}
+[5.344130] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 70%] Built target two_wheel_control_msgs\n'}
+[5.363088] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__py\x1b[0m\n'}
+[5.382239] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 74%] \x1b[34m\x1b[1mGenerating Python code for ROS interfaces\x1b[0m\n'}
+[5.427746] (-) TimerEvent: {}
+[5.528271] (-) TimerEvent: {}
+[5.628604] (-) TimerEvent: {}
+[5.728942] (-) TimerEvent: {}
+[5.829271] (-) TimerEvent: {}
+[5.929624] (-) TimerEvent: {}
+[6.031487] (-) TimerEvent: {}
+[6.131836] (-) TimerEvent: {}
+[6.232215] (-) TimerEvent: {}
+[6.268448] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 74%] Built target two_wheel_control_msgs__py\n'}
+[6.286541] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__python\x1b[0m\n'}
+[6.332319] (-) TimerEvent: {}
+[6.337031] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 77%] \x1b[32mBuilding C object CMakeFiles/two_wheel_control_msgs__python.dir/rosidl_generator_py/two_wheel_control_msgs/msg/_command_s.c.o\x1b[0m\n'}
+[6.432438] (-) TimerEvent: {}
+[6.507210] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 80%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/two_wheel_control_msgs/libtwo_wheel_control_msgs__python.so\x1b[0m\n'}
+[6.532555] (-) TimerEvent: {}
+[6.563533] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 80%] Built target two_wheel_control_msgs__python\n'}
+[6.582600] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_introspection_c__pyext\x1b[0m\n'}
+[6.583032] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_fastrtps_c__pyext\x1b[0m\n'}
+[6.585929] (two_wheel_control_msgs) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target two_wheel_control_msgs__rosidl_typesupport_c__pyext\x1b[0m\n'}
+[6.632675] (-) TimerEvent: {}
+[6.633429] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 83%] \x1b[32mBuilding C object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/two_wheel_control_msgs/_two_wheel_control_msgs_s.ep.rosidl_typesupport_fastrtps_c.c.o\x1b[0m\n'}
+[6.633833] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 87%] \x1b[32mBuilding C object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/two_wheel_control_msgs/_two_wheel_control_msgs_s.ep.rosidl_typesupport_introspection_c.c.o\x1b[0m\n'}
+[6.638284] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 90%] \x1b[32mBuilding C object CMakeFiles/two_wheel_control_msgs__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/two_wheel_control_msgs/_two_wheel_control_msgs_s.ep.rosidl_typesupport_c.c.o\x1b[0m\n'}
+[6.732798] (-) TimerEvent: {}
+[6.816957] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 93%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[6.832927] (-) TimerEvent: {}
+[6.834376] (two_wheel_control_msgs) StdoutLine: {'line': b'[ 96%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[6.845421] (two_wheel_control_msgs) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX shared library rosidl_generator_py/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[6.893313] (two_wheel_control_msgs) StdoutLine: {'line': b'[100%] Built target two_wheel_control_msgs__rosidl_typesupport_introspection_c__pyext\n'}
+[6.903773] (two_wheel_control_msgs) StdoutLine: {'line': b'[100%] Built target two_wheel_control_msgs__rosidl_typesupport_c__pyext\n'}
+[6.933044] (-) TimerEvent: {}
+[6.977375] (two_wheel_control_msgs) StdoutLine: {'line': b'[100%] Built target two_wheel_control_msgs__rosidl_typesupport_fastrtps_c__pyext\n'}
+[6.993048] (two_wheel_control_msgs) CommandEnded: {'returncode': 0}
+[7.033193] (-) TimerEvent: {}
+[7.080784] (two_wheel_control_msgs) JobProgress: {'identifier': 'two_wheel_control_msgs', 'progress': 'install'}
+[7.095708] (two_wheel_control_msgs) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs'], 'cwd': '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'it:en'), ('USER', 'lorenzo'), ('LC_TIME', 'en_US.UTF-8'), ('SSH_AGENT_PID', '2467'), ('XDG_SESSION_TYPE', 'x11'), ('KIGITHUB', 'https://github.com/KiCad'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib'), ('HOME', '/home/lorenzo'), ('OLDPWD', '/home/lorenzo/Two_Wheel/ros_foxy_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'en_US.UTF-8'), ('MANAGERPID', '2284'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('QSYS_ROOTDIR', '/home/lorenzo/intelFPGA_lite/20.1/quartus/sopc_builder/bin'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3426'), ('MANDATORY_PATH', '/usr/share/gconf/ubuntu.mandatory.path'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/lorenzo/Two_Wheel/ros_foxy_ws/install'), ('ROS_DISTRO', 'foxy'), ('LOGNAME', 'lorenzo'), ('ALACRITTY_SOCKET', '/run/user/1000/Alacritty-:0-3426.sock'), ('WINDOWID', '14680068'), ('JOURNAL_STREAM', '9:54182'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('DEFAULTS_PATH', '/usr/share/gconf/ubuntu.default.path'), ('USERNAME', 'lorenzo'), ('TERM', 'xterm-256color'), ('ALACRITTY_LOG', '/tmp/Alacritty-3426.log'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/foxy/bin:/home/lorenzo/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'), ('SESSION_MANAGER', 'local/lorenzo-ThinkPad-X1-Carbon-3rd:@/tmp/.ICE-unix/2511,unix/lorenzo-ThinkPad-X1-Carbon-3rd:/tmp/.ICE-unix/2511'), ('INVOCATION_ID', 'ede0f7e740f24cebb3980dfdf9721fe8'), ('PAPERSIZE', 'letter'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'en_US.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'it_IT.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'en_US.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/Two_Wheel_sim:/opt/ros/foxy'), ('SHELL', '/bin/bash'), ('LC_NAME', 'en_US.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('_JAVA_AWT_WM_NONREPARENTING', '1;'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'en_US.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('LC_IDENTIFICATION', 'en_US.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs'), ('KICAD_PATH', '/usr/share/kicad'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('LC_NUMERIC', 'en_US.UTF-8'), ('LC_PAPER', 'en_US.UTF-8'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/Two_Wheel_sim:/opt/ros/foxy')]), 'shell': False}
+[7.111169] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[7.111629] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/ament_index/resource_index/rosidl_interfaces/two_wheel_control_msgs\n'}
+[7.111978] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs\n'}
+[7.112373] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg\n'}
+[7.112697] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/command.h\n'}
+[7.113048] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/rosidl_generator_c__visibility_control.h\n'}
+[7.113385] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail\n'}
+[7.113714] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__functions.h\n'}
+[7.114101] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__functions.c\n'}
+[7.114507] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__type_support.h\n'}
+[7.114948] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__struct.h\n'}
+[7.115621] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/environment/library_path.sh\n'}
+[7.116218] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/environment/library_path.dsv\n'}
+[7.119557] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_generator_c.so\n'}
+[7.119999] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_generator_c.so" to ""\n'}
+[7.120294] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs\n'}
+[7.120639] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg\n'}
+[7.120967] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[7.121259] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail\n'}
+[7.122193] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__rosidl_typesupport_fastrtps_c.h\n'}
+[7.122789] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_c.so\n'}
+[7.123150] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_c.so" to ""\n'}
+[7.123543] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs\n'}
+[7.123927] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg\n'}
+[7.124215] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail\n'}
+[7.124517] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[7.124920] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/dds_fastrtps\n'}
+[7.125219] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[7.125505] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp.so\n'}
+[7.126050] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_fastrtps_cpp.so" to ""\n'}
+[7.126613] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs\n'}
+[7.126905] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg\n'}
+[7.127318] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[7.127723] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail\n'}
+[7.128188] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__type_support.c\n'}
+[7.128692] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__rosidl_typesupport_introspection_c.h\n'}
+[7.129053] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_introspection_c.so\n'}
+[7.129578] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_introspection_c.so" to ""\n'}
+[7.130206] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_c.so\n'}
+[7.130827] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_c.so" to ""\n'}
+[7.131378] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs\n'}
+[7.131639] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg\n'}
+[7.131979] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/command.hpp\n'}
+[7.132274] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail\n'}
+[7.132506] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__traits.hpp\n'}
+[7.133105] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__builder.hpp\n'}
+[7.133494] (-) TimerEvent: {}
+[7.134697] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__struct.hpp\n'}
+[7.135027] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs\n'}
+[7.135343] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg\n'}
+[7.136322] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail\n'}
+[7.136697] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__rosidl_typesupport_introspection_cpp.hpp\n'}
+[7.137217] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/include/two_wheel_control_msgs/msg/detail/command__type_support.cpp\n'}
+[7.137714] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_introspection_cpp.so\n'}
+[7.137962] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_introspection_cpp.so" to ""\n'}
+[7.138658] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_cpp.so\n'}
+[7.139004] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__rosidl_typesupport_cpp.so" to ""\n'}
+[7.139486] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/environment/pythonpath.sh\n'}
+[7.139954] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/environment/pythonpath.dsv\n'}
+[7.140718] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/__init__.py\n'}
+[7.216123] (two_wheel_control_msgs) StdoutLine: {'line': b"Compiling '/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/__init__.py'...\n"}
+[7.225088] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/msg\n'}
+[7.225464] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/msg/__init__.py\n'}
+[7.225736] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/msg/_command.py\n'}
+[7.226056] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/msg/_command_s.c\n'}
+[7.226506] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so\n'}
+[7.227366] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so" to ""\n'}
+[7.227736] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so\n'}
+[7.228585] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so" to ""\n'}
+[7.228911] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so\n'}
+[7.229683] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/python3.8/site-packages/two_wheel_control_msgs/two_wheel_control_msgs_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so" to ""\n'}
+[7.230008] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__python.so\n'}
+[7.230426] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Set runtime path of "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/lib/libtwo_wheel_control_msgs__python.so" to ""\n'}
+[7.230707] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/msg/Command.idl\n'}
+[7.230958] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/msg/Command.msg\n'}
+[7.231261] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/ament_index/resource_index/package_run_dependencies/two_wheel_control_msgs\n'}
+[7.231551] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/ament_index/resource_index/parent_prefix_path/two_wheel_control_msgs\n'}
+[7.231842] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/environment/ament_prefix_path.sh\n'}
+[7.232121] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/environment/ament_prefix_path.dsv\n'}
+[7.232371] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/environment/path.sh\n'}
+[7.232626] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/environment/path.dsv\n'}
+[7.232886] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/local_setup.bash\n'}
+[7.233177] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/local_setup.sh\n'}
+[7.233435] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/local_setup.zsh\n'}
+[7.233673] (-) TimerEvent: {}
+[7.235737] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/local_setup.dsv\n'}
+[7.236092] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.dsv\n'}
+[7.236339] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/ament_index/resource_index/packages/two_wheel_control_msgs\n'}
+[7.236679] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_generator_cExport.cmake\n'}
+[7.236977] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_generator_cExport-noconfig.cmake\n'}
+[7.237278] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_introspection_cExport.cmake\n'}
+[7.237527] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[7.237824] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_cExport.cmake\n'}
+[7.238042] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[7.238307] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_generator_cppExport.cmake\n'}
+[7.238591] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[7.238811] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[7.239030] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_cppExport.cmake\n'}
+[7.239375] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgs__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[7.239592] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/rosidl_cmake-extras.cmake\n'}
+[7.239850] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[7.240103] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[7.240347] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[7.243204] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[7.256951] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[7.257380] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[7.257778] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgsConfig.cmake\n'}
+[7.258071] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/cmake/two_wheel_control_msgsConfig-version.cmake\n'}
+[7.258473] (two_wheel_control_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs/share/two_wheel_control_msgs/package.xml\n'}
+[7.259869] (two_wheel_control_msgs) CommandEnded: {'returncode': 0}
+[7.333878] (-) TimerEvent: {}
+[7.434765] (-) TimerEvent: {}
+[7.530130] (two_wheel_control_msgs) JobEnded: {'identifier': 'two_wheel_control_msgs', 'rc': 0}
+[7.532031] (-) EventReactorShutdown: {}

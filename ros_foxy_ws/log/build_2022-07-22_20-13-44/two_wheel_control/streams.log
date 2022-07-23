@@ -1,0 +1,40 @@
+[0.019s] Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control': AMENT_PREFIX_PATH=/home/lorenzo/Two_Wheel/ros_foxy_ws/install:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/lorenzo/Two_Wheel/ros_foxy_ws/install:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/Two_Wheel_sim:/opt/ros/foxy LD_LIBRARY_PATH=/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control -- -j4 -l4
+[0.058s] -- Found ament_cmake: 0.9.9 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.090s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.399s] -- Found ros2_control: 0.10.1 (/opt/ros/foxy/share/ros2_control/cmake)
+[0.399s] -- Found rclcpp: 2.4.1 (/opt/ros/foxy/share/rclcpp/cmake)
+[0.449s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.454s] -- Found rosidl_adapter: 1.2.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[0.593s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.665s] -- Found rmw_implementation_cmake: 1.0.3 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[0.667s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.868s] -- Found controller_interface: 0.10.1 (/opt/ros/foxy/share/controller_interface/cmake)
+[1.723s] -- Found two_wheel_control_msgs: 0.0.0 (/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake)
+[1.784s] -- Found ament_lint_auto: 0.9.6 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+[1.876s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.877s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.877s] -- Configured cppcheck include dirs: /home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/include
+[1.878s] -- Configured cppcheck exclude dirs and/or files: 
+[1.879s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.879s] -- Configured cpplint exclude dirs and/or files: 
+[1.879s] -- Added test 'lint_cmake' to check CMake code style
+[1.880s] -- Added test 'uncrustify' to check C / C++ code style
+[1.881s] -- Configured uncrustify additional arguments: 
+[1.881s] -- Added test 'xmllint' to check XML markup files
+[1.887s] -- Configuring done
+[1.888s] CMake Error at CMakeLists.txt:31 (add_library):
+[1.888s]   Cannot find source file:
+[1.888s] 
+[1.888s]     src/two_wheel_ID_control.cpp
+[1.888s] 
+[1.889s]   Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
+[1.889s]   .hpp .hxx .in .txx
+[1.889s] 
+[1.889s] 
+[1.890s] CMake Error at CMakeLists.txt:31 (add_library):
+[1.890s]   No SOURCES given to target: two_wheel_control
+[1.891s] 
+[1.891s] 
+[1.891s] CMake Generate step failed.  Build files cannot be regenerated correctly.
+[1.899s] make: *** [Makefile:222: cmake_check_build_system] Errore 1
+[1.901s] Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control' returned '2': AMENT_PREFIX_PATH=/home/lorenzo/Two_Wheel/ros_foxy_ws/install:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/lorenzo/Two_Wheel/ros_foxy_ws/install:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control_msgs:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_control:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim:/home/lorenzo/Two_Wheel/ros_foxy_ws/install/Two_Wheel_sim:/opt/ros/foxy LD_LIBRARY_PATH=/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control -- -j4 -l4

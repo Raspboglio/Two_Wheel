@@ -1,0 +1,31 @@
+[0.023s] Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake /home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim -DCMAKE_INSTALL_PREFIX=/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim
+[0.099s] -- The C compiler identification is GNU 9.4.0
+[0.168s] -- The CXX compiler identification is GNU 9.4.0
+[0.174s] -- Check for working C compiler: /usr/bin/cc
+[0.259s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.261s] -- Detecting C compiler ABI info
+[0.344s] -- Detecting C compiler ABI info - done
+[0.359s] -- Detecting C compile features
+[0.359s] -- Detecting C compile features - done
+[0.362s] -- Check for working CXX compiler: /usr/bin/c++
+[0.459s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.461s] -- Detecting CXX compiler ABI info
+[0.566s] -- Detecting CXX compiler ABI info - done
+[0.585s] -- Detecting CXX compile features
+[0.585s] -- Detecting CXX compile features - done
+[0.588s] -- Found ament_cmake: 0.9.9 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.621s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.621s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.916s] -- Found ament_lint_auto: 0.9.6 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+[0.988s] CMake Error at /opt/ros/foxy/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:53 (message):
+[0.989s]   ament_package_xml() package name 'two_wheel_sim' in '/package.xml' does not
+[0.989s]   match current PROJECT_NAME 'Two_Wheel_sim'.  You must call project() with
+[0.989s]   the same package name before.
+[0.989s] Call Stack (most recent call first):
+[0.989s]   /opt/ros/foxy/share/ament_lint_auto/cmake/ament_lint_auto_find_test_dependencies.cmake:31 (ament_package_xml)
+[0.989s]   CMakeLists.txt:37 (ament_lint_auto_find_test_dependencies)
+[0.989s] 
+[0.990s] 
+[0.990s] -- Configuring incomplete, errors occurred!
+[0.990s] See also "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/CMakeFiles/CMakeOutput.log".
+[0.994s] Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake /home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim -DCMAKE_INSTALL_PREFIX=/home/lorenzo/Two_Wheel/ros_foxy_ws/install/two_wheel_sim

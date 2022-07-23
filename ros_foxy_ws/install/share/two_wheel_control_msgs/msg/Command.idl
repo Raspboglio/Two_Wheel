@@ -1,0 +1,28 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from two_wheel_control_msgs/msg/Command.msg
+// generated code does not contain a copyright notice
+
+
+module two_wheel_control_msgs {
+  module msg {
+    struct Command {
+      double p;
+
+      double thetay;
+
+      double thetaz;
+
+      double p_dot;
+
+      double thetay_dot;
+
+      double thetaz_dot;
+
+      double p_ddot;
+
+      double thetay_ddot;
+
+      double thetaz_ddot;
+    };
+  };
+};

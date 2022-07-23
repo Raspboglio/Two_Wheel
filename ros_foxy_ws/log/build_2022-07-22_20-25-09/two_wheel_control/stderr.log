@@ -1,0 +1,101 @@
+In file included from [01m[K/opt/ros/foxy/include/rclcpp/client.hpp:32[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:23[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/include/two_wheel_control/two_wheel_ID_controller.hpp:5[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:1[m[K:
+/opt/ros/foxy/include/rclcpp/function_traits.hpp: In instantiation of ‘[01m[Kstruct rclcpp::function_traits::function_traits<std::_Bind<two_wheel_id_controller::TwoWheelIDController*(void (two_wheel_id_controller::TwoWheelIDController::*)(const two_wheel_control_msgs::msg::Command_<std::allocator<void> >&), std::_Placeholder<1>)> >[m[K’:
+[01m[K/opt/ros/foxy/include/rclcpp/subscription_traits.hpp:97:8:[m[K   required from ‘[01m[Kstruct rclcpp::subscription_traits::has_message_type<std::_Bind<two_wheel_id_controller::TwoWheelIDController*(void (two_wheel_id_controller::TwoWheelIDController::*)(const two_wheel_control_msgs::msg::Command_<std::allocator<void> >&), std::_Placeholder<1>)>, std::allocator<void>, void, void, void, void>[m[K’
+[01m[K/opt/ros/foxy/include/rclcpp/node.hpp:204:5:[m[K   required by substitution of ‘[01m[Ktemplate<class MessageT, class CallbackT, class AllocatorT, class CallbackMessageT, class SubscriptionT, class MessageMemoryStrategyT> std::shared_ptr<SubscriptionT> rclcpp::Node::create_subscription(const string&, const rclcpp::QoS&, CallbackT&&, const rclcpp::SubscriptionOptionsWithAllocator<AllocatorT>&, typename MessageMemoryStrategyT::SharedPtr) [with MessageT = two_wheel_control_msgs::msg::Command_<std::allocator<void> >; CallbackT = std::_Bind<two_wheel_id_controller::TwoWheelIDController*(void (two_wheel_id_controller::TwoWheelIDController::*)(const two_wheel_control_msgs::msg::Command_<std::allocator<void> >&), std::_Placeholder<1>)>; AllocatorT = std::allocator<void>; CallbackMessageT = <missing>; SubscriptionT = <missing>; MessageMemoryStrategyT = <missing>][m[K’
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:17:175:[m[K   required from here
+[01m[K/opt/ros/foxy/include/rclcpp/function_traits.hpp:51:9:[m[K [01;31m[Kerror: [m[Kdecltype cannot resolve address of overloaded function
+   51 |   using [01;31m[Karguments[m[K = typename tuple_tail<
+      |         [01;31m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/foxy/include/rclcpp/function_traits.hpp:57:9:[m[K [01;31m[Kerror: [m[Kdecltype cannot resolve address of overloaded function
+   57 |   using [01;31m[Kargument_type[m[K = typename std::tuple_element<N, arguments>::type;
+      |         [01;31m[K^~~~~~~~~~~~~[m[K
+[01m[K/opt/ros/foxy/include/rclcpp/function_traits.hpp:59:9:[m[K [01;31m[Kerror: [m[Kdecltype cannot resolve address of overloaded function
+   59 |   using [01;31m[Kreturn_type[m[K = typename function_traits<decltype( &FunctionT::operator())>::return_type;
+      |         [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kvirtual controller_interface::return_type two_wheel_id_controller::TwoWheelIDController::init(const string&)[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:17:175:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Krclcpp::Node::create_subscription<two_wheel_control_msgs::msg::Command>(const char [18], int, std::_Bind_helper<false, two_wheel_id_controller::TwoWheelIDController*, void (two_wheel_id_controller::TwoWheelIDController::*)(const two_wheel_control_msgs::msg::Command_<std::allocator<void> >&), const std::_Placeholder<1>&>::type)[m[K’
+   17 |     this->node_->create_subscription<two_wheel_control_msgs::msg::Command>("two_wheel_command", 10, std::bind(this, &TwoWheelIDController::subCallback, std::placeholders::_1)[01;31m[K)[m[K;
+      |                                                                                                                                                                               [01;31m[K^[m[K
+In file included from [01m[K/opt/ros/foxy/include/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:22[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/include/two_wheel_control/two_wheel_ID_controller.hpp:5[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:1[m[K:
+[01m[K/opt/ros/foxy/include/rclcpp/node.hpp:213:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class MessageT, class CallbackT, class AllocatorT, class CallbackMessageT, class SubscriptionT, class MessageMemoryStrategyT> std::shared_ptr<SubscriptionT> rclcpp::Node::create_subscription(const string&, const rclcpp::QoS&, CallbackT&&, const rclcpp::SubscriptionOptionsWithAllocator<AllocatorT>&, typename MessageMemoryStrategyT::SharedPtr)[m[K’
+  213 |   [01;36m[Kcreate_subscription[m[K(
+      |   [01;36m[K^~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/opt/ros/foxy/include/rclcpp/node.hpp:213:3:[m[K [01;36m[Knote: [m[K  substitution of deduced template arguments resulted in errors seen above
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:18:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   18 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:16:81:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcontroller_name[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+   16 | controller_interface::return_type TwoWheelIDController::init([01;35m[Kconst std::string &controller_name[m[K){
+      |                                                              [01;35m[K~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kcontroller_interface::interface_configuration_type two_wheel_id_controller::TwoWheelIDController::command_interface_configuration()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:22:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   22 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kcontroller_interface::interface_configuration_type two_wheel_id_controller::TwoWheelIDController::state_interface_configuration()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:26:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   26 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kcontroller_interface::return_type two_wheel_id_controller::TwoWheelIDController::on_configure()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:30:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   30 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kcontroller_interface::return_type two_wheel_id_controller::TwoWheelIDController::on_activate()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:34:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   34 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kcontroller_interface::return_type two_wheel_id_controller::TwoWheelIDController::on_deactivate()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:38:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   38 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kvirtual controller_interface::return_type two_wheel_id_controller::TwoWheelIDController::update()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:42:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   42 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kvoid two_wheel_id_controller::TwoWheelIDController::subCallback(const Command&)[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:44:84:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kmsg[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+   44 | void TwoWheelIDController::subCallback([01;35m[Kconst two_wheel_control_msgs::msg::Command &msg[m[K){
+      |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K At global scope:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:48:113:[m[K [01;35m[Kwarning: [m[Kextra ‘[01m[K;[m[K’ [[01;35m[K-Wpedantic[m[K]
+   48 | PLUGINLIB_EXPORT_CLASS(two_wheel_id_controller::TwoWheelIDController, controller_interface::ControllerInterface)[01;35m[K;[m[K
+      |                                                                                                                 [01;35m[K^[m[K
+In file included from [01m[K/opt/ros/foxy/include/class_loader/class_loader_core.hpp:57[m[K,
+                 from [01m[K/opt/ros/foxy/include/class_loader/class_loader.hpp:55[m[K,
+                 from [01m[K/opt/ros/foxy/include/pluginlib/class_list_macros.hpp:40[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/include/two_wheel_control/two_wheel_ID_controller.hpp:4[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:1[m[K:
+/opt/ros/foxy/include/class_loader/meta_object.hpp: In instantiation of ‘[01m[KB* class_loader::impl::MetaObject<C, B>::create() const [with C = two_wheel_id_controller::TwoWheelIDController; B = controller_interface::ControllerInterface][m[K’:
+[01m[K/opt/ros/foxy/include/class_loader/meta_object.hpp:216:7:[m[K   required from here
+[01m[K/opt/ros/foxy/include/class_loader/meta_object.hpp:218:12:[m[K [01;31m[Kerror: [m[Kinvalid new-expression of abstract class type ‘[01m[Ktwo_wheel_id_controller::TwoWheelIDController[m[K’
+  218 |     return [01;31m[Knew C[m[K;
+      |            [01;31m[K^~~~~[m[K
+In file included from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:1[m[K:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/include/two_wheel_control/two_wheel_ID_controller.hpp:12:11:[m[K [01;36m[Knote: [m[K  because the following virtual functions are pure within ‘[01m[Ktwo_wheel_id_controller::TwoWheelIDController[m[K’:
+   12 |     class [01;36m[KTwoWheelIDController[m[K : public controller_interface::ControllerInterface{
+      |           [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/include/two_wheel_control/two_wheel_ID_controller.hpp:6[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:1[m[K:
+[01m[K/opt/ros/foxy/include/controller_interface/controller_interface.hpp:78:34:[m[K [01;36m[Knote: [m[K	‘[01m[Kvirtual controller_interface::InterfaceConfiguration controller_interface::ControllerInterface::command_interface_configuration() const[m[K’
+   78 |   virtual InterfaceConfiguration [01;36m[Kcommand_interface_configuration[m[K() const = 0;
+      |                                  [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/opt/ros/foxy/include/controller_interface/controller_interface.hpp:81:34:[m[K [01;36m[Knote: [m[K	‘[01m[Kvirtual controller_interface::InterfaceConfiguration controller_interface::ControllerInterface::state_interface_configuration() const[m[K’
+   81 |   virtual InterfaceConfiguration [01;36m[Kstate_interface_configuration[m[K() const = 0;
+      |                                  [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/two_wheel_control.dir/build.make:63: CMakeFiles/two_wheel_control.dir/src/two_wheel_ID_controller.cpp.o] Errore 1
+make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/two_wheel_control.dir/all] Errore 2
+make: *** [Makefile:141: all] Errore 2

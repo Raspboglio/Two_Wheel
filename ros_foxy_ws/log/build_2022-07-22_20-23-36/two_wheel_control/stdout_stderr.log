@@ -1,0 +1,102 @@
+-- Found ament_cmake: 0.9.9 (/opt/ros/foxy/share/ament_cmake/cmake)
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Found ros2_control: 0.10.1 (/opt/ros/foxy/share/ros2_control/cmake)
+-- Found rclcpp: 2.4.1 (/opt/ros/foxy/share/rclcpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Found rosidl_adapter: 1.2.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 1.0.3 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found controller_interface: 0.10.1 (/opt/ros/foxy/share/controller_interface/cmake)
+-- Found two_wheel_control_msgs: 0.0.0 (/home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_control_msgs/cmake)
+-- Found ament_lint_auto: 0.9.6 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+-- Added test 'copyright' to check source files copyright and LICENSE
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: /home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/include
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'cpplint' to check C / C++ code against the Google style
+-- Configured cpplint exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control
+[35m[1mScanning dependencies of target two_wheel_control[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/two_wheel_control.dir/src/two_wheel_ID_controller.cpp.o[0m
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kvirtual controller_interface::return_type two_wheel_id_controller::TwoWheelIDController::init(const string&)[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:17:153:[m[K [01;31m[Kerror: [m[K‘[01m[Kplaceholder[m[K’ has not been declared
+   17 |     this->node_->create_subscription<two_wheel_control_msgs::msg::Command>("two_wheel_command", 10, std::bind(this, &TwoWheelIDController::subCallback, [01;31m[Kplaceholder[m[K::_1));
+      |                                                                                                                                                         [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:18:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   18 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:16:81:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcontroller_name[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+   16 | controller_interface::return_type TwoWheelIDController::init([01;35m[Kconst std::string &controller_name[m[K){
+      |                                                              [01;35m[K~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kcontroller_interface::interface_configuration_type two_wheel_id_controller::TwoWheelIDController::command_interface_configuration()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:22:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   22 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kcontroller_interface::interface_configuration_type two_wheel_id_controller::TwoWheelIDController::state_interface_configuration()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:26:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   26 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kcontroller_interface::return_type two_wheel_id_controller::TwoWheelIDController::on_configure()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:30:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   30 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kcontroller_interface::return_type two_wheel_id_controller::TwoWheelIDController::on_activate()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:34:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   34 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kcontroller_interface::return_type two_wheel_id_controller::TwoWheelIDController::on_deactivate()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:38:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   38 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kvirtual controller_interface::return_type two_wheel_id_controller::TwoWheelIDController::update()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:42:1:[m[K [01;35m[Kwarning: [m[Kno return statement in function returning non-void [[01;35m[K-Wreturn-type[m[K]
+   42 | [01;35m[K}[m[K
+      | [01;35m[K^[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In member function ‘[01m[Kvoid two_wheel_id_controller::TwoWheelIDController::subCallback(const Command&)[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:44:84:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kmsg[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+   44 | void TwoWheelIDController::subCallback([01;35m[Kconst two_wheel_control_msgs::msg::Command &msg[m[K){
+      |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~[m[K
+In file included from [01m[K/opt/ros/foxy/include/class_loader/class_loader.hpp:56[m[K,
+                 from [01m[K/opt/ros/foxy/include/pluginlib/class_list_macros.hpp:40[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/include/two_wheel_control/two_wheel_ID_controller.hpp:4[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:1[m[K:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K At global scope:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:48:24:[m[K [01;31m[Kerror: [m[K‘[01m[Ktwo_wheel_id_control[m[K’ does not name a type; did you mean ‘[01m[Ktwo_wheel_id_controller[m[K’?
+   48 | PLUGINLIB_EXPORT_CLASS([01;31m[Ktwo_wheel_id_control[m[K::TwoWheelIDController, controller_interface::ControllerInterface);
+      |                        [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K In constructor ‘[01m[K{anonymous}::ProxyExec0::ProxyExec0()[m[K’:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:48:1:[m[K [01;31m[Kerror: [m[K‘[01m[K_derived[m[K’ was not declared in this scope
+   48 | [01;31m[KPLUGINLIB_EXPORT_CLASS[m[K(two_wheel_id_control::TwoWheelIDController, controller_interface::ControllerInterface);
+      | [01;31m[K^~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:48:1:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KregisterPlugin<<expression error>, {anonymous}::ProxyExec0::_base>(const char [43], const char [42])[m[K’
+   48 | [01;31m[KPLUGINLIB_EXPORT_CLASS[m[K(two_wheel_id_control::TwoWheelIDController, controller_interface::ControllerInterface);
+      | [01;31m[K^~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/opt/ros/foxy/include/class_loader/class_loader.hpp:55[m[K,
+                 from [01m[K/opt/ros/foxy/include/pluginlib/class_list_macros.hpp:40[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/include/two_wheel_control/two_wheel_ID_controller.hpp:4[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:1[m[K:
+[01m[K/opt/ros/foxy/include/class_loader/class_loader_core.hpp:210:6:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class Derived, class Base> void class_loader::impl::registerPlugin(const string&, const string&)[m[K’
+  210 | void [01;36m[KregisterPlugin[m[K(const std::string & class_name, const std::string & base_class_name)
+      |      [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/opt/ros/foxy/include/class_loader/class_loader_core.hpp:210:6:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+In file included from [01m[K/opt/ros/foxy/include/class_loader/class_loader.hpp:56[m[K,
+                 from [01m[K/opt/ros/foxy/include/pluginlib/class_list_macros.hpp:40[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/include/two_wheel_control/two_wheel_ID_controller.hpp:4[m[K,
+                 from [01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:1[m[K:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:48:1:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   48 | [01;31m[KPLUGINLIB_EXPORT_CLASS[m[K(two_wheel_id_control::TwoWheelIDController, controller_interface::ControllerInterface);
+      | [01;31m[K^~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:[m[K At global scope:
+[01m[K/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp:48:110:[m[K [01;35m[Kwarning: [m[Kextra ‘[01m[K;[m[K’ [[01;35m[K-Wpedantic[m[K]
+   48 | PLUGINLIB_EXPORT_CLASS(two_wheel_id_control::TwoWheelIDController, controller_interface::ControllerInterface)[01;35m[K;[m[K
+      |                                                                                                              [01;35m[K^[m[K
+make[2]: *** [CMakeFiles/two_wheel_control.dir/build.make:63: CMakeFiles/two_wheel_control.dir/src/two_wheel_ID_controller.cpp.o] Errore 1
+make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/two_wheel_control.dir/all] Errore 2
+make: *** [Makefile:141: all] Errore 2
