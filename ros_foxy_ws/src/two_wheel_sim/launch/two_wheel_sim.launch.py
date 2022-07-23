@@ -18,6 +18,7 @@ def generate_launch_description():
         "xacro ",
         PathJoinSubstitution([two_wheel_prefix ,"urdf","two_wheel.xacro.urdf"])
     ])
+    
     robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',

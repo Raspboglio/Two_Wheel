@@ -1,0 +1,22 @@
+[0.029s] Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test -- -j4 -l4
+[0.084s] Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test -- -j4 -l4
+[0.135s] Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test
+[0.146s] -- Install configuration: ""
+[0.146s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/launch
+[0.147s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/launch/urdf_test.launch.py
+[0.147s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/ament_index/resource_index/package_run_dependencies/two_wheel_test
+[0.147s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/ament_index/resource_index/parent_prefix_path/two_wheel_test
+[0.147s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/environment/ament_prefix_path.sh
+[0.147s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/environment/ament_prefix_path.dsv
+[0.148s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/environment/path.sh
+[0.148s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/environment/path.dsv
+[0.148s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/local_setup.bash
+[0.148s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/local_setup.sh
+[0.148s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/local_setup.zsh
+[0.148s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/local_setup.dsv
+[0.148s] -- Installing: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/package.dsv
+[0.148s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/ament_index/resource_index/packages/two_wheel_test
+[0.149s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/cmake/two_wheel_testConfig.cmake
+[0.149s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/cmake/two_wheel_testConfig-version.cmake
+[0.149s] -- Up-to-date: /home/lorenzo/Two_Wheel/ros_foxy_ws/install/share/two_wheel_test/package.xml
+[0.151s] Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/bin/cmake --install /home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test

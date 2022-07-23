@@ -41,6 +41,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim" TYPE DIRECTORY FILES
     "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim/urdf"
     "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim/launch"
+    "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim/config"
     )
 endif()
 

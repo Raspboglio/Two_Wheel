@@ -1,0 +1,14 @@
+source;share/two_wheel_test/hook/cmake_prefix_path.ps1
+source;share/two_wheel_test/hook/cmake_prefix_path.dsv
+source;share/two_wheel_test/hook/cmake_prefix_path.sh
+source;share/two_wheel_test/hook/ld_library_path_lib.ps1
+source;share/two_wheel_test/hook/ld_library_path_lib.dsv
+source;share/two_wheel_test/hook/ld_library_path_lib.sh
+source;share/two_wheel_test/hook/pythonpath.ps1
+source;share/two_wheel_test/hook/pythonpath.dsv
+source;share/two_wheel_test/hook/pythonpath.sh
+source;share/two_wheel_test/local_setup.bash
+source;share/two_wheel_test/local_setup.dsv
+source;share/two_wheel_test/local_setup.ps1
+source;share/two_wheel_test/local_setup.sh
+source;share/two_wheel_test/local_setup.zsh
