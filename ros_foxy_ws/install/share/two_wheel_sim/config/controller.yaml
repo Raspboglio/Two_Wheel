@@ -4,3 +4,28 @@ controller_manager:
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
+
+    two_wheel_controller:
+      type: two_wheel_controller/TwoWheelIDController 
+      
+
+
+two_wheel_controller:
+  ros__parameters:
+    body_I_diag:
+      - 1
+      - 1
+      - 1
+    wheel_I_diag:
+      - 1
+      - 1
+      - 1
+    body_mass: 10
+    wheel_mass: 1
+    body_height: 10
+    wheel_radius: 0.1
+    wheel_distance: 0.4
+    Kp:
+      - 0.5
+    Kd:
+      - 0.3

@@ -45,7 +45,7 @@ ament_target_dependencies(${PROJECT_NAME}
   rclcpp_lifecycle
   two_wheel_control_msgs
 )
-
+target_compile_definitions(${PROJECT_NAME} PRIVATE "TWO_WHEEL_CONTROL_BUILDING_DLL" "_USE_MATH_DEFINES")
 pluginlib_export_plugin_description_file(controller_interface two_wheel_ID_controller.xml)
 
 install(
@@ -71,7 +71,9 @@ if(BUILD_TESTING)
   #set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-
+ament_export_include_directories(
+  include
+)
 ament_export_libraries(
   ${PROJECT_NAME}
 )

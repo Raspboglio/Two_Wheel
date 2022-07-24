@@ -129,6 +129,10 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_control/cmake" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control/ament_cmake_export_include_directories/ament_cmake_export_include_directories-extras.cmake")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_control/cmake" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control/ament_cmake_export_libraries/ament_cmake_export_libraries-extras.cmake")
 endif()
 
