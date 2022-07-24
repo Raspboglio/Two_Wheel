@@ -63,6 +63,8 @@ two_wheel_control_msgs/msg/command.hpp
 /home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/src/two_wheel_ID_controller.cpp
 two_wheel_control/two_wheel_ID_controller.hpp
 -
+armadillo
+-
 
 /opt/ros/foxy/include/builtin_interfaces/msg/detail/duration__builder.hpp
 builtin_interfaces/msg/detail/duration__struct.hpp

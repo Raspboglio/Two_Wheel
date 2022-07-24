@@ -414,7 +414,20 @@ $$\tau = (T^+)^T \, \gamma$$
 
 \subsection{Simulation}
 
+The simulation is performed with Gazebo since it provides an easy interface with ROS.
+The robot model along with the sensor's definition is done via an urdf file.
+
 \subsubsection{Controller}
 The interface between Gazebo and ROS is enstablished via the \href{https://github.com/ros-controls/ros2_control}{ros controls} 
-and \href{https://github.com/ros-controls/gazebo_ros2_control}{gazebo ros2 control}
+and \href{https://github.com/ros-controls/gazebo_ros2_control}{gazebo ros2 control}.
+
+The controller allows 3 sets of feedback:
+\begin{enumerate}
+	\item position feedback
+	\item velocity feedback
+	\item position and velocity feedback
+\end{enumerate}
+
+in the future might be added a trajectory following controller that will perform a position velocity and acceleration feedback
+
 \end{document}
