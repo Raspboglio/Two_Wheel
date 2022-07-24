@@ -35,22 +35,9 @@ namespace two_wheel_id_controller{
             
             bool pos_feed, vel_feed;
             
-            arma::Col<double> u(); // measured state col vector [p, thetay, thetaz]
-            arma::Col<double> u_dot();
-            arma::Col<double> u_m(); //real measured col vector [wr, wl, thetay]
-            arma::Col<double> u_m_dot();
-            arma::Col<double> q_w(); // wanted state col vector [p, thetay, thetaz]
-            amra::Col<double> q_w_dot();
-            arma::Col<double> e();  // error
-            arma::Col<double> e_dot();
-            arma::Mat<double> Kp();
-            arma::Mat<double> Kd();
-            arma::Mat<double> B();
-            arma::Col<double> G();
-            arma::Mat<double> T(); // Conversion matrix between gamma input [f, My, Mz] and tau input [Mr, Ml]
-            arma::Mat<double> T_out();  // Conversion matrix between generalized coord [v,thetay,thetaz] and measured output [wr, wl, thetay]
-                                        //[T;[0 0 1]]
-            arma::Col<double> tau(); // input vector of the system  
+            std::unique_ptr<arma::Col<double>> u, u_dot, u_m,  u_m_dot, q_w, q_w_dot, e, e_dot, G, tau;
+            std::unique_ptr<arma::Mat<double>> Kp, Kd, B, T, T_out;
+            
     };
 
 }
