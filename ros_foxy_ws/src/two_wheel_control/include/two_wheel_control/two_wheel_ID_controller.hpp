@@ -32,6 +32,9 @@ namespace two_wheel_id_controller{
             void subCallback(const two_wheel_control_msgs::msg::Command::SharedPtr msg);
 
             rclcpp::Subscription<two_wheel_control_msgs::msg::Command>::SharedPtr _sub;
+            
+            bool pos_feed, vel_feed;
+            
             arma::Col<double> u(); // measured state col vector [p, thetay, thetaz]
             arma::Col<double> u_dot();
             arma::Col<double> u_m(); //real measured col vector [wr, wl, thetay]
