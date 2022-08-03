@@ -1,6 +1,0 @@
-{
-  "package_name": "two_wheel_control_msgs",
-  "non_idl_tuples": [
-    "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control_msgs:msg/Command.msg"
-  ]
-}

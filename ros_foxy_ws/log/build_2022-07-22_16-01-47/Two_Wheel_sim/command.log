@@ -1,2 +1,0 @@
-Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/Two_Wheel_sim': /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/Two_Wheel_sim -- -j4 -l4
-Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/Two_Wheel_sim' returned '2': /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/Two_Wheel_sim -- -j4 -l4

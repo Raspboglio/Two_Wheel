@@ -1,5 +1,0 @@
-[0.020s] Invoking command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/Two_Wheel_sim': /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/Two_Wheel_sim -- -j4 -l4
-[0.041s] CMake Error: The source directory "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/Two_Wheel_sim" does not exist.
-[0.041s] Specify --help for usage, or press the help button on the CMake GUI.
-[0.042s] make: *** [Makefile:222: cmake_check_build_system] Errore 1
-[0.044s] Invoked command in '/home/lorenzo/Two_Wheel/ros_foxy_ws/build/Two_Wheel_sim' returned '2': /usr/bin/cmake --build /home/lorenzo/Two_Wheel/ros_foxy_ws/build/Two_Wheel_sim -- -j4 -l4

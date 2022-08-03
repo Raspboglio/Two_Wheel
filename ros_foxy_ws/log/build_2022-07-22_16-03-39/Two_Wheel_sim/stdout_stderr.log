@@ -1,3 +1,0 @@
-CMake Error: The source directory "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/Two_Wheel_sim" does not exist.
-Specify --help for usage, or press the help button on the CMake GUI.
-make: *** [Makefile:222: cmake_check_build_system] Errore 1

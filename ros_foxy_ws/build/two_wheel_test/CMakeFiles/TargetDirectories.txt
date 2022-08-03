@@ -1,9 +1,0 @@
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test/CMakeFiles/install/local.dir
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test/CMakeFiles/install.dir
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test/CMakeFiles/list_install_components.dir
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test/CMakeFiles/rebuild_cache.dir
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test/CMakeFiles/edit_cache.dir
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test/CMakeFiles/test.dir
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test/CMakeFiles/install/strip.dir
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test/CMakeFiles/two_wheel_test_uninstall.dir
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test/CMakeFiles/uninstall.dir

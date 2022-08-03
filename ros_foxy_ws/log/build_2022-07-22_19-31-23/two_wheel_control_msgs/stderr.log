@@ -1,9 +1,0 @@
-CMake Error at /opt/ros/foxy/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:93 (message):
-  rosidl_generate_interfaces() the passed file 'msg/command.msg' doesn't
-  exist relative to the CMAKE_CURRENT_SOURCE_DIR
-  '/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control_msgs'
-Call Stack (most recent call first):
-  CMakeLists.txt:21 (rosidl_generate_interfaces)
-
-
-make: *** [Makefile:222: cmake_check_build_system] Errore 1
