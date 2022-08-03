@@ -1,1 +1,0 @@
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control/ament_cmake_core/two_wheel_controlConfig.cmake

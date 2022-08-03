@@ -1,1 +1,0 @@
-/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim/launch/two_wheel_sim.launch.py

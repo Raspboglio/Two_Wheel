@@ -1,1 +1,0 @@
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs/rosidl_cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake

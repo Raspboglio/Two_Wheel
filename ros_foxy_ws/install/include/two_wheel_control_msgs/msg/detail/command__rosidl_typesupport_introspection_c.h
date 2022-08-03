@@ -1,1 +1,0 @@
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs/rosidl_typesupport_introspection_c/two_wheel_control_msgs/msg/detail/command__rosidl_typesupport_introspection_c.h

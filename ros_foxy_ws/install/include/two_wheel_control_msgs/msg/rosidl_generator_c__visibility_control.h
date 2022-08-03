@@ -1,1 +1,0 @@
-/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control_msgs/rosidl_generator_c/two_wheel_control_msgs/msg/rosidl_generator_c__visibility_control.h
