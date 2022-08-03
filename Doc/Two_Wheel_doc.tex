@@ -409,6 +409,28 @@ $$\tau = (T^+)^T \, \gamma$$
 %\end{tikzpicture}
 %\section{Simplified Controller}
 
+\section{Controller}
+\subsection{PD controller}
+The controller is based on 2 main stages:
+\begin{enumerate}
+	\item Position/Orientation control
+	\item Balancing control
+\end{enumerate}
+
+This division is necessary since we have 3 DoF but only 2 DoC (Given by the two wheel)
+
+\subsubsection{Positon/Orientation control}
+The first control stage consist in the PD control of the orientation and the position of the robot (considered as a point mass centered between the two contact point of the wheels).
+While $\theta_z$ isn't influenced by the control of $\theta_y$,  and so can be controlled indipendently, the position and velocity is coupled.
+We can find the following relation between $\ddot p$ and $ \theta_y$ 
+$$\ddot p |_{\theta_y} = \frac{I_{p, \theta_y}}{I_{\theta_y}} * cos(\theta_y)$$
+This is obtained considering $\ddot \theta_y$ constant.
+So the PD part of $p$ is converted into a corresponding $\theta_y$ that is further elaborated by the balancing stage.
+
+\subsubsection{Balancing control}
+The Balancing control stage purpose is to keep a given $\theta_y$ thats derived from the first stage
+
+
 
 \section{ROS}
 
@@ -431,7 +453,7 @@ The controller allows 3 sets of feedback:
 
 in the future might be added a trajectory following controller that will perform a position velocity and acceleration feedback.
 
-This controller can (with the right K_p and K_d) mantain the vertical position but struggles with the controll of the position.
+This controller can (with the right $K_p$ and $K_d$) mantain the vertical position but struggles with the controll of the position.
 
 \paragraph{MPC} 
 
