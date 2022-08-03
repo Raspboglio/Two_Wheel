@@ -12,8 +12,10 @@ if(NOT CMAKE_CXX_STANDARD)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
+  add_compile_options(-Wall -Wextra -Wpedantic -g)
 endif()
+
+add_compile_options(-g)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
@@ -45,7 +47,7 @@ ament_target_dependencies(${PROJECT_NAME}
   rclcpp_lifecycle
   two_wheel_control_msgs
 )
-target_compile_definitions(${PROJECT_NAME} PRIVATE "TWO_WHEEL_CONTROL_BUILDING_DLL" "_USE_MATH_DEFINES")
+target_compile_definitions(${PROJECT_NAME} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
 pluginlib_export_plugin_description_file(controller_interface two_wheel_ID_controller.xml)
 
 install(

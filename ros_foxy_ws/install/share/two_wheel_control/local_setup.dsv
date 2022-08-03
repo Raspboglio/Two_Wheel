@@ -1,3 +1,1 @@
-source;share/two_wheel_control/environment/ament_prefix_path.sh
-source;share/two_wheel_control/environment/library_path.sh
-source;share/two_wheel_control/environment/path.sh
+/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_control/ament_cmake_environment_hooks/local_setup.dsv

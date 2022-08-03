@@ -10,7 +10,7 @@
 #include<armadillo>
 
 
-namespace two_wheel_id_controller{
+namespace two_wheel_controller{
     
     class TwoWheelIDController : public controller_interface::ControllerInterface{
         public:

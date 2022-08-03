@@ -33,6 +33,7 @@ def generate_launch_description():
         arguments=[
             "-entity","Two_Wheel",
             "-topic","robot_description",
+            "-z", "1.5"
         ]
     )
 
@@ -44,7 +45,7 @@ def generate_launch_description():
     
     load_two_wheel_controller = ExecuteProcess(
         cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
-             'two_wheel_controller'],
+             'two_wheel_control'],
         output='screen'
     )
 

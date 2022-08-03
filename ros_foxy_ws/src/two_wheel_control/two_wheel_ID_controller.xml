@@ -1,5 +1,5 @@
-<library path="two_wheel_controller">
-    <class name="two_wheel_controller/TwoWheelIDController" type="two_wheel_id_control::TwoWheelIDControl" base_class_type="controller_interface::ControllerInterface">
+<library path="two_wheel_control">
+    <class name="two_wheel_control/TwoWheelIDController" type="two_wheel_controller::TwoWheelIDController" base_class_type="controller_interface::ControllerInterface">
       <description>
         Inverse Dynamic controller for the Two Wheel robot
       </description>

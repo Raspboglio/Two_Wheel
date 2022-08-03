@@ -4,7 +4,7 @@
 
 
 
-using namespace two_wheel_id_controller;
+using namespace two_wheel_controller;
 
 TwoWheelIDController::TwoWheelIDController(){
 
@@ -35,17 +35,27 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
     auto_declare<std::vector<double>>("Kd", std::vector<double>({0}));
 
     // Allocate memory for matices/vectors
+    // RCLCPP_INFO(this->node_->get_logger(), "INIT MATRICES");
     u = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
     u_dot= std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
+    u_m = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
+    u_m_dot = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
+    e = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
+    e_dot = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
     q_w = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
     q_w_dot = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
-    B = std::make_unique<arma::Col<double>>(3,3,arma::fill::zeros);
+    B = std::make_unique<arma::Mat<double>>(3,3,arma::fill::zeros);
     G = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
-    T = std::make_unique<arma::Col<double>>(2, 3, arma::fill::zeros);
-    T_out = std::make_unique<arma::Col<double>>(3, 3, arma::fill::zeros);
-    Kp = std::make_unique<arma::Col<double>>(3, 3, arma::fill::zeros);
-    Kd =std::make_unique<arma::Col<double>>(3, 3, arma::fill::zeros);
+    T = std::make_unique<arma::Mat<double>>(2, 3, arma::fill::zeros);
+    T_out = std::make_unique<arma::Mat<double>>(3, 3, arma::fill::zeros);
+    Kp = std::make_unique<arma::Mat<double>>(3, 3, arma::fill::zeros);
+    Kd =std::make_unique<arma::Mat<double>>(3, 3, arma::fill::zeros);
     tau = std::make_unique<arma::Col<double>>(2, arma::fill::zeros);
+
+    // TODO: add initial values for inputs as parameters
+    q_w = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
+    q_w_dot = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
+
 
     return controller_interface::return_type::OK;
 }
@@ -54,9 +64,13 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
 *   Inverse Dynamic controller only need effort interfaces
 */
 controller_interface::InterfaceConfiguration TwoWheelIDController::command_interface_configuration() const{
+    // RCLCPP_INFO(this->node_->get_logger(), "INIT COMMANDS");
     controller_interface::InterfaceConfiguration config;
     config.names.push_back("RW_joint/effort");
     config.names.push_back("LW_joint/effort");
+
+    // config.names.push_back("RW_joint/velocity");
+    // config.names.push_back("LW_joint/velocity");
     config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
     return config;
 }
@@ -68,6 +82,7 @@ controller_interface::InterfaceConfiguration TwoWheelIDController::command_inter
 *   position,velocity
 */
 controller_interface::InterfaceConfiguration TwoWheelIDController::state_interface_configuration() const{
+    // RCLCPP_INFO(this->node_->get_logger(), "INIT STATES");
     controller_interface::InterfaceConfiguration config;
     std::vector<std::string> feedback = this->node_->get_parameter("feedback").as_string_array();
     
@@ -75,13 +90,13 @@ controller_interface::InterfaceConfiguration TwoWheelIDController::state_interfa
         //PV control
         config.names.push_back("RW_joint/position");
         config.names.push_back("LW_joint/position");
-        config.names.push_back("imu_sensor/orientation.y");
+        config.names.push_back("imu_sensor/orientation.x");
     }
 
     if( std::find(feedback.begin(), feedback.end(), "velocity") != feedback.end() ){
         config.names.push_back("RW_joint/velocity");
         config.names.push_back("LW_joint/velocity");
-        config.names.push_back("imu_sensor/angular_velocity.y");
+        config.names.push_back("imu_sensor/angular_velocity.x");
     }
     
     config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
@@ -90,14 +105,14 @@ controller_interface::InterfaceConfiguration TwoWheelIDController::state_interfa
 }
 
 rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWheelIDController::on_configure(const rclcpp_lifecycle::State & previous_state){
-    
+    // RCLCPP_INFO(this->node_->get_logger(), "INIT CONFIGURE");
     // Feedback strategy configuration
     std::vector<std::string> feedback = this->node_->get_parameter("feedback").as_string_array();
     if(feedback.size() == 0){
         RCLCPP_ERROR(this->node_->get_logger(), "Feedback array must be non empty");
         return CallbackReturn::ERROR;
     }
-    
+
     pos_feed = std::find( feedback.begin(), feedback.end(), "position") != feedback.end();
     vel_feed = std::find( feedback.begin(), feedback.end(), "velocity") != feedback.end();
     
@@ -135,7 +150,7 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
         RCLCPP_ERROR(this->node_->get_logger(), "length can't be 0, probably you didn't define that");
         return CallbackReturn::ERROR;
     }
-
+    // RCLCPP_INFO(this->node_->get_logger(), "INIT PARAM MATRICES");
     std::vector<double> Kp_coeff = this->node_->get_parameter("Kp").as_double_array();
     std::vector<double> Kd_coeff = this->node_->get_parameter("Kd").as_double_array();
 
@@ -145,24 +160,38 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
     }
 
     // Init B
-    B->at(1,1) = I_wheel[2] + 3 * m_w;
-    B->at(1,2) = l * m_w;
-    B->at(2,1) = l * m_w;
-    B->at(2,2) = m_w * l * l + I_body[2];
-    B->at(3,3) = I_body[3] + 2 * I_wheel[3] + d * d * m_w / 2 + I_wheel[2] * d * d / (2 * r * r);
-
+    // B->at(1,1) = I_wheel[2] + 3 * m_w;
+    // B->at(1,2) = l * m_w;
+    // B->at(2,1) = l * m_w;
+    // B->at(2,2) = m_w * l * l + I_body[2];
+    // B->at(3,3) = I_body[3] + 2 * I_wheel[3] + d * d * m_w / 2 + I_wheel[2] * d * d / (2 * r * r);
+    
+    *B = {{I_wheel[2]+3*m_w, l*m_w, 0}, 
+        {l*m_w, m_w*l*l+I_body[2], 0}, 
+        {0, 0, I_body[3]+2*I_wheel[3]+d*d*m_w/2+I_wheel[2]*d*d/(2*r*r)}};
+    
     // Init T*
     *T = {{1/r, -1, d/(2*r)}, {1/r, -1, d/(2*r)}};
-    *T_out = {{1/r, -1, d/(2*r)}, {1/r, -1, d/(2*r)}, {0, 0, 1}};
+    *T_out = {{1/r, -1, d/(2*r)}, {1/r, -1, d/(2*r)}, {0, 1, 0}};
     
+    // std::cout << "B: " << std::endl;
+    // B->print();
+    // std::cout << "T: " << std::endl;
+    // T->print();
+    // std::cout << "T out: " << std::endl;
+    // T_out->print();
+    
+    std::cout << "Kp:" << std::endl;
     // Init K*
     if(Kp_coeff.size() == 1){
         for(int i = 0; i < 3; i++){
             Kp->at(i,i) = Kp_coeff[1];
+            std::cout << Kp_coeff[1];
         }
     }else{
         for(int i = 0; i < 3; i++){
             Kp->at(i,i) = Kp_coeff[i];
+            std::cout << Kp_coeff[i];
         }
     }
 
@@ -189,34 +218,61 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
 }
 
 controller_interface::return_type TwoWheelIDController::update(){
-    
+    // RCLCPP_INFO(this->node_->get_logger(), "UPDATE");
     // TODO: check the order of the state interfaces (and command interfaces)
     // Measure current state
-    for(int i = 0; i < 3; i++){
+    try{
+        for(int i = 0; i < 3; i++){
+            if(pos_feed){     
+                u_m->at(i) = this->state_interfaces_[i].get_value();
+                // RCLCPP_INFO(this->node_->get_logger(), "%s value: %.4f", this->state_interfaces_[i].get_full_name().c_str(), this->state_interfaces_[i].get_value());
+            }
+            if(vel_feed){
+                u_m_dot->at(i) = this->state_interfaces_[i+3].get_value();
+            }
+            
+        }
+        
+        e->zeros();
+        e_dot->zeros();
+
         if(pos_feed){
-            u_m->at(i) = this->state_interfaces_[i].get_value();
+            *u = arma::pinv(*T_out) * *u_m;
+            *e = *q_w - *u;
         }
+
         if(vel_feed){
-            u_m_dot->at(i) = this->state_interfaces_[i+3].get_value();
+            *u_dot = arma::pinv(*T_out) * *u_m_dot;
+            *e_dot = *q_w_dot - *u_dot;
         }
+        
+        std::cout << "pos error: " << std::endl;
+        e->print();
+        std::cout << "vel error: " << std::endl;
+        e_dot->print();
+        std::cout << std::endl;
+        
+        // TODO: Compute G
+        
+        *tau = *T * (*B * (*Kp * *e + *Kd * *e_dot)  + *G); // TODO: check what we need between T, T' and T_inv
+        
+        //Checking variable 
+        // TODO: remove for real use since it allocates a lot of memory
+        // arma::Col<double> Kp_e = *Kp * *e;
+        // arma::Col<double> gamma = *B * (*Kp * *e + *Kd * *e_dot);
+        // std::cout << "Kp = " << std::endl;
+        // Kp->print();
+        // std::cout << "Kp * e = " << std::endl;
+        // Kp_e.print();
+        // std::cout << "gamma = " << std::endl;
+        // gamma.print();
+        
+        std::cout << "actuation: " << std::endl;
+        tau->print();
+
+    }catch(std::exception &e){
+        RCLCPP_ERROR(this->node_->get_logger(), e.what());
     }
-
-    e->zeros();
-    e_dot->zeros();
-
-    if(pos_feed){
-        *u = arma::pinv(*T_out) * *u_m;
-        *e = *q_w - *u;
-    }
-
-    if(vel_feed){
-        *u_dot = arma::pinv(*T_out) * *u_m_dot;
-        *e_dot = *q_w_dot - *u_dot;
-    }
-    
-    // TODO: Compute G
-
-    *tau = *T * ((*Kp * *e + *Kd * *e_dot) * *B + *G); // TODO: check what we need between T, T' and T_inv
 
     for(int i = 0; i < 2; i++){
         this->command_interfaces_[i].set_value(tau->at(i));
@@ -240,4 +296,4 @@ void TwoWheelIDController::subCallback(const two_wheel_control_msgs::msg::Comman
     }
 }
 
-PLUGINLIB_EXPORT_CLASS(two_wheel_id_controller::TwoWheelIDController, controller_interface::ControllerInterface)
+PLUGINLIB_EXPORT_CLASS(two_wheel_controller::TwoWheelIDController, controller_interface::ControllerInterface)

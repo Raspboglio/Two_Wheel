@@ -1,31 +1,41 @@
 controller_manager:
   ros__parameters:
-    update_rate: 100 
+    update_rate: 1000 
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    two_wheel_controller:
-      type: two_wheel_controller/TwoWheelIDController 
+    two_wheel_control:
+      type: two_wheel_control/TwoWheelIDController 
       
 
 
-two_wheel_controller:
+two_wheel_control:
   ros__parameters:
     body_I_diag:
-      - 1
-      - 1
-      - 1
+      - 1.9
+      - 3.3
+      - 1.9
     wheel_I_diag:
-      - 1
-      - 1
-      - 1
-    body_mass: 10
-    wheel_mass: 1
-    body_height: 10
-    wheel_radius: 0.1
+      - 0.002
+      - 0.001
+      - 0.001
+    body_mass: 20.0
+    wheel_mass: 0.1
+    body_height: 0.5
+    wheel_radius: 0.2
     wheel_distance: 0.4
     Kp:
-      - 0.5
+      - 1.0
+      - 200.0
+      - 1.0
     Kd:
-      - 0.3
+      - 1.0
+      - 100.0
+      - 1.0
+
+    feedback:
+      - velocity
+      - position
+
+    

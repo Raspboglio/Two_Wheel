@@ -38,70 +38,7 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim" TYPE DIRECTORY FILES
-    "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim/urdf"
-    "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim/launch"
-    "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim/config"
-    )
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/two_wheel_sim")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/two_wheel_sim")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim/environment" TYPE FILE FILES "/opt/ros/foxy/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim/environment" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_environment_hooks/ament_prefix_path.dsv")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim/environment" TYPE FILE FILES "/opt/ros/foxy/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim/environment" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_environment_hooks/path.dsv")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_environment_hooks/local_setup.bash")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_environment_hooks/local_setup.sh")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_environment_hooks/local_setup.zsh")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_environment_hooks/local_setup.dsv")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_environment_hooks/package.dsv")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_index/share/ament_index/resource_index/packages/two_wheel_sim")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim/cmake" TYPE FILE FILES
-    "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_core/two_wheel_simConfig.cmake"
-    "/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_core/two_wheel_simConfig-version.cmake"
-    )
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/two_wheel_sim" TYPE FILE FILES "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_sim/package.xml")
+  include("/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_sim/ament_cmake_symlink_install/ament_cmake_symlink_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

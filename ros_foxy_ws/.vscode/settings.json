@@ -1,6 +1,7 @@
 {
     "ros.distro": "foxy",
     "python.autoComplete.extraPaths": [
+        "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/lib/python3.8/site-packages",
         "/opt/ros/foxy/lib/python3.8/site-packages"
     ],
     "python.analysis.extraPaths": [

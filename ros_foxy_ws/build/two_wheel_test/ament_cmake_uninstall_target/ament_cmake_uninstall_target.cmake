@@ -55,3 +55,6 @@ endforeach()
 message(STATUS "Execute custom uninstall script")
 
 # begin of custom uninstall code
+
+# uninstall files installed using the symlink install functions
+include("/home/lorenzo/Two_Wheel/ros_foxy_ws/build/two_wheel_test/ament_cmake_symlink_install/ament_cmake_symlink_install_uninstall_script.cmake")
