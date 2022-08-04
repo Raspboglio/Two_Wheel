@@ -14,8 +14,8 @@
     <xacro:property name="I_w_xx" value="${1/2 * m_w * r_w * r_w}"/>
     <xacro:property name="I_w_yy" value="${1/4 * m_w * r_w * r_w + 1/12 * m_w * w_t * w_t}"/>
     <xacro:property name="I_w_zz" value="${1/4 * m_w * r_w * r_w + 1/12 * m_w * w_t * w_t}"/>
-    <xacro:property name="eff_lim" value="500"/>
-    <xacro:property name="speed_lim" value="500"/>
+    <xacro:property name="eff_lim" value="5000"/>
+    <xacro:property name="speed_lim" value="5000"/>
     
     <link name="root">
     </link>

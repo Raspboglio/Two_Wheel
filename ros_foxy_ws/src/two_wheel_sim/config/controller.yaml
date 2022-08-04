@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 1000 
+    update_rate: 100 
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -25,14 +25,23 @@ two_wheel_control:
     body_height: 0.5
     wheel_radius: 0.2
     wheel_distance: 0.4
+    # Kp:
+    #   - 0.005
+    #   - 40.0
+    #   - 10.0
+    # Kd:
+    #   - 0.005
+    #   - 10.0
+    #   - 10.0
+
     Kp:
-      - 1.0
-      - 200.0
-      - 1.0
+      - 0.01
+      - 40.0
+      - 50.0
     Kd:
-      - 1.0
-      - 100.0
-      - 1.0
+      - 0.01
+      - 10.0
+      - 30.0
 
     feedback:
       - velocity

@@ -143,7 +143,7 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
         return CallbackReturn::ERROR;
     }
     
-    double l = this->node_->get_parameter("body_height").as_double();
+    l = this->node_->get_parameter("body_height").as_double();
     double r = this->node_->get_parameter("wheel_radius").as_double();
     double d = this->node_->get_parameter("wheel_distance").as_double();
     if(l == 0 || r == 0 || d == 0){
@@ -171,8 +171,8 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
         {0, 0, I_body[3]+2*I_wheel[3]+d*d*m_w/2+I_wheel[2]*d*d/(2*r*r)}};
     
     // Init T*
-    *T = {{1/r, -1, d/(2*r)}, {1/r, -1, d/(2*r)}};
-    *T_out = {{1/r, -1, d/(2*r)}, {1/r, -1, d/(2*r)}, {0, 1, 0}};
+    *T = {{1/r, -1, d/(2*r)}, {1/r, -1, -d/(2*r)}};
+    *T_out = {{1/r, -1, d/(2*r)}, {1/r, -1, -d/(2*r)}, {0, 1, 0}};
     
     // std::cout << "B: " << std::endl;
     // B->print();
@@ -236,22 +236,48 @@ controller_interface::return_type TwoWheelIDController::update(){
         e->zeros();
         e_dot->zeros();
 
+        // if(pos_feed){
+        //     *u = arma::pinv(*T_out) * *u_m;
+        //     *e = *q_w - *u;
+        // }
+
+        // if(vel_feed){
+        //     *u_dot = arma::pinv(*T_out) * *u_m_dot;
+        //     *e_dot = *q_w_dot - *u_dot;
+        // }
+        
         if(pos_feed){
             *u = arma::pinv(*T_out) * *u_m;
+            
+            q_w->at(1) = std::asin( (Kp->at(0,0) * (q_w->at(0) - u->at(0)) + Kd->at(0,0) * (q_w_dot->at(0) - u_dot->at(0)) ) *  B->at(1,1) / (B->at(0,1) * 9.81 * l));
+            if(q_w->has_nan()){
+                RCLCPP_ERROR(this->node_->get_logger(),"Exceeded angle");
+                q_w->at(1) = 0.2;
+            }
+
+            std::cout << "Pos error: " << (q_w->at(0) - u->at(0)) <<std::endl;
+            std::cout << "Vel error: " << (q_w_dot->at(0) - u_dot->at(0)) <<std::endl;
+            //std::cout << "desired theta: " << std::acos( (Kp->at(1,1) * (q_w->at(1) - u->at(1)) + Kd->at(1,1) * (q_w_dot->at(1) - u_dot->at(1)) ) *  B->at(2,2) / B->at(1,2)) << std::endl;
             *e = *q_w - *u;
         }
 
         if(vel_feed){
             *u_dot = arma::pinv(*T_out) * *u_m_dot;
+            q_w_dot->at(1) = 0;
             *e_dot = *q_w_dot - *u_dot;
         }
-        
+
+        // Ignore p error since it's already taken into account in theta_y
+        e->at(0) = 0;
+        e_dot->at(0) = 0;
+
         std::cout << "pos error: " << std::endl;
         e->print();
         std::cout << "vel error: " << std::endl;
         e_dot->print();
         std::cout << std::endl;
         
+
         // TODO: Compute G
         
         *tau = *T * (*B * (*Kp * *e + *Kd * *e_dot)  + *G); // TODO: check what we need between T, T' and T_inv
