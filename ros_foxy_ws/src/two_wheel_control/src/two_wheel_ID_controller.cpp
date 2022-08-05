@@ -1,7 +1,7 @@
 #include<two_wheel_control/two_wheel_ID_controller.hpp>
 
 
-
+// TODO: reprogram the control of position or velocities
 
 
 using namespace two_wheel_controller;
@@ -31,6 +31,7 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
     auto_declare<double>("body_height", 0);
     auto_declare<double>("wheel_redius", 0);
     auto_declare<double>("wheel_distance", 0);
+    auto_declare<double>("max_angle", 0);
     auto_declare<std::vector<double>>("Kp", std::vector<double>({0}));
     auto_declare<std::vector<double>>("Kd", std::vector<double>({0}));
 
@@ -51,6 +52,7 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
     Kp = std::make_unique<arma::Mat<double>>(3, 3, arma::fill::zeros);
     Kd =std::make_unique<arma::Mat<double>>(3, 3, arma::fill::zeros);
     tau = std::make_unique<arma::Col<double>>(2, arma::fill::zeros);
+    gamma = std::make_unique<arma::Col<double>>(3, arma::fill::zeros);
 
     // TODO: add initial values for inputs as parameters
     q_w = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
@@ -91,6 +93,9 @@ controller_interface::InterfaceConfiguration TwoWheelIDController::state_interfa
         config.names.push_back("RW_joint/position");
         config.names.push_back("LW_joint/position");
         config.names.push_back("imu_sensor/orientation.x");
+        config.names.push_back("imu_sensor/orientation.y");
+        config.names.push_back("imu_sensor/orientation.z");
+        config.names.push_back("imu_sensor/orientation.w");
     }
 
     if( std::find(feedback.begin(), feedback.end(), "velocity") != feedback.end() ){
@@ -99,6 +104,8 @@ controller_interface::InterfaceConfiguration TwoWheelIDController::state_interfa
         config.names.push_back("imu_sensor/angular_velocity.x");
     }
     
+    
+
     config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
 
     return config;
@@ -115,7 +122,11 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
 
     pos_feed = std::find( feedback.begin(), feedback.end(), "position") != feedback.end();
     vel_feed = std::find( feedback.begin(), feedback.end(), "velocity") != feedback.end();
-    
+    max_angle = this->node_->get_parameter("max_angle").as_double();
+    if(max_angle <= 0){
+        RCLCPP_ERROR(this->node_->get_logger(), "max_angle should be specified and positive");
+        return CallbackReturn::ERROR;
+    }
     // Take physical parameters
     
     std::vector<double> I_body = this->node_->get_parameter("body_I_diag").as_double_array();
@@ -160,11 +171,6 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
     }
 
     // Init B
-    // B->at(1,1) = I_wheel[2] + 3 * m_w;
-    // B->at(1,2) = l * m_w;
-    // B->at(2,1) = l * m_w;
-    // B->at(2,2) = m_w * l * l + I_body[2];
-    // B->at(3,3) = I_body[3] + 2 * I_wheel[3] + d * d * m_w / 2 + I_wheel[2] * d * d / (2 * r * r);
     
     *B = {{I_wheel[2]+3*m_w, l*m_w, 0}, 
         {l*m_w, m_w*l*l+I_body[2], 0}, 
@@ -180,13 +186,12 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
     // T->print();
     // std::cout << "T out: " << std::endl;
     // T_out->print();
-    
-    std::cout << "Kp:" << std::endl;
+
     // Init K*
     if(Kp_coeff.size() == 1){
         for(int i = 0; i < 3; i++){
             Kp->at(i,i) = Kp_coeff[1];
-            std::cout << Kp_coeff[1];
+            
         }
     }else{
         for(int i = 0; i < 3; i++){
@@ -204,6 +209,7 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
             Kd->at(i,i) = Kd_coeff[i];
         }
     }
+
     return CallbackReturn::SUCCESS;
 }
 
@@ -222,17 +228,28 @@ controller_interface::return_type TwoWheelIDController::update(){
     // TODO: check the order of the state interfaces (and command interfaces)
     // Measure current state
     try{
-        for(int i = 0; i < 3; i++){
-            if(pos_feed){     
-                u_m->at(i) = this->state_interfaces_[i].get_value();
-                // RCLCPP_INFO(this->node_->get_logger(), "%s value: %.4f", this->state_interfaces_[i].get_full_name().c_str(), this->state_interfaces_[i].get_value());
-            }
-            if(vel_feed){
-                u_m_dot->at(i) = this->state_interfaces_[i+3].get_value();
-            }
-            
-        }
         
+        if(pos_feed){     
+            u_m->at(0) = this->state_interfaces_[0].get_value();
+            u_m->at(1) = this->state_interfaces_[1].get_value();
+
+            //Handle quaternions
+            x = this->state_interfaces_[2].get_value();
+            y = this->state_interfaces_[3].get_value();
+            z = this->state_interfaces_[4].get_value();
+            w = this->state_interfaces_[5].get_value();
+            u_m->at(2) = std::atan2(2 * (w * x + y * z), (1 - 2 * (x * x + y * y)));
+        }
+            
+        if(vel_feed){
+            u_m_dot->at(0) = this->state_interfaces_[6].get_value();
+            u_m_dot->at(1) = this->state_interfaces_[7].get_value();
+            u_m_dot->at(2) = this->state_interfaces_[8].get_value();
+        }
+
+        // std::cout << "measured position" << std::endl;
+        // u_m->print();
+
         e->zeros();
         e_dot->zeros();
 
@@ -247,23 +264,28 @@ controller_interface::return_type TwoWheelIDController::update(){
         // }
         
         if(pos_feed){
-            *u = arma::pinv(*T_out) * *u_m;
+            *u = arma::inv(*T_out) * *u_m;
             
-            q_w->at(1) = std::asin( (Kp->at(0,0) * (q_w->at(0) - u->at(0)) + Kd->at(0,0) * (q_w_dot->at(0) - u_dot->at(0)) ) *  B->at(1,1) / (B->at(0,1) * 9.81 * l));
-            if(q_w->has_nan()){
+            
+            v_ddot = (Kp->at(0,0) * (q_w->at(0) - u->at(0)) + Kd->at(0,0) * (q_w_dot->at(0) - u_dot->at(0)) ) *  B->at(1,1) / (B->at(0,1) * 9.81 * l);
+            if(std::abs(std::asin(v_ddot)) < max_angle){
+                q_w->at(1) = std::asin( v_ddot );
+            }else{
                 RCLCPP_ERROR(this->node_->get_logger(),"Exceeded angle");
-                q_w->at(1) = 0.2;
+                q_w->at(1) = std::asin(std::copysign(max_angle,v_ddot)); //use copysign to crop the angle
             }
 
-            std::cout << "Pos error: " << (q_w->at(0) - u->at(0)) <<std::endl;
-            std::cout << "Vel error: " << (q_w_dot->at(0) - u_dot->at(0)) <<std::endl;
-            //std::cout << "desired theta: " << std::acos( (Kp->at(1,1) * (q_w->at(1) - u->at(1)) + Kd->at(1,1) * (q_w_dot->at(1) - u_dot->at(1)) ) *  B->at(2,2) / B->at(1,2)) << std::endl;
+            // std::cout << "Pos error: " << (q_w->at(0) - u->at(0)) <<std::endl;
+            // std::cout << "Vel error: " << (q_w_dot->at(0) - u_dot->at(0)) <<std::endl;
+            // std::cout << "desired theta: " << q_w->at(1) << std::endl;
+            // std::cout << "cur theta: " << u->at(1) << std::endl;
             *e = *q_w - *u;
         }
 
         if(vel_feed){
-            *u_dot = arma::pinv(*T_out) * *u_m_dot;
+            *u_dot = arma::inv(*T_out) * *u_m_dot;
             q_w_dot->at(1) = 0;
+            // std::cout << "cur vely: " << u_dot->at(1) << std::endl;
             *e_dot = *q_w_dot - *u_dot;
         }
 
@@ -271,17 +293,25 @@ controller_interface::return_type TwoWheelIDController::update(){
         e->at(0) = 0;
         e_dot->at(0) = 0;
 
-        std::cout << "pos error: " << std::endl;
-        e->print();
-        std::cout << "vel error: " << std::endl;
-        e_dot->print();
-        std::cout << std::endl;
+        // std::cout << "curr state: " << std::endl;
+        // u->print();
+        // std::cout << "curr vel: " << std::endl;
+        // u_dot->print();
+
+        // std::cout << "pos error: " << std::endl;
+        // e->print();
+        // std::cout << "vel error: " << std::endl;
+        // e_dot->print();
+        // std::cout << std::endl;
+
+         
         
 
-        // TODO: Compute G
+        //TODO: limit tau
         
-        *tau = *T * (*B * (*Kp * *e + *Kd * *e_dot)  + *G); // TODO: check what we need between T, T' and T_inv
+        *tau = *T * (*B * (*Kp * *e + *Kd * *e_dot)); // TODO: check what we need between T, T' and T_inv
         
+        // std::cout << "action/error: " << (tau->at(0) + tau->at(1)) / (Kp->at(1,1) * e->at(1) + Kd->at(1,1) * e_dot->at(1)) << std::endl;
         //Checking variable 
         // TODO: remove for real use since it allocates a lot of memory
         // arma::Col<double> Kp_e = *Kp * *e;
@@ -293,11 +323,11 @@ controller_interface::return_type TwoWheelIDController::update(){
         // std::cout << "gamma = " << std::endl;
         // gamma.print();
         
-        std::cout << "actuation: " << std::endl;
-        tau->print();
+        // std::cout << "actuation: " << std::endl;
+        // tau->print();
 
-    }catch(std::exception &e){
-        RCLCPP_ERROR(this->node_->get_logger(), e.what());
+    }catch(std::exception &err){
+        RCLCPP_ERROR(this->node_->get_logger(), err.what());
     }
 
     for(int i = 0; i < 2; i++){
@@ -310,16 +340,17 @@ controller_interface::return_type TwoWheelIDController::update(){
 void TwoWheelIDController::subCallback(const two_wheel_control_msgs::msg::Command::SharedPtr msg){
     
     if(pos_feed){
-        q_w->at(1) = msg->p;
-        q_w->at(2) = msg->thetay;
-        q_w->at(3) = msg->thetaz;
+        q_w->at(0) = msg->p;
+        
+        q_w->at(2) = msg->thetaz;
     }
 
     if(vel_feed){
-        q_w->at(1) = msg->p_dot;
-        q_w->at(2) = msg->thetay_dot;
-        q_w->at(3) = msg->thetaz_dot;
+        q_w_dot->at(0) = msg->p_dot;
+       
+        q_w_dot->at(2) = msg->thetaz_dot;
     }
+    // RCLCPP_INFO(this->node_->get_logger(), "Received new command p:\n%.4f\n%.4f\n v: \n%.4f\n%.4f", q_w->at(0), q_w->at(2), q_w_dot->at(0), q_w_dot->at(2));
 }
 
 PLUGINLIB_EXPORT_CLASS(two_wheel_controller::TwoWheelIDController, controller_interface::ControllerInterface)

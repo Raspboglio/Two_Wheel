@@ -438,23 +438,46 @@ The Balancing control stage purpose is to keep a given $\theta_y$ thats derived 
 
 The simulation is performed with Gazebo since it provides an easy interface with ROS.
 The robot model along with the sensor's definition is done via an urdf file.
+All the file needed for the simulation are in the two wheel sim package along with the urdf description
 
-\subsubsection{Controller}
+\subsection{Controller}
 The interface between Gazebo and ROS is enstablished via the \href{https://github.com/ros-controls/ros2_control}{ros controls} 
 and \href{https://github.com/ros-controls/gazebo_ros2_control}{gazebo ros2 control}.
 
-\paragraph{PD controller}
-The controller allows 3 sets of feedback:
+\subsubsection{Static Feedback controller}
+The controller is structured as 2 static feedback stages:
 \begin{enumerate}
-	\item position feedback
-	\item velocity feedback
-	\item position and velocity feedback
+	\item Position/Velocity
+	\item Inverted pendulum
 \end{enumerate}
 
-in the future might be added a trajectory following controller that will perform a position velocity and acceleration feedback.
+This separation is needed since the sistem despite having 3 generalized coordinates only 2 of them can be controller, in this case we only control $p$ and $\theta_z$
 
-This controller can (with the right $K_p$ and $K_d$) mantain the vertical position but struggles with the control of the position.
+\paragraph{Position/Velocity controller}
+The first stage is controls positions and velocities in the space, so we only take into account $\theta_z$ and $p$.
+$\theta_z$ provides directly an acceleration contribution while the result of $p$ controller produces the input for the next stage by computing the desired acceleration and transforming it into a desired $\theta_y$ thanks to the equation:
+$$\ddot p = \frac{I_{p\theta_y}}{I_{\theta_y}}$$
+Where $I_{p\theta_y}$ and $I_{\theta_y}$ are the (1,2) and (2,2) elements of B.
 
-\paragraph{MPC} 
 
+\paragraph{Inverted Pendulum controller}
+The last stage purpose is to control the remaining degree of freedom $\theta_y$ this stage takes as input the desired $\theta_y$ and returns the needed acceleration.
+
+\subsubsection{Controller parameters}
+The controller can be configured via a series of ROS parameters that are readed only when started.
+\begin{itemize}
+	\item body\textunderscore I\textunderscore diag: This is a vector of 3 elements containing the 3 main component of the body inertia, coupling component such as $I_{xy}$ are neglected.
+	\item wheel\textunderscore I\textunderscore diag: same as the body but for the wheel.
+	\item body\textunderscore mass: mass of the body.
+    \item wheel\textunderscore mass: mass of the wheel.
+    \item body\textunderscore height: distance between the wheel axle and the CoM of the body
+    \item wheel\textunderscore radius: radius of the wheel.
+    \item wheel\textunderscore distance: distance between the two wheel. 
+    \item max\textunderscore angle: maximum $\theta_y$ allowed.
+    \item $K_p$: vector of 3 elements containing the feedback gain on the positions. Setting the first or the last value to zero will create a velocity only controller. The second value MUST be nonnull in order to not fall.
+    \item $K_d$: same as the previous but for velocities, again setting to zero values will create a position only feedback.
+    \item feedback: deprecated.
+\end{itemize}
+
+The two wheel sim package already contains some values that works for a 100Hz controller.
 \end{document}

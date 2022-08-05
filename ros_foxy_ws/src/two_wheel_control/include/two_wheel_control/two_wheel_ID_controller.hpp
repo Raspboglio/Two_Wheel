@@ -34,9 +34,9 @@ namespace two_wheel_controller{
             rclcpp::Subscription<two_wheel_control_msgs::msg::Command>::SharedPtr _sub;
             
             bool pos_feed, vel_feed;
-            double l;
+            double l, v_ddot, x, y, z, w, max_angle;
 
-            std::unique_ptr<arma::Col<double>> u, u_dot, u_m,  u_m_dot, q_w, q_w_dot, e, e_dot, G, tau;
+            std::unique_ptr<arma::Col<double>> u, u_dot, u_m,  u_m_dot, q_w, q_w_dot, e, e_dot, G, tau, gamma;
             std::unique_ptr<arma::Mat<double>> Kp, Kd, B, T, T_out;
             
     };

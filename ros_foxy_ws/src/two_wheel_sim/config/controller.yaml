@@ -23,25 +23,29 @@ two_wheel_control:
     body_mass: 20.0
     wheel_mass: 0.1
     body_height: 0.5
-    wheel_radius: 0.2
+    wheel_radius: 0.1
     wheel_distance: 0.4
+
+    max_angle: 0.19
+
+    # GOOD FOR 100 Hz
     # Kp:
-    #   - 0.005
-    #   - 40.0
-    #   - 10.0
+    #   - 0.01
+    #   - 50.0
+    #   - 55.0
     # Kd:
-    #   - 0.005
-    #   - 10.0
-    #   - 10.0
+    #   - 0.013
+    #   - 30.0
+    #   - 15.0
 
     Kp:
       - 0.01
-      - 40.0
-      - 50.0
+      - 55.0
+      - 55.0
     Kd:
       - 0.01
-      - 10.0
       - 30.0
+      - 15.0
 
     feedback:
       - velocity

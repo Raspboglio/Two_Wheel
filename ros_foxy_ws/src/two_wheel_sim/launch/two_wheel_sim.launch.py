@@ -33,7 +33,8 @@ def generate_launch_description():
         arguments=[
             "-entity","Two_Wheel",
             "-topic","robot_description",
-            "-z", "1.5"
+            "-z", "1.5", 
+            "-Y", "0" 
         ]
     )
 
