@@ -47,10 +47,6 @@ two_wheel_control:
       - 30.0
       - 15.0
 
-    feedback:
-      - velocity
-      - position
-
     tuning: true
 
     
