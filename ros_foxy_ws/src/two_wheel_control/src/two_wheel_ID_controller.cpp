@@ -2,7 +2,7 @@
 
 
 // TODO: reprogram the control of position or velocities
-
+// TODO: make states and error published on a topic in order to better tune gains
 
 using namespace two_wheel_controller;
 
@@ -289,6 +289,12 @@ controller_interface::return_type TwoWheelIDController::update(){
             *e_dot = *q_w_dot - *u_dot;
         }
 
+        std::cout << "pos error: " << std::endl;
+        e->print();
+        std::cout << "vel error: " << std::endl;
+        e_dot->print();
+        std::cout << std::endl;
+
         // Ignore p error since it's already taken into account in theta_y
         e->at(0) = 0;
         e_dot->at(0) = 0;
@@ -298,18 +304,14 @@ controller_interface::return_type TwoWheelIDController::update(){
         // std::cout << "curr vel: " << std::endl;
         // u_dot->print();
 
-        // std::cout << "pos error: " << std::endl;
-        // e->print();
-        // std::cout << "vel error: " << std::endl;
-        // e_dot->print();
-        // std::cout << std::endl;
 
          
         
 
         //TODO: limit tau
+        *G = {0,-9.81 * l * std::sin(u->at(1)), 0};
         
-        *tau = *T * (*B * (*Kp * *e + *Kd * *e_dot)); // TODO: check what we need between T, T' and T_inv
+        *tau = *T * (*B * (*Kp * *e + *Kd * *e_dot) + *G); // TODO: check what we need between T, T' and T_inv
         
         // std::cout << "action/error: " << (tau->at(0) + tau->at(1)) / (Kp->at(1,1) * e->at(1) + Kd->at(1,1) * e_dot->at(1)) << std::endl;
         //Checking variable 

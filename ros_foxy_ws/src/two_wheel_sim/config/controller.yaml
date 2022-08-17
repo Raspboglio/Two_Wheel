@@ -26,7 +26,7 @@ two_wheel_control:
     wheel_radius: 0.1
     wheel_distance: 0.4
 
-    max_angle: 0.19
+    max_angle: 0.4
 
     # GOOD FOR 100 Hz
     # Kp:
@@ -39,11 +39,11 @@ two_wheel_control:
     #   - 15.0
 
     Kp:
-      - 0.01
+      - 0.10
       - 55.0
-      - 55.0
+      - 50.0
     Kd:
-      - 0.01
+      - 0.07
       - 30.0
       - 15.0
 
