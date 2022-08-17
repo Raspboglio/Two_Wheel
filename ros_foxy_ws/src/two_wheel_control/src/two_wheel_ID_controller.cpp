@@ -18,7 +18,6 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
     controller_interface::return_type res = controller_interface::ControllerInterface::init(controller_name); 
     if(res == controller_interface::return_type::ERROR) return res;
 
-    _sub = this->node_->create_subscription<two_wheel_control_msgs::msg::Command>("two_wheel_command", 10, std::bind(&TwoWheelIDController::subCallback, this,  std::placeholders::_1));
     
     // Feedback params
     auto_declare<std::vector<std::string>>("feedback", std::vector<std::string>({"position", "velocity"}));
@@ -34,6 +33,7 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
     auto_declare<double>("max_angle", 0);
     auto_declare<std::vector<double>>("Kp", std::vector<double>({0}));
     auto_declare<std::vector<double>>("Kd", std::vector<double>({0}));
+    auto_declare<bool>("tuning", false);
 
     // Allocate memory for matices/vectors
     // RCLCPP_INFO(this->node_->get_logger(), "INIT MATRICES");
@@ -170,8 +170,16 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
         return CallbackReturn::ERROR;
     }
 
+
+    tuning = this->node_->get_parameter("tuning").as_bool();
+    _state_pub = this->node_->create_publisher<two_wheel_control_msgs::msg::State>("state", 10);
+    if(tuning){
+        _tuning_command = this->node_->create_subscription<two_wheel_control_msgs::msg::TuningCommand>("tuning", 10, std::bind(&TwoWheelIDController::tuningCallback, this, std::placeholders::_1));
+    }else{
+        _sub = this->node_->create_subscription<two_wheel_control_msgs::msg::Command>("two_wheel_command", 10, std::bind(&TwoWheelIDController::subCallback, this,  std::placeholders::_1));
+    }
+
     // Init B
-    
     *B = {{I_wheel[2]+3*m_w, l*m_w, 0}, 
         {l*m_w, m_w*l*l+I_body[2], 0}, 
         {0, 0, I_body[3]+2*I_wheel[3]+d*d*m_w/2+I_wheel[2]*d*d/(2*r*r)}};
@@ -246,66 +254,63 @@ controller_interface::return_type TwoWheelIDController::update(){
             u_m_dot->at(1) = this->state_interfaces_[7].get_value();
             u_m_dot->at(2) = this->state_interfaces_[8].get_value();
         }
-
+        *u = arma::inv(*T_out) * *u_m;
+        *u_dot = arma::inv(*T_out) * *u_m_dot;
         // std::cout << "measured position" << std::endl;
         // u_m->print();
 
         e->zeros();
         e_dot->zeros();
-
-        // if(pos_feed){
-        //     *u = arma::pinv(*T_out) * *u_m;
-        //     *e = *q_w - *u;
-        // }
-
-        // if(vel_feed){
-        //     *u_dot = arma::pinv(*T_out) * *u_m_dot;
-        //     *e_dot = *q_w_dot - *u_dot;
-        // }
+        if(tuning){
+            e->at(1) = q_w->at(1) - u->at(1);
+            e_dot->at(1) = q_w_dot->at(1) - u_dot->at(1);
+        }else{
         
-        if(pos_feed){
-            *u = arma::inv(*T_out) * *u_m;
-            
-            
-            v_ddot = (Kp->at(0,0) * (q_w->at(0) - u->at(0)) + Kd->at(0,0) * (q_w_dot->at(0) - u_dot->at(0)) ) *  B->at(1,1) / (B->at(0,1) * 9.81 * l);
-            if(std::abs(std::asin(v_ddot)) < max_angle){
-                q_w->at(1) = std::asin( v_ddot );
-            }else{
-                RCLCPP_ERROR(this->node_->get_logger(),"Exceeded angle");
-                q_w->at(1) = std::asin(std::copysign(max_angle,v_ddot)); //use copysign to crop the angle
+            if(pos_feed){
+                v_ddot = (Kp->at(0,0) * (q_w->at(0) - u->at(0)) + Kd->at(0,0) * (q_w_dot->at(0) - u_dot->at(0)) ) *  B->at(1,1) / (B->at(0,1) * 9.81 * l);
+                if(std::abs(std::asin(v_ddot)) < max_angle){
+                    q_w->at(1) = std::asin( v_ddot );
+                }else{
+                    RCLCPP_ERROR(this->node_->get_logger(),"Exceeded angle");
+                    q_w->at(1) = std::asin(std::copysign(max_angle,v_ddot)); //use copysign to crop the angle
+                }
+
+                // std::cout << "Pos error: " << (q_w->at(0) - u->at(0)) <<std::endl;
+                // std::cout << "Vel error: " << (q_w_dot->at(0) - u_dot->at(0)) <<std::endl;
+                // std::cout << "desired theta: " << q_w->at(1) << std::endl;
+                // std::cout << "cur theta: " << u->at(1) << std::endl;
+                *e = *q_w - *u;
             }
 
-            // std::cout << "Pos error: " << (q_w->at(0) - u->at(0)) <<std::endl;
-            // std::cout << "Vel error: " << (q_w_dot->at(0) - u_dot->at(0)) <<std::endl;
-            // std::cout << "desired theta: " << q_w->at(1) << std::endl;
-            // std::cout << "cur theta: " << u->at(1) << std::endl;
-            *e = *q_w - *u;
+            if(vel_feed){
+                q_w_dot->at(1) = 0;
+                // std::cout << "cur vely: " << u_dot->at(1) << std::endl;
+                *e_dot = *q_w_dot - *u_dot;
+            }
+            // Ignore p error since it's already taken into account in theta_y
+            e->at(0) = 0;
+            e_dot->at(0) = 0;
         }
+        // std::cout << "pos error: " << std::endl;
+        // e->print();
+        // std::cout << "vel error: " << std::endl;
+        // e_dot->print();
+        // std::cout << std::endl;
 
-        if(vel_feed){
-            *u_dot = arma::inv(*T_out) * *u_m_dot;
-            q_w_dot->at(1) = 0;
-            // std::cout << "cur vely: " << u_dot->at(1) << std::endl;
-            *e_dot = *q_w_dot - *u_dot;
-        }
-
-        std::cout << "pos error: " << std::endl;
-        e->print();
-        std::cout << "vel error: " << std::endl;
-        e_dot->print();
-        std::cout << std::endl;
-
-        // Ignore p error since it's already taken into account in theta_y
-        e->at(0) = 0;
-        e_dot->at(0) = 0;
+        
 
         // std::cout << "curr state: " << std::endl;
         // u->print();
         // std::cout << "curr vel: " << std::endl;
         // u_dot->print();
-
-
-         
+        
+        _pub_msg.p = u->at(0);
+        _pub_msg.thetay = u->at(1);
+        _pub_msg.thetaz = u->at(2);
+        _pub_msg.v = u_dot->at(0);
+        _pub_msg.omegay = u_dot->at(1);
+        _pub_msg.omegaz = u_dot->at(2);
+        _state_pub->publish(_pub_msg);
         
 
         //TODO: limit tau
@@ -351,6 +356,19 @@ void TwoWheelIDController::subCallback(const two_wheel_control_msgs::msg::Comman
         q_w_dot->at(0) = msg->p_dot;
        
         q_w_dot->at(2) = msg->thetaz_dot;
+    }
+    // RCLCPP_INFO(this->node_->get_logger(), "Received new command p:\n%.4f\n%.4f\n v: \n%.4f\n%.4f", q_w->at(0), q_w->at(2), q_w_dot->at(0), q_w_dot->at(2));
+}
+
+void TwoWheelIDController::tuningCallback(const two_wheel_control_msgs::msg::TuningCommand::SharedPtr msg){
+    q_w->zeros();
+    q_w_dot->zeros();
+    if(pos_feed){
+        q_w->at(1) = msg->thetay;
+    }
+
+    if(vel_feed){
+        q_w_dot->at(1) = msg->thetay_dot;
     }
     // RCLCPP_INFO(this->node_->get_logger(), "Received new command p:\n%.4f\n%.4f\n v: \n%.4f\n%.4f", q_w->at(0), q_w->at(2), q_w_dot->at(0), q_w_dot->at(2));
 }
