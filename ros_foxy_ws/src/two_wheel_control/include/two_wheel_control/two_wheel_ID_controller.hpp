@@ -7,6 +7,7 @@
 #include <two_wheel_control_msgs/msg/command.hpp>
 #include <two_wheel_control_msgs/msg/state.hpp>
 #include <two_wheel_control_msgs/msg/tuning_command.hpp>
+#include <control_toolbox/pid.hpp>
 // Linear Algebra utils
 #include<armadillo>
 
@@ -30,14 +31,16 @@ namespace two_wheel_controller{
             controller_interface::return_type update() override;
 
         private:
+            std::vector<control_toolbox::Pid> PID; 
+
             void subCallback(const two_wheel_control_msgs::msg::Command::SharedPtr msg);
 
             rclcpp::Subscription<two_wheel_control_msgs::msg::Command>::SharedPtr _sub;
             
-            double l, v_ddot, x, y, z, w, max_angle;
+            double l, v_ddot, x, y, z, w, max_angle, update_rate;
 
             std::unique_ptr<arma::Col<double>> u, u_dot, u_m,  u_m_dot, q_w, q_w_dot, e, e_dot, G, tau, gamma;
-            std::unique_ptr<arma::Mat<double>> Kp, Kd, B, T, T_out;
+            std::unique_ptr<arma::Mat<double>> B, T, T_out;
 
             // Tuning utilities
             bool tuning;

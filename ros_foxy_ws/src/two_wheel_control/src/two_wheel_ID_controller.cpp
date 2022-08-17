@@ -1,9 +1,6 @@
 #include<two_wheel_control/two_wheel_ID_controller.hpp>
 
 
-// TODO: reprogram the control of position or velocities
-// TODO: make states and error published on a topic in order to better tune gains
-
 using namespace two_wheel_controller;
 
 TwoWheelIDController::TwoWheelIDController(){
@@ -17,7 +14,6 @@ TwoWheelIDController::~TwoWheelIDController(){
 controller_interface::return_type TwoWheelIDController::init(const std::string &controller_name){
     controller_interface::return_type res = controller_interface::ControllerInterface::init(controller_name); 
     if(res == controller_interface::return_type::ERROR) return res;
-
     
     // Physical parameters
     auto_declare<std::vector<double>>("body_I_diag", std::vector<double>({0,0,0}));
@@ -28,9 +24,12 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
     auto_declare<double>("wheel_redius", 0);
     auto_declare<double>("wheel_distance", 0);
     auto_declare<double>("max_angle", 0);
-    auto_declare<std::vector<double>>("Kp", std::vector<double>({0}));
-    auto_declare<std::vector<double>>("Kd", std::vector<double>({0}));
+    auto_declare<std::vector<double>>("P", std::vector<double>({0}));
+    auto_declare<std::vector<double>>("I", std::vector<double>({0}));
+    auto_declare<std::vector<double>>("D", std::vector<double>({0}));
+    auto_declare<std::vector<double>>("max_I", std::vector<double>({0}));
     auto_declare<bool>("tuning", false);
+    auto_declare<double>("update_rate", 0);
 
     // Allocate memory for matices/vectors
     // RCLCPP_INFO(this->node_->get_logger(), "INIT MATRICES");
@@ -46,8 +45,6 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
     G = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
     T = std::make_unique<arma::Mat<double>>(2, 3, arma::fill::zeros);
     T_out = std::make_unique<arma::Mat<double>>(3, 3, arma::fill::zeros);
-    Kp = std::make_unique<arma::Mat<double>>(3, 3, arma::fill::zeros);
-    Kd =std::make_unique<arma::Mat<double>>(3, 3, arma::fill::zeros);
     tau = std::make_unique<arma::Col<double>>(2, arma::fill::zeros);
     gamma = std::make_unique<arma::Col<double>>(3, arma::fill::zeros);
 
@@ -55,6 +52,11 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
     q_w = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
     q_w_dot = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
 
+    // Allocate PID memory
+    for(int i = 0; i < 6; i++){
+        control_toolbox::Pid tmp;
+        PID.push_back(tmp);
+    }
 
     return controller_interface::return_type::OK;
 }
@@ -146,14 +148,25 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
         return CallbackReturn::ERROR;
     }
     // RCLCPP_INFO(this->node_->get_logger(), "INIT PARAM MATRICES");
-    std::vector<double> Kp_coeff = this->node_->get_parameter("Kp").as_double_array();
-    std::vector<double> Kd_coeff = this->node_->get_parameter("Kd").as_double_array();
+    std::vector<double> P_coeff = this->node_->get_parameter("P").as_double_array();
+    std::vector<double> D_coeff = this->node_->get_parameter("D").as_double_array();
+    std::vector<double> I_coeff = this->node_->get_parameter("I").as_double_array();
+    std::vector<double> max_I = this->node_->get_parameter("max_I").as_double_array();
 
-    if((Kp_coeff.size() != 1 && Kp_coeff.size() != 3) || (Kd_coeff.size() != 1 && Kd_coeff.size() != 3)){
-        RCLCPP_ERROR(this->node_->get_logger(), "Gains must be of 1 or 3 elements (one value for all or each value for each parameter)");
+    if(P_coeff.size() != 6 || I_coeff.size() != 6 || D_coeff.size() != 6 || max_I.size() != 6){
+        RCLCPP_ERROR(node_->get_logger(), "PID gains must be vector of dimension 6 (1 for each state variable)");
         return CallbackReturn::ERROR;
     }
 
+    for(int i = 0; i < 6; i++){
+        PID[i].initPid(P_coeff[i], I_coeff[i], D_coeff[i], max_I[i], -max_I[i]);
+    }
+
+    update_rate = node_->get_parameter("update_rate").as_double();
+    if(update_rate <= 0){
+        RCLCPP_ERROR(node_->get_logger(), "update_rate must be >=0, probably you didn't define that");
+        return CallbackReturn::ERROR;
+    }
 
     tuning = this->node_->get_parameter("tuning").as_bool();
     _state_pub = this->node_->create_publisher<two_wheel_control_msgs::msg::State>("state", 10);
@@ -179,34 +192,14 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
     // std::cout << "T out: " << std::endl;
     // T_out->print();
 
-    // Init K*
-    if(Kp_coeff.size() == 1){
-        for(int i = 0; i < 3; i++){
-            Kp->at(i,i) = Kp_coeff[1];
-            
-        }
-    }else{
-        for(int i = 0; i < 3; i++){
-            Kp->at(i,i) = Kp_coeff[i];
-            std::cout << Kp_coeff[i];
-        }
-    }
-
-    if(Kd_coeff.size() == 1){
-        for(int i = 0; i < 3; i++){
-            Kd->at(i,i) = Kd_coeff[1];
-        }
-    }else{
-        for(int i = 0; i < 3; i++){
-            Kd->at(i,i) = Kd_coeff[i];
-        }
-    }
-
     return CallbackReturn::SUCCESS;
 }
 
 rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWheelIDController::on_activate(const rclcpp_lifecycle::State & previous_state){
-
+    std::vector<control_toolbox::Pid>::iterator pid_it = PID.begin();
+    for(; pid_it != PID.end(); pid_it++){
+        pid_it->reset();
+    }
     return CallbackReturn::SUCCESS;
 }
 
@@ -216,12 +209,8 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
 }
 
 controller_interface::return_type TwoWheelIDController::update(){
-    // RCLCPP_INFO(this->node_->get_logger(), "UPDATE");
-    // TODO: check the order of the state interfaces (and command interfaces)
     // Measure current state
-    try{
-        
-             
+    try{          
         u_m->at(0) = this->state_interfaces_[0].get_value();
         u_m->at(1) = this->state_interfaces_[1].get_value();
 
@@ -249,14 +238,15 @@ controller_interface::return_type TwoWheelIDController::update(){
             e->at(1) = q_w->at(1) - u->at(1);
             e_dot->at(1) = q_w_dot->at(1) - u_dot->at(1);
         }else{
-        
-            
-            v_ddot = (Kp->at(0,0) * (q_w->at(0) - u->at(0)) + Kd->at(0,0) * (q_w_dot->at(0) - u_dot->at(0)) ) *  B->at(1,1) / (B->at(0,1) * 9.81 * l);
+            e->at(0) = q_w->at(0) - u_dot->at(0);
+            e_dot->at(0) = q_w_dot->at(0) - u_dot->at(0);
+
+            v_ddot = (PID[0].computeCommand(e->at(0), 1/update_rate) + PID[3].computeCommand(e->at(3), 1/update_rate)) *  B->at(1,1) / (B->at(0,1) * 9.81 * l);
             if(std::abs(std::asin(v_ddot)) < max_angle){
-                q_w->at(1) = std::asin( v_ddot );
+                q_w->at(1) = std::asin(v_ddot);
             }else{
                 RCLCPP_ERROR(this->node_->get_logger(),"Exceeded angle");
-                q_w->at(1) = std::asin(std::copysign(max_angle,v_ddot)); //use copysign to crop the angle
+                q_w->at(1) = std::asin(std::copysign(max_angle,v_ddot));
             }
 
             // std::cout << "Pos error: " << (q_w->at(0) - u->at(0)) <<std::endl;
@@ -299,8 +289,11 @@ controller_interface::return_type TwoWheelIDController::update(){
 
         //TODO: limit tau
         *G = {0,-9.81 * l * std::sin(u->at(1)), 0};
+        gamma->at(0) = 0;
+        gamma->at(1) = PID[1].computeCommand(e->at(1), 1/update_rate) + PID[4].computeCommand(e->at(4), 1/update_rate);
+        gamma->at(2) = PID[2].computeCommand(e->at(2), 1/update_rate) + PID[5].computeCommand(e->at(5), 1/update_rate);
         
-        *tau = *T * (*B * (*Kp * *e + *Kd * *e_dot) + *G); // TODO: check what we need between T, T' and T_inv
+        *tau = *T * (*B * *gamma + *G); // TODO: check what we need between T, T' and T_inv
         
         // std::cout << "action/error: " << (tau->at(0) + tau->at(1)) / (Kp->at(1,1) * e->at(1) + Kd->at(1,1) * e_dot->at(1)) << std::endl;
         //Checking variable 
