@@ -50,7 +50,7 @@ two_wheel_control:
       - 0.0
       - 0.0
       - 0.0
-      - 0.1
+      - 0.0
       - 0.0
     max_I:
       - 100.0
@@ -110,7 +110,7 @@ two_wheel_control:
     #   - 30.0
     #   - 15.0
 
-    tuning: false
+    tuning: true
 
     avg_size: 20
 

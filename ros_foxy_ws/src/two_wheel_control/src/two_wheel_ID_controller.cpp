@@ -98,7 +98,7 @@ controller_interface::InterfaceConfiguration TwoWheelIDController::state_interfa
 
     config.names.push_back("RW_joint/velocity");
     config.names.push_back("LW_joint/velocity");
-    config.names.push_back("imu_sensor/angular_velocity.x");
+    config.names.push_back("imu_sensor/angular_velocity.y");
     
     
     
@@ -234,7 +234,7 @@ controller_interface::return_type TwoWheelIDController::update(){
         y = this->state_interfaces_[3].get_value();
         z = this->state_interfaces_[4].get_value();
         w = this->state_interfaces_[5].get_value();
-        u_m->at(2) = std::atan2(2 * (w * x + y * z), (1 - 2 * (x * x + y * y)));
+        u_m->at(2) = std::asin(2*(w*y - z*x)); // TODO: add a check for out of range of asin
         
             
         

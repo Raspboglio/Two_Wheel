@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Two_Wheel">
     
-    <xacro:property name="l_b" value="1"/>
-    <xacro:property name="w_b" value="0.4"/>
+    <xacro:property name="l_b" value="0.4"/>
+    <xacro:property name="w_b" value="1"/>
     <xacro:property name="h_b" value="1"/>
     <xacro:property name="m_b" value="20"/>
     <xacro:property name="m_w" value="0.1"/>
@@ -47,8 +47,8 @@
     </link>
 
     <joint name="RW_joint" type="revolute">
-        <origin xyz="${l_b/2} 0 ${-h_b/2}" rpy="0.0 0.0 0.0"/>
-        <axis xyz="1 0 0"/>
+        <origin xyz="0 ${w_b/2} ${-h_b/2}" rpy="0.0 0.0 0.0"/>
+        <axis xyz="0 1 0"/>
         <parent link="base_link"/>
         <child link="RW"/>
         <limit effort="${eff_lim}" velocity="${speed_lim}" lower="-${eff_lim}" upper="${eff_lim}"/>
@@ -56,18 +56,18 @@
 
     <link name="RW">
         <inertial>
-            <origin xyz="${w_t/2} 0.0 0.0" rpy="0.0 ${pi/2} 0.0"/>
+            <origin xyz="0.0 ${w_t/2} 0.0" rpy="${pi/2} 0.0 0.0"/>
             <mass value="${m_w}"/>
             <inertia ixx="${I_w_xx}" ixy="0.0" ixz="0.0" iyy="${I_w_yy}" iyz="0.0" izz="${I_w_zz}"/>
         </inertial>
         <visual>
-            <origin xyz="${w_t/2} 0.0 0.0" rpy="0.0 ${pi/2} 0.0"/>
+            <origin xyz="0.0 ${w_t/2} 0.0" rpy="${pi/2} 0.0 0.0"/>
             <geometry>
                 <cylinder radius="${r_w}" length="${w_t}"/> 
             </geometry>
         </visual>
         <collision>
-            <origin xyz="${w_t/2} 0.0 0.0" rpy="0.0 ${pi/2} 0.0"/>
+            <origin xyz="0.0 ${w_t/2} 0.0" rpy="${pi/2} 0.0 0.0"/>
             <geometry>
                 <cylinder radius="${r_w}" length="${w_t}"/>    
             </geometry>
@@ -75,8 +75,8 @@
     </link>
 
     <joint name="LW_joint" type="revolute">
-        <origin xyz="${-l_b/2} 0 ${-h_b/2}" rpy="0.0 0.0 0.0"/>
-        <axis xyz="1 0 0"/>
+        <origin xyz="0 ${-w_b/2} ${-h_b/2}" rpy="0.0 0.0 0.0"/>
+        <axis xyz="0 1 0"/>
         <parent link="base_link"/>
         <child link="LW"/>
         <limit effort="${eff_lim}" velocity="${speed_lim}" lower="-${eff_lim}" upper="${eff_lim}"/>
@@ -84,18 +84,18 @@
 
     <link name="LW">
         <inertial>
-            <origin xyz="${-w_t/2} 0.0 0.0" rpy="0.0 ${pi/2} 0.0"/>
+            <origin xyz="0.0 ${-w_t/2} 0.0" rpy="${pi/2} 0.0 0.0"/>
             <mass value="${m_w}"/>
             <inertia ixx="${I_w_xx}" ixy="0.0" ixz="0.0" iyy="${I_w_yy}" iyz="0.0" izz="${I_w_zz}"/>
         </inertial>
         <visual>
-            <origin xyz="${-w_t/2} 0.0 0.0" rpy="0.0 ${pi/2} 0.0"/>
+            <origin xyz="0.0 ${-w_t/2} 0.0" rpy="${pi/2} 0.0 0.0"/>
             <geometry>
                 <cylinder radius="${r_w}" length="${w_t}"/> 
             </geometry>
         </visual>
         <collision>
-            <origin xyz="${-w_t/2} 0.0 0.0" rpy="0.0 ${pi/2} 0.0"/>
+            <origin xyz="0.0 ${-w_t/2} 0.0" rpy="${pi/2} 0.0 0.0"/>
             <geometry>
                 <cylinder radius="${r_w}" length="${w_t}"/>    
             </geometry>
