@@ -12,7 +12,7 @@ controller_manager:
 
 two_wheel_control:
   ros__parameters:
-    update_rate: 100
+    update_rate: 100.0
 
     body_I_diag:
       - 1.9
@@ -28,30 +28,68 @@ two_wheel_control:
     wheel_radius: 0.1
     wheel_distance: 0.4
 
-    max_angle: 0.4
+    max_angle: 0.6
 
+    # VELOCITY CONTROL
     P:
-      -0
-      -1
-      -0
-      -0
-      -0
-      -1
+      - 0.0
+      - 200.0
+      - 100.0
+      - 0.015
+      - 10.0
+      - 50.0
     I:
-      -0
-      -0
-      -0
-      -0
-      -0
-      -0
+      - 0.0
+      - 100.0
+      - 10.0
+      - 0.0
+      - 0.0
+      - 0.0
     D:
-      -0
-      -0
-      -0
-      -0
-      -0
-      -0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.1
+      - 0.0
     max_I:
+      - 100.0
+      - 100.0
+      - 100.0
+      - 100.0
+      - 100.0
+      - 100.0
+
+    # POSITION CONTROL
+    # P:
+    #   - 0.01
+    #   - 200.0
+    #   - 100.0
+    #   - 0.005
+    #   - 10.0
+    #   - 50.0
+    # I:
+    #   - 0.005
+    #   - 100.0
+    #   - 1.0
+    #   - 0.0
+    #   - 10.0
+    #   - 0.0
+    # D:
+    #   - 0.0
+    #   - 0.1
+    #   - 0.0
+    #   - 0.0
+    #   - 0.1
+    #   - 0.0
+    # max_I:
+    #   - 100.0
+    #   - 100.0
+    #   - 100.0
+    #   - 100.0
+    #   - 100.0
+    #   - 100.0
+
 
     # GOOD FOR 100 Hz
     # Kp:
@@ -72,6 +110,8 @@ two_wheel_control:
     #   - 30.0
     #   - 15.0
 
-    tuning: true
+    tuning: false
+
+    avg_size: 20
 
     

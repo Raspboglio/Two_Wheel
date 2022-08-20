@@ -1,6 +1,6 @@
 #include<two_wheel_control/two_wheel_ID_controller.hpp>
 
-
+// TODO: filter the input of the inverted pendulum in order to limit the fast variations
 using namespace two_wheel_controller;
 
 TwoWheelIDController::TwoWheelIDController(){
@@ -14,7 +14,6 @@ TwoWheelIDController::~TwoWheelIDController(){
 controller_interface::return_type TwoWheelIDController::init(const std::string &controller_name){
     controller_interface::return_type res = controller_interface::ControllerInterface::init(controller_name); 
     if(res == controller_interface::return_type::ERROR) return res;
-    
     // Physical parameters
     auto_declare<std::vector<double>>("body_I_diag", std::vector<double>({0,0,0}));
     auto_declare<std::vector<double>>("wheel_I_diag", std::vector<double>({0,0,0}));
@@ -28,8 +27,11 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
     auto_declare<std::vector<double>>("I", std::vector<double>({0}));
     auto_declare<std::vector<double>>("D", std::vector<double>({0}));
     auto_declare<std::vector<double>>("max_I", std::vector<double>({0}));
+    // Tuning
     auto_declare<bool>("tuning", false);
     auto_declare<double>("update_rate", 0);
+    // Filtering
+    auto_declare<int>("avg_size",1);
 
     // Allocate memory for matices/vectors
     // RCLCPP_INFO(this->node_->get_logger(), "INIT MATRICES");
@@ -162,11 +164,15 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
         PID[i].initPid(P_coeff[i], I_coeff[i], D_coeff[i], max_I[i], -max_I[i]);
     }
 
-    update_rate = node_->get_parameter("update_rate").as_double();
+    // Tuning
+
+    double update_rate = node_->get_parameter("update_rate").as_double();
     if(update_rate <= 0){
         RCLCPP_ERROR(node_->get_logger(), "update_rate must be >=0, probably you didn't define that");
         return CallbackReturn::ERROR;
     }
+
+    period = std::make_unique<rclcpp::Duration>(rclcpp::Duration::from_seconds(1/update_rate));
 
     tuning = this->node_->get_parameter("tuning").as_bool();
     _state_pub = this->node_->create_publisher<two_wheel_control_msgs::msg::State>("state", 10);
@@ -174,7 +180,16 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
         _tuning_command = this->node_->create_subscription<two_wheel_control_msgs::msg::TuningCommand>("tuning", 10, std::bind(&TwoWheelIDController::tuningCallback, this, std::placeholders::_1));
     }else{
         _sub = this->node_->create_subscription<two_wheel_control_msgs::msg::Command>("two_wheel_command", 10, std::bind(&TwoWheelIDController::subCallback, this,  std::placeholders::_1));
+        if(_sub == nullptr){
+            RCLCPP_ERROR(node_->get_logger(), "Subscription creation failed");
+            return CallbackReturn::ERROR;
+        }
     }
+
+    // Filtering
+
+    int avg_size = node_->get_parameter("avg_size").as_int();
+    _avg.resize(avg_size,0);
 
     // Init B
     *B = {{I_wheel[2]+3*m_w, l*m_w, 0}, 
@@ -197,9 +212,9 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
 
 rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWheelIDController::on_activate(const rclcpp_lifecycle::State & previous_state){
     std::vector<control_toolbox::Pid>::iterator pid_it = PID.begin();
-    for(; pid_it != PID.end(); pid_it++){
-        pid_it->reset();
-    }
+    // for(; pid_it != PID.end(); pid_it++){
+    //     pid_it->reset();
+    // }
     return CallbackReturn::SUCCESS;
 }
 
@@ -238,16 +253,33 @@ controller_interface::return_type TwoWheelIDController::update(){
             e->at(1) = q_w->at(1) - u->at(1);
             e_dot->at(1) = q_w_dot->at(1) - u_dot->at(1);
         }else{
-            e->at(0) = q_w->at(0) - u_dot->at(0);
+            e->at(0) = q_w->at(0) - u->at(0);
             e_dot->at(0) = q_w_dot->at(0) - u_dot->at(0);
+            std::cout << q_w_dot->at(0) << std::endl << u_dot->at(0) << std::endl << e_dot->at(0) << std::endl << std::endl;
 
-            v_ddot = (PID[0].computeCommand(e->at(0), 1/update_rate) + PID[3].computeCommand(e->at(3), 1/update_rate)) *  B->at(1,1) / (B->at(0,1) * 9.81 * l);
+
+            v_ddot = (PID[0].computeCommand(e->at(0), period->nanoseconds()) + PID[3].computeCommand(e_dot->at(0), period->nanoseconds())) *  B->at(1,1) / (B->at(0,1) * 9.81 * l);
+            _avg.erase(_avg.begin());
             if(std::abs(std::asin(v_ddot)) < max_angle){
-                q_w->at(1) = std::asin(v_ddot);
+                _avg.push_back(std::asin(v_ddot));
             }else{
                 RCLCPP_ERROR(this->node_->get_logger(),"Exceeded angle");
-                q_w->at(1) = std::asin(std::copysign(max_angle,v_ddot));
+                _avg.push_back(std::asin(std::copysign(max_angle,v_ddot)));
             }
+            // Filtering with moving avarange
+            q_w->at(1) = 0;
+            std::vector<double>::iterator avg_it = _avg.begin();
+            for(; avg_it != _avg.end(); avg_it++){
+                q_w->at(1) += *avg_it;    
+            }
+            q_w->at(1) = q_w->at(1) / _avg.size();
+
+            // if(std::abs(std::asin(v_ddot)) < max_angle){
+            //     q_w->at(1) = std::asin(v_ddot);
+            // }else{
+            //     RCLCPP_ERROR(this->node_->get_logger(),"Exceeded angle");
+            //     q_w->at(1) = std::asin(std::copysign(max_angle,v_ddot));
+            // }
 
             // std::cout << "Pos error: " << (q_w->at(0) - u->at(0)) <<std::endl;
             // std::cout << "Vel error: " << (q_w_dot->at(0) - u_dot->at(0)) <<std::endl;
@@ -269,9 +301,7 @@ controller_interface::return_type TwoWheelIDController::update(){
         // e->print();
         // std::cout << "vel error: " << std::endl;
         // e_dot->print();
-        // std::cout << std::endl;
-
-        
+        // std::cout << std::endl;        
 
         // std::cout << "curr state: " << std::endl;
         // u->print();
@@ -279,20 +309,21 @@ controller_interface::return_type TwoWheelIDController::update(){
         // u_dot->print();
         
         _pub_msg.p = u->at(0);
-        _pub_msg.thetay = u->at(1);
+        _pub_msg.thetay = u->at(1) * 10;
         _pub_msg.thetaz = u->at(2);
-        _pub_msg.v = u_dot->at(0);
+        _pub_msg.v = u_dot->at(0) ;
         _pub_msg.omegay = u_dot->at(1);
         _pub_msg.omegaz = u_dot->at(2);
+        _pub_msg.thetay_tgt = q_w->at(1) * 10;
         _state_pub->publish(_pub_msg);
         
 
         //TODO: limit tau
         *G = {0,-9.81 * l * std::sin(u->at(1)), 0};
         gamma->at(0) = 0;
-        gamma->at(1) = PID[1].computeCommand(e->at(1), 1/update_rate) + PID[4].computeCommand(e->at(4), 1/update_rate);
-        gamma->at(2) = PID[2].computeCommand(e->at(2), 1/update_rate) + PID[5].computeCommand(e->at(5), 1/update_rate);
-        
+        gamma->at(1) = PID[1].computeCommand(e->at(1), period->nanoseconds()) + PID[4].computeCommand(e_dot->at(1), period->nanoseconds());
+        gamma->at(2) = PID[2].computeCommand(e->at(2), period->nanoseconds()) + PID[5].computeCommand(e_dot->at(2), period->nanoseconds());
+
         *tau = *T * (*B * *gamma + *G); // TODO: check what we need between T, T' and T_inv
         
         // std::cout << "action/error: " << (tau->at(0) + tau->at(1)) / (Kp->at(1,1) * e->at(1) + Kd->at(1,1) * e_dot->at(1)) << std::endl;
@@ -305,8 +336,7 @@ controller_interface::return_type TwoWheelIDController::update(){
         // std::cout << "Kp * e = " << std::endl;
         // Kp_e.print();
         // std::cout << "gamma = " << std::endl;
-        // gamma.print();
-        
+        // gamma->print();
         // std::cout << "actuation: " << std::endl;
         // tau->print();
 
@@ -340,7 +370,7 @@ void TwoWheelIDController::tuningCallback(const two_wheel_control_msgs::msg::Tun
     q_w->at(1) = msg->thetay;
     q_w_dot->at(1) = msg->thetay_dot;
     
-    // RCLCPP_INFO(this->node_->get_logger(), "Received new command p:\n%.4f\n%.4f\n v: \n%.4f\n%.4f", q_w->at(0), q_w->at(2), q_w_dot->at(0), q_w_dot->at(2));
+    // RCLCPP_INFO(this->node_->get_logger(), "Received new command \n%.4f\n%.4f\n", q_w->at(1), q_w_dot->at(1));
 }
 
 PLUGINLIB_EXPORT_CLASS(two_wheel_controller::TwoWheelIDController, controller_interface::ControllerInterface)

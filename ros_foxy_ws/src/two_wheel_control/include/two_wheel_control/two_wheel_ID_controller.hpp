@@ -37,17 +37,22 @@ namespace two_wheel_controller{
 
             rclcpp::Subscription<two_wheel_control_msgs::msg::Command>::SharedPtr _sub;
             
-            double l, v_ddot, x, y, z, w, max_angle, update_rate;
+            double l, v_ddot, x, y, z, w, max_angle;
 
             std::unique_ptr<arma::Col<double>> u, u_dot, u_m,  u_m_dot, q_w, q_w_dot, e, e_dot, G, tau, gamma;
             std::unique_ptr<arma::Mat<double>> B, T, T_out;
+
+            std::unique_ptr<rclcpp::Duration> period;
 
             // Tuning utilities
             bool tuning;
             rclcpp::Publisher<two_wheel_control_msgs::msg::State>::SharedPtr _state_pub;
             rclcpp::Subscription<two_wheel_control_msgs::msg::TuningCommand>::SharedPtr _tuning_command; 
             void tuningCallback(const two_wheel_control_msgs::msg::TuningCommand::SharedPtr msg);
-            two_wheel_control_msgs::msg::State _pub_msg;           
+            two_wheel_control_msgs::msg::State _pub_msg; 
+
+            // Filtering
+            std::vector<double> _avg;          
     };
 
 }
