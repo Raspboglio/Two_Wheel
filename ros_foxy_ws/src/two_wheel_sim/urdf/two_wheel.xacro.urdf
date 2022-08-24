@@ -11,22 +11,23 @@
     <xacro:property name="I_b_xx" value="${1/12 * m_b * (w_b * w_b + h_b*h_b)}"/>
     <xacro:property name="I_b_yy" value="${1/12 * m_b * (l_b * l_b + h_b*h_b)}"/>
     <xacro:property name="I_b_zz" value="${1/12 * m_b * (w_b * w_b + l_b*l_b)}"/>
-    <xacro:property name="I_w_xx" value="${1/2 * m_w * r_w * r_w}"/>
-    <xacro:property name="I_w_yy" value="${1/4 * m_w * r_w * r_w + 1/12 * m_w * w_t * w_t}"/>
+    <xacro:property name="I_w_xx" value="${1/4 * m_w * r_w * r_w + 1/12 * m_w * w_t * w_t}"/>
+    <xacro:property name="I_w_yy" value="${1/2 * m_w * r_w * r_w}"/>
     <xacro:property name="I_w_zz" value="${1/4 * m_w * r_w * r_w + 1/12 * m_w * w_t * w_t}"/>
     <xacro:property name="eff_lim" value="100"/>
     <xacro:property name="speed_lim" value="100"/>
     
-    <link name="root">
+    
+    <link name="base_link">
     </link>
 
-    <joint name="base_link_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <parent link="root"/>
-        <child link="base_link"/>
+    <joint name="body_joint" type="fixed">
+        <origin xyz="0 0 ${h_b/2}" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="body"/>
     </joint>
 
-    <link name="base_link">
+    <link name="body">
         <inertial>
             <origin  xyz='0 0 0' rpy='0 0 0'/>
             <mass value="${m_b}"/>
@@ -49,7 +50,7 @@
     <joint name="RW_joint" type="revolute">
         <origin xyz="0 ${w_b/2} ${-h_b/2}" rpy="0.0 0.0 0.0"/>
         <axis xyz="0 1 0"/>
-        <parent link="base_link"/>
+        <parent link="body"/>
         <child link="RW"/>
         <limit effort="${eff_lim}" velocity="${speed_lim}" lower="-${eff_lim}" upper="${eff_lim}"/>
     </joint>
@@ -77,7 +78,7 @@
     <joint name="LW_joint" type="revolute">
         <origin xyz="0 ${-w_b/2} ${-h_b/2}" rpy="0.0 0.0 0.0"/>
         <axis xyz="0 1 0"/>
-        <parent link="base_link"/>
+        <parent link="body"/>
         <child link="LW"/>
         <limit effort="${eff_lim}" velocity="${speed_lim}" lower="-${eff_lim}" upper="${eff_lim}"/>
     </joint>
@@ -105,7 +106,7 @@
     <joint name="imu_joint" type="fixed">
         <axis xyz="1 0 0"/> 
         <origin xyz="0 0 0"/>
-        <parent link="base_link"/>
+        <parent link="body"/>
         <child link="imu_link"/>
       </joint>
     

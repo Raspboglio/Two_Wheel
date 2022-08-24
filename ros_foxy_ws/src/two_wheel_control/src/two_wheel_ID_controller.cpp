@@ -1,6 +1,7 @@
 #include<two_wheel_control/two_wheel_ID_controller.hpp>
 
-// TODO: filter the input of the inverted pendulum in order to limit the fast variations
+// TODO: Remove the velocity hardware interfaces and only take positions/orientations. Then compute velocities (more realistic)
+// TOOD: change everything to realtime pub/sub
 using namespace two_wheel_controller;
 
 TwoWheelIDController::TwoWheelIDController(){
@@ -36,6 +37,7 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
     // Allocate memory for matices/vectors
     // RCLCPP_INFO(this->node_->get_logger(), "INIT MATRICES");
     u = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
+    last_u = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
     u_dot= std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
     u_m = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
     u_m_dot = std::make_unique<arma::Col<double>>(3,arma::fill::zeros);
@@ -59,6 +61,16 @@ controller_interface::return_type TwoWheelIDController::init(const std::string &
         control_toolbox::Pid tmp;
         PID.push_back(tmp);
     }
+
+    // Init position
+    _last_pose.position.x = 0;
+    _last_pose.position.y = 0;
+    _last_pose.position.z = 0;
+    _last_pose.orientation.w = 0;
+    _last_pose.orientation.x = 0;
+    _last_pose.orientation.y = 0;
+    _last_pose.orientation.z = 0;
+    
 
     return controller_interface::return_type::OK;
 }
@@ -176,6 +188,8 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
 
     tuning = this->node_->get_parameter("tuning").as_bool();
     _state_pub = this->node_->create_publisher<two_wheel_control_msgs::msg::State>("state", 10);
+    _odom_pub = node_->create_publisher<nav_msgs::msg::Odometry>("/odom",10);
+    // _tf_pub = node_->create_publisher<tf2_msgs::msg::TFMessage>("/tf",50);
     if(tuning){
         _tuning_command = this->node_->create_subscription<two_wheel_control_msgs::msg::TuningCommand>("tuning", 10, std::bind(&TwoWheelIDController::tuningCallback, this, std::placeholders::_1));
     }else{
@@ -234,8 +248,11 @@ controller_interface::return_type TwoWheelIDController::update(){
         y = this->state_interfaces_[3].get_value();
         z = this->state_interfaces_[4].get_value();
         w = this->state_interfaces_[5].get_value();
-        u_m->at(2) = std::asin(2*(w*y - z*x)); // TODO: add a check for out of range of asin
-        
+        if(std::abs(2*(w*y - z*x)) < 1){
+            u_m->at(2) = std::asin(2*(w*y - z*x));
+        }else{
+            u_m->at(2) = std::asin(2*(w*y - z*x) + std::copysign(1,(w*y - z*x)));
+        }
             
         
         u_m_dot->at(0) = this->state_interfaces_[6].get_value();
@@ -247,6 +264,9 @@ controller_interface::return_type TwoWheelIDController::update(){
         // std::cout << "measured position" << std::endl;
         // u_m->print();
 
+
+        updateOdom();
+
         e->zeros();
         e_dot->zeros();
         if(tuning){
@@ -255,7 +275,7 @@ controller_interface::return_type TwoWheelIDController::update(){
         }else{
             e->at(0) = q_w->at(0) - u->at(0);
             e_dot->at(0) = q_w_dot->at(0) - u_dot->at(0);
-            std::cout << q_w_dot->at(0) << std::endl << u_dot->at(0) << std::endl << e_dot->at(0) << std::endl << std::endl;
+            // std::cout << q_w_dot->at(0) << std::endl << u_dot->at(0) << std::endl << e_dot->at(0) << std::endl << std::endl;
 
 
             v_ddot = (PID[0].computeCommand(e->at(0), period->nanoseconds()) + PID[3].computeCommand(e_dot->at(0), period->nanoseconds())) *  B->at(1,1) / (B->at(0,1) * 9.81 * l);
@@ -286,8 +306,6 @@ controller_interface::return_type TwoWheelIDController::update(){
             // std::cout << "desired theta: " << q_w->at(1) << std::endl;
             // std::cout << "cur theta: " << u->at(1) << std::endl;
             *e = *q_w - *u;
-            
-
             
             q_w_dot->at(1) = 0;
             // std::cout << "cur vely: " << u_dot->at(1) << std::endl;
@@ -325,20 +343,7 @@ controller_interface::return_type TwoWheelIDController::update(){
         gamma->at(2) = PID[2].computeCommand(e->at(2), period->nanoseconds()) + PID[5].computeCommand(e_dot->at(2), period->nanoseconds());
 
         *tau = *T * (*B * *gamma + *G); // TODO: check what we need between T, T' and T_inv
-        
-        // std::cout << "action/error: " << (tau->at(0) + tau->at(1)) / (Kp->at(1,1) * e->at(1) + Kd->at(1,1) * e_dot->at(1)) << std::endl;
-        //Checking variable 
-        // TODO: remove for real use since it allocates a lot of memory
-        // arma::Col<double> Kp_e = *Kp * *e;
-        // arma::Col<double> gamma = *B * (*Kp * *e + *Kd * *e_dot);
-        // std::cout << "Kp = " << std::endl;
-        // Kp->print();
-        // std::cout << "Kp * e = " << std::endl;
-        // Kp_e.print();
-        // std::cout << "gamma = " << std::endl;
-        // gamma->print();
-        // std::cout << "actuation: " << std::endl;
-        // tau->print();
+        *last_u = *u;
 
     }catch(std::exception &err){
         RCLCPP_ERROR(this->node_->get_logger(), err.what());
@@ -371,6 +376,64 @@ void TwoWheelIDController::tuningCallback(const two_wheel_control_msgs::msg::Tun
     q_w_dot->at(1) = msg->thetay_dot;
     
     // RCLCPP_INFO(this->node_->get_logger(), "Received new command \n%.4f\n%.4f\n", q_w->at(1), q_w_dot->at(1));
+}
+
+void TwoWheelIDController::updateOdom(){
+    // TODO: use u_dot where possible once modified hardware interfaces
+    _odom_msg.child_frame_id = "base_link";
+    _odom_msg.header.frame_id = "odom";
+    _odom_msg.header.stamp = node_->get_clock()->now();
+    
+    // Compute velocities
+    _odom_msg.twist.twist.linear.x = (u_dot->at(0)) * std::cos(u->at(2));
+    _odom_msg.twist.twist.linear.y = (u_dot->at(0)) * std::cos(u->at(2));
+    _odom_msg.twist.twist.linear.z = 0;
+
+    _odom_msg.twist.twist.angular.x = 0;
+    _odom_msg.twist.twist.angular.y = 0;
+    _odom_msg.twist.twist.angular.z = u_dot->at(2);
+    
+    // Compute positions
+    // Consider speed constant in the step we obtain circular trajectories (actually accelerations are constant)
+    if((std::abs(u->at(2) - last_u->at(2))) < 1e-4){
+        // Only linear movement
+        _odom_msg.pose.pose.position.x = _last_pose.position.x + (u->at(0) - last_u->at(0)) * std::cos(u->at(2));
+        _odom_msg.pose.pose.position.y = _last_pose.position.y + (u->at(0) - last_u->at(0)) * std::sin(u->at(2));
+        _odom_msg.pose.pose.position.z = 0;    
+    }else{
+
+        // TODO: method taken from diff drive controller, check validity
+        _odom_msg.pose.pose.position.x = _last_pose.position.x + u_dot->at(0) / u_dot->at(2) * (std::sin(u->at(2)) - std::sin(last_u->at(2)));
+        _odom_msg.pose.pose.position.y = _last_pose.position.y + u_dot->at(0) / u_dot->at(2) * (std::cos(u->at(2)) - std::cos(last_u->at(2)));
+        _odom_msg.pose.pose.position.z = 0;
+
+    }
+    
+    // We only know thetaz from the encoder, the other will be taken from the IMU
+    _odom_msg.pose.pose.orientation.w = std::cos(u->at(2) * 0.5);
+    _odom_msg.pose.pose.orientation.x = 0;
+    _odom_msg.pose.pose.orientation.y = 0;
+    _odom_msg.pose.pose.orientation.z = std::sin(u->at(2) * 0.5);
+
+    // _transform.header.stamp = node_->get_clock()->now();
+    // _transform.child_frame_id = "base_link";
+    // _transform.header.frame_id = "odom";
+    // _transform.transform.translation.x = _odom_msg.pose.pose.position.x;
+    // _transform.transform.translation.y = _odom_msg.pose.pose.position.y;
+    // _transform.transform.translation.z = _odom_msg.pose.pose.position.z;
+
+    // _transform.transform.rotation.w = _odom_msg.pose.pose.orientation.w;
+    // _transform.transform.rotation.x = _odom_msg.pose.pose.orientation.x;
+    // _transform.transform.rotation.y = _odom_msg.pose.pose.orientation.y;
+    // _transform.transform.rotation.z = _odom_msg.pose.pose.orientation.z;
+
+
+    // _tf_msg.transforms.push_back(_transform);
+    _last_pose = _odom_msg.pose.pose;
+
+    _odom_pub->publish(_odom_msg);
+    // _tf_pub->publish(_tf_msg);
+
 }
 
 PLUGINLIB_EXPORT_CLASS(two_wheel_controller::TwoWheelIDController, controller_interface::ControllerInterface)

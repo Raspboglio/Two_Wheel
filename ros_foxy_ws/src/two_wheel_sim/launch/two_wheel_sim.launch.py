@@ -4,6 +4,7 @@ from launch_ros.actions import Node
 from launch.actions import IncludeLaunchDescription, ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, PathJoinSubstitution
+import os
 import xacro
 
 def generate_launch_description():
@@ -33,7 +34,7 @@ def generate_launch_description():
         arguments=[
             "-entity","Two_Wheel",
             "-topic","robot_description",
-            "-z", "0.7", 
+            "-z", "0.2", 
             "-Y", "0" 
         ]
     )
@@ -50,10 +51,26 @@ def generate_launch_description():
         output='screen'
     )
 
+    robot_localization_node = Node(
+       package='robot_localization',
+       executable='ekf_node',
+       name='ekf_filter_node',
+       output='screen',
+       parameters=[os.path.join(two_wheel_prefix, 'config/ekf.yaml')]
+    )
+
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        output='screen',
+    )
+
     return LaunchDescription([
         gazebo,
         robot_state_publisher,
         spawn_node,
         load_joint_state_controller,
         load_two_wheel_controller,
+        robot_localization_node,
+        rviz_node,
     ])

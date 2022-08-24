@@ -110,7 +110,7 @@ two_wheel_control:
     #   - 30.0
     #   - 15.0
 
-    tuning: true
+    tuning: false
 
     avg_size: 20
 

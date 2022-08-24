@@ -8,6 +8,8 @@
 #include <two_wheel_control_msgs/msg/state.hpp>
 #include <two_wheel_control_msgs/msg/tuning_command.hpp>
 #include <control_toolbox/pid.hpp>
+#include <nav_msgs/msg/odometry.hpp>
+#include <tf2_msgs/msg/tf_message.hpp>
 // Linear Algebra utils
 #include<armadillo>
 
@@ -39,7 +41,7 @@ namespace two_wheel_controller{
             
             double l, v_ddot, x, y, z, w, max_angle;
 
-            std::unique_ptr<arma::Col<double>> u, u_dot, u_m,  u_m_dot, q_w, q_w_dot, e, e_dot, G, tau, gamma;
+            std::unique_ptr<arma::Col<double>> u, u_dot, u_m, u_m_dot, q_w, q_w_dot, e, e_dot, G, tau, gamma, last_u;
             std::unique_ptr<arma::Mat<double>> B, T, T_out;
 
             std::unique_ptr<rclcpp::Duration> period;
@@ -49,7 +51,17 @@ namespace two_wheel_controller{
             rclcpp::Publisher<two_wheel_control_msgs::msg::State>::SharedPtr _state_pub;
             rclcpp::Subscription<two_wheel_control_msgs::msg::TuningCommand>::SharedPtr _tuning_command; 
             void tuningCallback(const two_wheel_control_msgs::msg::TuningCommand::SharedPtr msg);
-            two_wheel_control_msgs::msg::State _pub_msg; 
+            two_wheel_control_msgs::msg::State _pub_msg;
+
+            // Odometry
+            rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr _odom_pub;
+            rclcpp::Publisher<tf2_msgs::msg::TFMessage>::SharedPtr _tf_pub;
+            nav_msgs::msg::Odometry _odom_msg;
+            geometry_msgs::msg::Pose _last_pose;
+            tf2_msgs::msg::TFMessage _tf_msg;
+            geometry_msgs::msg::TransformStamped _transform;
+            void updateOdom();
+
 
             // Filtering
             std::vector<double> _avg;          
