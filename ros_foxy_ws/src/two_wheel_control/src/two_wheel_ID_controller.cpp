@@ -211,8 +211,8 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
         {0, 0, I_body[3]+2*I_wheel[3]+d*d*m_w/2+I_wheel[2]*d*d/(2*r*r)}};
     
     // Init T*
-    *T = {{1/r, -1, d/(2*r)}, {1/r, -1, -d/(2*r)}};
-    *T_out = {{1/r, -1, d/(2*r)}, {1/r, -1, -d/(2*r)}, {0, 1, 0}};
+    *T = {{1/r, -1, -d/(2*r)}, {1/r, -1, d/(2*r)}}; // TODO: not sure about the z contrib
+    *T_out = {{1/r, -1, -d/(2*r)}, {1/r, -1, d/(2*r)}, {0, 1, 0}};
     
     // std::cout << "B: " << std::endl;
     // B->print();

@@ -1,3 +1,4 @@
+from ast import arguments
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
@@ -9,12 +10,13 @@ import xacro
 
 def generate_launch_description():
     gazebo_prefix = get_package_share_directory('gazebo_ros')
-
+    two_wheel_prefix = get_package_share_directory('two_wheel_sim')
     gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([gazebo_prefix,'/launch/gazebo.launch.py'])
+        PythonLaunchDescriptionSource([gazebo_prefix,'/launch/gazebo.launch.py']),
+        launch_arguments={'world':PathJoinSubstitution([two_wheel_prefix,'worlds','test_world'])}.items()
     )
 
-    two_wheel_prefix = get_package_share_directory('two_wheel_sim')
+    
     two_wheel_urdf = Command([
         "xacro ",
         PathJoinSubstitution([two_wheel_prefix ,"urdf","two_wheel.xacro.urdf"])
@@ -23,9 +25,10 @@ def generate_launch_description():
     robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        parameters=[
-            {"robot_description":two_wheel_urdf}
-        ]
+        parameters=[{
+            "robot_description":two_wheel_urdf,
+            'use_sim_time':True,
+        }]
     )
 
     spawn_node = Node(
@@ -51,19 +54,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    robot_localization_node = Node(
-       package='robot_localization',
-       executable='ekf_node',
-       name='ekf_filter_node',
-       output='screen',
-       parameters=[os.path.join(two_wheel_prefix, 'config/ekf.yaml')]
-    )
-
-    rviz_node = Node(
-        package='rviz2',
-        executable='rviz2',
-        output='screen',
-    )
+    
 
     return LaunchDescription([
         gazebo,
@@ -71,6 +62,4 @@ def generate_launch_description():
         spawn_node,
         load_joint_state_controller,
         load_two_wheel_controller,
-        robot_localization_node,
-        rviz_node,
     ])

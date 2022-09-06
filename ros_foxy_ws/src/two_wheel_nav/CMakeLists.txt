@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(two_wheel_sim)
+project(two_wheel_nav)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -15,19 +15,17 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(sensor_msgs REQUIRED)
+# uncomment the following section in order to fill in
+# further dependencies manually.
+# find_package(<dependency> REQUIRED)
 
 install(DIRECTORY
-  urdf
-  launch
-  config
-  worlds
-  DESTINATION share/${PROJECT_NAME}
-  )
-
+launch
+config
+DESTINATION share/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -39,6 +37,5 @@ if(BUILD_TESTING)
   #set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-
 
 ament_package()

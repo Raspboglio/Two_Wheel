@@ -444,17 +444,17 @@ All the file needed for the simulation are in the two wheel sim package along wi
 The interface between Gazebo and ROS is enstablished via the \href{https://github.com/ros-controls/ros2_control}{ros controls} 
 and \href{https://github.com/ros-controls/gazebo_ros2_control}{gazebo ros2 control}.
 
-\subsubsection{Static Feedback controller}
-The controller is structured as 2 static feedback stages:
+\subsubsection{PID controller}
+The controller is structured as 2 PID stages:
 \begin{enumerate}
 	\item Position/Velocity
 	\item Inverted pendulum
 \end{enumerate}
 
-This separation is needed since the sistem despite having 3 generalized coordinates only 2 of them can be controller, in this case we only control $p$ and $\theta_z$
+This separation is needed since the system despite having 3 generalized coordinates only 2 of them can be controller, in this case we only control $p$ and $\theta_z$
 
 \paragraph{Position/Velocity controller}
-The first stage is controls positions and velocities in the space, so we only take into account $\theta_z$ and $p$.
+The first stage controls positions and velocities in the space, so we only take into account $\theta_z$ and $p$.
 $\theta_z$ provides directly an acceleration contribution while the result of $p$ controller produces the input for the next stage by computing the desired acceleration and transforming it into a desired $\theta_y$ thanks to the equation:
 $$\ddot p = \frac{I_{p\theta_y}}{I_{\theta_y}}$$
 Where $I_{p\theta_y}$ and $I_{\theta_y}$ are the (1,2) and (2,2) elements of B.
@@ -474,10 +474,29 @@ The controller can be configured via a series of ROS parameters that are readed 
     \item wheel\textunderscore radius: radius of the wheel.
     \item wheel\textunderscore distance: distance between the two wheel. 
     \item max\textunderscore angle: maximum $\theta_y$ allowed.
-    \item $K_p$: vector of 3 elements containing the feedback gain on the positions. Setting the first or the last value to zero will create a velocity only controller. The second value MUST be nonnull in order to not fall.
-    \item $K_d$: same as the previous but for velocities, again setting to zero values will create a position only feedback.
-    \item feedback: deprecated.
+    \item $P$: vector of 6 elements containing the proportional feedback gain. Setting the first or the last 3 values to zero will create a velocity only controller. The 2 and 5 values MUST be nonnull in order to not fall.
+    \item $I$: same as the previous but for integral, since the first 3 value are the integration of the last 3 it wouldn't make sense to set that values, so the last 3 values should be 0.
+    \item $D$: same as the previous but for differential, again the last 3 are already the derivative of the first 3 so the first three items should be 0.
+    \item tuning: boolean value that disables the first stage in order to enable a correct tuning of the IP stage.
+    \item avg \textunderscore size: Since the robot doesn't perform well with abrupt $\theta_y$ changes is implemented a moving avarange filter on between the first stage and the IP stage. This slows the response but provide a more reliable control. This parameter specify the dimension of the moving avarange, the higher this value the smoother (and slower) will be the response.
+   
 \end{itemize}
 
 The two wheel sim package already contains some values that works for a 100Hz controller.
+
+\subsubsection{Tuning}
+For tuning purposes I added a topic (" /state ") that provides the current state of the robot, it can be useful integrated with the plot function of rqt while tuning the different PID values.
+
+\subsubsection{Odometry}
+The controller also publish the odometry value for localization purposes. Since the IMU is already published by the plugin/node we only provide the one based on the wheel encoders, so only the position values and orientation around z are to be taken into account.
+
+\subsection{Localization and Navigation}
+The robot uses the \href{https://navigation.ros.org/index.html}{nav2} stack in order to obtain the robot position and plan the movement.
+
+\subsubsection{Odometry}
+In order to obtain a correct odometry the robot uses an extended kahlman filter that integrating the data provided by encoders and IMU it obtains a more accurate position of the robot. This node (part of the \href{https://github.com/cra-ros-pkg/robot_localization/tree/foxy-devel}{robot localization} package) also publish the odom->base_link transformation matrix to the /tf topic.
+
+\subsubsection{SLAM}
+A SLAM algorithm is used in order to create a map of the environment, the data is collected throught a lidar sensor on the front of the robot.
+
 \end{document}
