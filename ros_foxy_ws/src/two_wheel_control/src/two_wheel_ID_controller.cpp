@@ -84,8 +84,6 @@ controller_interface::InterfaceConfiguration TwoWheelIDController::command_inter
     config.names.push_back("RW_joint/effort");
     config.names.push_back("LW_joint/effort");
 
-    // config.names.push_back("RW_joint/velocity");
-    // config.names.push_back("LW_joint/velocity");
     config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
     return config;
 }

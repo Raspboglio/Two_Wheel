@@ -1,0 +1,7 @@
+<library path="two_wheel_control">
+    <class name="two_wheel_control/TwoWheelMPCController" type="two_wheel_controller::TwoWheelMPCController" base_class_type="controller_interface::ControllerInterface">
+      <description>
+        MPC controller for the two wheel robot
+      </description>
+    </class>
+  </library>

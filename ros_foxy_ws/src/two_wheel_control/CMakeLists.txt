@@ -36,12 +36,14 @@ find_package(tf2_msgs REQUIRED)
 add_library(${PROJECT_NAME}
   SHARED
   src/two_wheel_ID_controller.cpp
+  src/two_wheel_MPC_controller.cpp
 )
 
 target_include_directories(${PROJECT_NAME}
   PRIVATE
   include
 )
+
 ament_target_dependencies(${PROJECT_NAME}
   controller_interface
   hardware_interface
@@ -54,6 +56,7 @@ ament_target_dependencies(${PROJECT_NAME}
   tf2_msgs
 )
 target_compile_definitions(${PROJECT_NAME} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
+pluginlib_export_plugin_description_file(controller_interface two_wheel_ID_controller.xml)
 pluginlib_export_plugin_description_file(controller_interface two_wheel_ID_controller.xml)
 
 install(
