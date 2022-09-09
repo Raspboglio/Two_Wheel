@@ -463,7 +463,7 @@ Where $I_{p\theta_y}$ and $I_{\theta_y}$ are the (1,2) and (2,2) elements of B.
 \paragraph{Inverted Pendulum controller}
 The last stage purpose is to control the remaining degree of freedom $\theta_y$ this stage takes as input the desired $\theta_y$ and returns the needed acceleration.
 
-\subsubsection{Controller parameters}
+\paragraph{Controller parameters}
 The controller can be configured via a series of ROS parameters that are readed only when started.
 \begin{itemize}
 	\item body\textunderscore I\textunderscore diag: This is a vector of 3 elements containing the 3 main component of the body inertia, coupling component such as $I_{xy}$ are neglected.
@@ -484,10 +484,20 @@ The controller can be configured via a series of ROS parameters that are readed 
 
 The two wheel sim package already contains some values that works for a 100Hz controller.
 
-\subsubsection{Tuning}
+\paragraph{Tuning}
 For tuning purposes I added a topic (" /state ") that provides the current state of the robot, it can be useful integrated with the plot function of rqt while tuning the different PID values.
 
-\subsubsection{Odometry}
+\subsubsection{MPC controller}
+The MPC controller make use of an opensource library \href{https://github.com/nicolapiccinelli/libmpc}{libmpc} that depends on \href{https://eigen.tuxfamily.org/index.php?title=Main_Page}{Eigen3} \href{https://nlopt.readthedocs.io/en/latest/}{NLopt} \href{https://osqp.org/docs/}{OSQP}.
+Since libmpc includes eigen3 as #include<Eigen/Core> but the apt package manager installs the library as <eigen3/Eigen/Core> a possible solution can be making a symbolic link with the following command\\
+sudo ln -s /usr/include/eigen3/Eigen /usr/include/Eigen\\
+sudo ln -s /usr/include/eigen3/unsupported /usr/include/unsupported\\
+CAUTION: this can create conflict with other libraries or programs.
+
+It also requires gcc 10.3 version
+
+Since I can't make it work i'm moving to the control toolbox library 
+\subsection{Odometry}
 The controller also publish the odometry value for localization purposes. Since the IMU is already published by the plugin/node we only provide the one based on the wheel encoders, so only the position values and orientation around z are to be taken into account.
 
 \subsection{Localization and Navigation}

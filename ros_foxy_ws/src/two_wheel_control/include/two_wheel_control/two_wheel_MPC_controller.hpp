@@ -6,6 +6,8 @@
 #include <two_wheel_control_msgs/msg/state.hpp>
 #include <two_wheel_control_msgs/msg/command.hpp>
 #include <eigen3/Eigen/Dense>
+#include <ct/core/core.h>
+#include <ct/optcon/optcon.h>
 
 namespace two_wheel_controller{
 
@@ -31,12 +33,18 @@ namespace two_wheel_controller{
 
     private:
     
-        Eigen::Matrix<double, 6, 6> A_gen,A;
+        Eigen::Matrix<double, 3, 3> A_gen,A;
         Eigen::Matrix<double, 3, 3> T;
         Eigen::Matrix<double, 3, 2> B;
         Eigen::Matrix<double, 3, 3> C; 
-        
+        Eigen::Matrix<double, 3, 2> D;
+        Eigen::Matrix<double, 3, 3> Q;
+        Eigen::Matrix<double, 2, 2> R;
 
+
+        // TODO: decide what to limit as inequalities
+        
+        
         double max_angle, l;
 
         std::unique_ptr<rclcpp::Duration> period;
@@ -53,6 +61,46 @@ namespace two_wheel_controller{
         nav_msgs::msg::Odometry _odom_msg;
         void updateOdom();
 
+    };
+
+    // Linearized system, for the non linear one we also need the position feedback while we only use velocity here
+    class TwoWheelDynamic : public ct::core::ControlledSystem<3, 2>{
+        public:
+            EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
+            static const size_t STATE_DIM = 3;
+            static const size_t CON_DIM = 2;
+
+            typedef ControlledSystem<3, 2> Base;
+            typedef typename Base::time_t time_t;   
+
+            TwoWheelDynamic() = delete;
+
+            TwoWheelDynamic(Eigen::Matrix<double, STATE_DIM, STATE_DIM> A, Eigen::Matrix<double, STATE_DIM, CON_DIM> B, std::shared_ptr<ct::core::Controller<3, 2>> controller = nullptr) : ControlledSystem<3, 2>(controller){
+                _A = A;
+                _B = B;
+            }
+
+            TwoWheelDynamic(const TwoWheelDynamic &other){
+                this->_A = other._A;
+                this->_B = other._B;
+            }
+
+            ~TwoWheelDynamic() = default;
+
+            TwoWheelDynamic* clone() const override{
+                return new TwoWheelDynamic(*this);
+            }
+
+            void computeControlledDynamics(const ct::core::StateVector<STATE_DIM> &x, const ct::core::Time &t, const ct::core::ControlVector<CON_DIM> &control , ct::core::StateVector<STATE_DIM>& derivative) override{
+                derivative = _A * x + _B * control;
+            }
+
+
+        private:
+
+            Eigen::Matrix<double, STATE_DIM, STATE_DIM> _A;
+            Eigen::Matrix<double, STATE_DIM, CON_DIM> _B;
     };
     
 }

@@ -6,10 +6,12 @@ if(NOT CMAKE_C_STANDARD)
   set(CMAKE_C_STANDARD 99)
 endif()
 
-# Default to C++14
+# Default to C++20
+
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 14)
 endif()
+
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic -g)
@@ -42,6 +44,7 @@ add_library(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME}
   PRIVATE
   include
+  include/libmpc/include
 )
 
 ament_target_dependencies(${PROJECT_NAME}
@@ -59,8 +62,8 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNC
 pluginlib_export_plugin_description_file(controller_interface two_wheel_ID_controller.xml)
 pluginlib_export_plugin_description_file(controller_interface two_wheel_ID_controller.xml)
 
-install(
-  DIRECTORY include/
+install(DIRECTORY 
+  include/  
   DESTINATION include
 )
 

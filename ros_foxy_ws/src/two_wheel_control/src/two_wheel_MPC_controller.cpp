@@ -32,10 +32,9 @@ controller_interface::return_type TwoWheelMPCController::init(const std::string 
     _last_pose.orientation.w = 0;
     _last_pose.orientation.x = 0;
     _last_pose.orientation.y = 0;
-    _last_pose.orientation.z = 0;
+    _last_pose.orientation.z = 0;  
 
-     
-        
+    
 
 }
 
@@ -125,14 +124,113 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
         return CallbackReturn::ERROR;
     }
 
-    // Init B
-    *B = {{I_wheel[2]+3*m_w, l*m_w, 0}, 
-        {l*m_w, m_w*l*l+I_body[2], 0}, 
-        {0, 0, I_body[3]+2*I_wheel[3]+d*d*m_w/2+I_wheel[2]*d*d/(2*r*r)}};
+    A_gen <<
+        I_wheel[2]+3*m_w, l*m_w, 0,
+        l*m_w, m_w*l*l+I_body[2], 0,
+        0, 0, I_body[3]+2*I_wheel[3]+d*d*m_w/2+I_wheel[2]*d*d/(2*r*r);
+
+    T << 
+        1/r, -1, -d/(2*r),
+        1/r, -1, d/(2*r), 
+        0, 1, 0, 
+        
+
+    // x = T_inv * x_hat where x is the real controllable state variables (RW, LW, theta_y) and x_hat si the theretical state variable (p, theta_y, theta_z)
+    A = T * A_gen * T.inverse(); 
+
+    // TODO: B coefficient should take into account inertias since u is not an acceleration but an effort
+    B <<
+        1, 0,
+        0, 1,
+        0, 0;
+
+    C << 1, 0, 0,
+        0, 1, 0, 
+        0, 0, 1;
+ 
+    D.setZero();
+
+    Q << 
+        1, 0, 0,
+        0, 1, 0,
+        0, 0, 0;
     
-    // Init T*
-    *T = {{1/r, -1, -d/(2*r)}, {1/r, -1, d/(2*r)}}; // TODO: not sure about the z contrib
-    *T_out = {{1/r, -1, -d/(2*r)}, {1/r, -1, d/(2*r)}, {0, 1, 0}};
+    R <<
+        1, 0,
+        0, 1;
+
+    const int s_dim = TwoWheelDynamic::STATE_DIM, c_dim = TwoWheelDynamic::CON_DIM;
+
+
+    std::shared_ptr<ct::core::ControlledSystem<s_dim, c_dim>> system_dynamics(new TwoWheelDynamic(A, B));
+    
+    std::shared_ptr<ct::core::SystemLinearizer<s_dim, c_dim>> linearizer(new ct::core::SystemLinearizer<s_dim, c_dim>(system_dynamics));
+
+    std::shared_ptr<ct::optcon::CostFunctionQuadratic<s_dim, c_dim>> cost_fun( new ct::optcon::CostFunctionAnalytical<s_dim, c_dim>() );
+
+    std::shared_ptr<ct::optcon::TermQuadratic<s_dim, c_dim>> final_cost(Q,R);
+    std::shared_ptr<ct::optcon::TermQuadratic<s_dim, c_dim>> inter_cost(Q,R);
+    // TODO: add config file dir
+    cost_fun->addFinalTerm(final_cost);
+    cost_fun->addIntermediateTerm(inter_cost);
+
+    ct::core::StateVector<s_dim> x0;
+    x0.setZero();
+
+    ct::core::Time time_horizon = 3;
+
+    ct::optcon::ContinuousOptConProblem<s_dim, c_dim> optConProblem(
+        time_horizon, x0, system_dynamics, cost_fun, linearizer);
+
+    ct::optcon::NLOptConSettings ilqr_settings;
+    ilqr_settings.dt = 0.01;  // the control discretization in [sec]
+    ilqr_settings.integrator = ct::core::IntegrationType::EULERCT;
+    ilqr_settings.discretization = ct::optcon::NLOptConSettings::APPROXIMATION::FORWARD_EULER;
+    ilqr_settings.max_iterations = 10;
+    ilqr_settings.nlocp_algorithm = ct::optcon::NLOptConSettings::NLOCP_ALGORITHM::ILQR;
+    ilqr_settings.lqocp_solver = ct::optcon::NLOptConSettings::LQOCP_SOLVER::GNRICCATI_SOLVER;  // the LQ-problems are solved using a custom Gauss-Newton Riccati solver
+    ilqr_settings.printSummary = true;
+    size_t K = ilqr_settings.computeK(time_horizon);
+
+    // ct::optcon::NLOptConSolver<s_dim, c_dim>::Policy_t init_controller()
+    ct::optcon::NLOptConSolver<s_dim, c_dim> nl_solver(optConProblem, ilqr_settings);
+    nl_solver.solve();
+    ct::core::StateFeedbackController<s_dim, c_dim> nl_controller = nl_solver.getSolution(); 
+
+    // TODO: need's initial guess?
+
+    // Init MPC 
+    // Reuse ilqr settings
+    ilqr_settings.max_iterations = 1;
+    ilqr_settings.printSummary = false;
+
+    ct::optcon::mpc_settings mpc_settings;
+
+    mpc_settings.stateForwardIntegration_ = true;
+    mpc_settings.postTruncation_ = true;
+    mpc_settings.measureDelay_ = true;
+    mpc_settings.delayMeasurementMultiplier_ = 1.0;
+    mpc_settings.mpc_mode = ct::optcon::MPC_MODE::FIXED_FINAL_TIME;
+    mpc_settings.coldStart_ = false;
+
+    ct::optcon::MPC<ct::optcon::NLOptConSolver<s_dim, c_dim>> mpc(optConProblem, ilqr_settings, mpc_settings);
+
+    mpc.setInitialGuess(nl_controller);
+
+
+
+    
+
+    
+
+    // Init B
+    // *B = {{I_wheel[2]+3*m_w, l*m_w, 0}, 
+    //     {l*m_w, m_w*l*l+I_body[2], 0}, 
+    //     {0, 0, I_body[3]+2*I_wheel[3]+d*d*m_w/2+I_wheel[2]*d*d/(2*r*r)}};
+    
+    // // Init T*
+    // *T = {{1/r, -1, -d/(2*r)}, {1/r, -1, d/(2*r)}}; // TODO: not sure about the z contrib
+    // *T_out = {{1/r, -1, -d/(2*r)}, {1/r, -1, d/(2*r)}, {0, 1, 0}};
     
     // std::cout << "B: " << std::endl;
     // B->print();
@@ -160,23 +258,11 @@ controller_interface::return_type TwoWheelMPCController::update(){
 void TwoWheelMPCController::subCallback(const two_wheel_control_msgs::msg::Command::SharedPtr msg){
     
     
-    q_w->at(0) = msg->p;
-    q_w->at(2) = msg->thetaz;
+    // q_w->at(0) = msg->p;
+    // q_w->at(2) = msg->thetaz;
 
-    q_w_dot->at(0) = msg->p_dot;
-    q_w_dot->at(2) = msg->thetaz_dot;
-    
-    // RCLCPP_INFO(this->node_->get_logger(), "Received new command p:\n%.4f\n%.4f\n v: \n%.4f\n%.4f", q_w->at(0), q_w->at(2), q_w_dot->at(0), q_w_dot->at(2));
-}
-
-void TwoWheelMPCController::subCallback(const two_wheel_control_msgs::msg::Command::SharedPtr msg){
-    
-    
-    q_w->at(0) = msg->p;
-    q_w->at(2) = msg->thetaz;
-
-    q_w_dot->at(0) = msg->p_dot;
-    q_w_dot->at(2) = msg->thetaz_dot;
+    // q_w_dot->at(0) = msg->p_dot;
+    // q_w_dot->at(2) = msg->thetaz_dot;
     
     // RCLCPP_INFO(this->node_->get_logger(), "Received new command p:\n%.4f\n%.4f\n v: \n%.4f\n%.4f", q_w->at(0), q_w->at(2), q_w_dot->at(0), q_w_dot->at(2));
 }
@@ -188,35 +274,35 @@ void TwoWheelMPCController::updateOdom(){
     _odom_msg.header.stamp = node_->get_clock()->now();
     
     // Compute velocities
-    _odom_msg.twist.twist.linear.x = (u_dot->at(0)) * std::cos(u->at(2));
-    _odom_msg.twist.twist.linear.y = (u_dot->at(0)) * std::cos(u->at(2));
-    _odom_msg.twist.twist.linear.z = 0;
+    // _odom_msg.twist.twist.linear.x = (u_dot->at(0)) * std::cos(u->at(2));
+    // _odom_msg.twist.twist.linear.y = (u_dot->at(0)) * std::cos(u->at(2));
+    // _odom_msg.twist.twist.linear.z = 0;
 
-    _odom_msg.twist.twist.angular.x = 0;
-    _odom_msg.twist.twist.angular.y = 0;
-    _odom_msg.twist.twist.angular.z = u_dot->at(2);
+    // _odom_msg.twist.twist.angular.x = 0;
+    // _odom_msg.twist.twist.angular.y = 0;
+    // _odom_msg.twist.twist.angular.z = u_dot->at(2);
     
-    // Compute positions
-    // Consider speed constant in the step we obtain circular trajectories (actually accelerations are constant)
-    if((std::abs(u->at(2) - last_u->at(2))) < 1e-4){
-        // Only linear movement
-        _odom_msg.pose.pose.position.x = _last_pose.position.x + (u->at(0) - last_u->at(0)) * std::cos(u->at(2));
-        _odom_msg.pose.pose.position.y = _last_pose.position.y + (u->at(0) - last_u->at(0)) * std::sin(u->at(2));
-        _odom_msg.pose.pose.position.z = 0;    
-    }else{
+    // // Compute positions
+    // // Consider speed constant in the step we obtain circular trajectories (actually accelerations are constant)
+    // if((std::abs(u->at(2) - last_u->at(2))) < 1e-4){
+    //     // Only linear movement
+    //     _odom_msg.pose.pose.position.x = _last_pose.position.x + (u->at(0) - last_u->at(0)) * std::cos(u->at(2));
+    //     _odom_msg.pose.pose.position.y = _last_pose.position.y + (u->at(0) - last_u->at(0)) * std::sin(u->at(2));
+    //     _odom_msg.pose.pose.position.z = 0;    
+    // }else{
 
-        // TODO: method taken from diff drive controller, check validity
-        _odom_msg.pose.pose.position.x = _last_pose.position.x + u_dot->at(0) / u_dot->at(2) * (std::sin(u->at(2)) - std::sin(last_u->at(2)));
-        _odom_msg.pose.pose.position.y = _last_pose.position.y + u_dot->at(0) / u_dot->at(2) * (std::cos(u->at(2)) - std::cos(last_u->at(2)));
-        _odom_msg.pose.pose.position.z = 0;
+    //     // TODO: method taken from diff drive controller, check validity
+    //     _odom_msg.pose.pose.position.x = _last_pose.position.x + u_dot->at(0) / u_dot->at(2) * (std::sin(u->at(2)) - std::sin(last_u->at(2)));
+    //     _odom_msg.pose.pose.position.y = _last_pose.position.y + u_dot->at(0) / u_dot->at(2) * (std::cos(u->at(2)) - std::cos(last_u->at(2)));
+    //     _odom_msg.pose.pose.position.z = 0;
 
-    }
+    // }
     
-    // We only know thetaz from the encoder, the other will be taken from the IMU
-    _odom_msg.pose.pose.orientation.w = std::cos(u->at(2) * 0.5);
-    _odom_msg.pose.pose.orientation.x = 0;
-    _odom_msg.pose.pose.orientation.y = 0;
-    _odom_msg.pose.pose.orientation.z = std::sin(u->at(2) * 0.5);
+    // // We only know thetaz from the encoder, the other will be taken from the IMU
+    // _odom_msg.pose.pose.orientation.w = std::cos(u->at(2) * 0.5);
+    // _odom_msg.pose.pose.orientation.x = 0;
+    // _odom_msg.pose.pose.orientation.y = 0;
+    // _odom_msg.pose.pose.orientation.z = std::sin(u->at(2) * 0.5);
 
     // _transform.header.stamp = node_->get_clock()->now();
     // _transform.child_frame_id = "base_link";
