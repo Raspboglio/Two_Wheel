@@ -62,7 +62,7 @@ K2 = 1/2 * m_w * v2^2 + 1/2 * omega2' * Gamma_w * omega2;
 K3 = 1/2 * m_b * v3_real^2 + 1/2 * omega3' * Gamma_b * omega3;
 
 K = K1 + K2 + K3;
-U = l*cos(u(2))*g;
+U = m_b*l*cos(u(2))*g;
 %% Lagrange
 
 L = simplify(K - U);
@@ -75,6 +75,9 @@ for n = 1 : 3
 end
 dL_du = conj(dL_du');
 EL = simplify(DE - dL_du);
+B = simplify([diff(DE(1), u_ddot(1)), diff(DE(1), u_ddot(2)), diff(DE(1), u_ddot(3)); ...
+    diff(DL(2), u_ddot(1)), diff(DL(2), u_ddot(2)), diff(DE(2), u_ddot(3)); ...
+    diff(dL_du(3), u_ddot(1)), diff(DdL_du(3), u_ddot(2)), diff(DL(3), u_ddot(3));]);
 EL_latex = latex(EL);
 
 % X={u(1), u_dot(1), u(2), u_dot(2),u(3), u_dot(3)};
@@ -88,13 +91,13 @@ EL_latex = latex(EL);
 %From DE we ca+n build B
 
 B= [3*m_w+2*Gamma_w_yy/(2*r^2),   l*m_w,            0;
-   -l*m_w,                  Gamma_b_yy+l^2*m_w,     0;
+   l*m_w,                  Gamma_b_yy+l^2*m_w,     0;
     0                       0                       Gamma_b_zz+2*Gamma_w_zz+d^2*m_w/2+Gamma_w_yy*d^2/(2*r^2)];
 %C results to be 0
 %g
 G = [0;-g*l*sin(u(2));0];
 
-EL = B*u_ddot - G - [f; M_y; M_z] == zeros(3,1);
+EL = B*u_ddot + G - [f; M_y; M_z] == zeros(3,1);
 
 [VF,Ysubs] = odeToVectorField(EL);
 
