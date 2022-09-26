@@ -25,7 +25,10 @@ controller_interface::return_type TwoWheelMPCController::init(const std::string 
     auto_declare<double>("wheel_redius", 0);
     auto_declare<double>("wheel_distance", 0);
     auto_declare<double>("max_angle", 0);
-
+    auto_declare<double>("update_rate", 0);
+    auto_declare<std::vector<double>>("Q_diag", std::vector<double>(4, 0));
+    auto_declare<std::vector<double>>("R_diag", std::vector<double>(2, 0));
+    auto_declare<double>("prediction_horizon", 10);
     _last_pose.position.x = 0;
     _last_pose.position.y = 0;
     _last_pose.position.z = 0;
@@ -69,6 +72,12 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
     max_angle = node_->get_parameter("max_angle").as_double();
     if(max_angle <= 0){
         RCLCPP_ERROR(node_->get_logger(), "max_angle should be specified and positive");
+        return CallbackReturn::ERROR;
+    }
+
+    update_rate = node_->get_parameter("update_rate").as_double();
+    if(update_rate <= 0){
+        RCLCPP_ERROR(node_->get_logger(), "Error, update rate must be bigger than 0");
         return CallbackReturn::ERROR;
     }
 
@@ -118,21 +127,43 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
     _odom_pub = node_->create_publisher<nav_msgs::msg::Odometry>("/odom",10);
     // _tf_pub = node_->create_publisher<tf2_msgs::msg::TFMessage>("/tf",50);
     
-    _sub = node_->create_subscription<two_wheel_control_msgs::msg::Command>("two_wheel_command", 10, std::bind(&TwoWheelMPCController::subCallback, this,  std::placeholders::_1));
+    _sub = node_->create_subscription<geometry_msgs::msg::Twist>("two_wheel_command", 10, std::bind(&TwoWheelMPCController::subCallback, this,  std::placeholders::_1));
     if(_sub == nullptr){
         RCLCPP_ERROR(node_->get_logger(), "Subscription creation failed");
         return CallbackReturn::ERROR;
     }
 
+    std::vector<double> Q_diag = node_->get_parameter("Q_diag").as_double_array();
+    if(Q_diag.size() != 4){
+        RCLCPP_ERROR(node_->get_logger(), "Q_diag must be a vector of length 4");
+        return CallbackReturn::ERROR;
+    }
+    std::vector<double> R_diag = node_->get_parameter("R_diag").as_double_array();
+    if(R_diag.size() != 2){
+        RCLCPP_ERROR(node_->get_logger(), "R_diag must be a vector of length 2");
+        return CallbackReturn::ERROR;
+    }
+
+    double Hp = node_->get_parameter("prediction_horizon").as_double();
+
+
+    pos << 0, 0, 0;
+    last_pos = pos;
+    state << 0, 0, 0, 0;
+    error = state;
+    goal = state;
+
     A_gen <<
-        I_wheel[2]+3*m_w, l*m_w, 0,
-        l*m_w, m_w*l*l+I_body[2], 0,
-        0, 0, I_body[3]+2*I_wheel[3]+d*d*m_w/2+I_wheel[2]*d*d/(2*r*r);
+        0, 0, 1, 0,
+        0, I_wheel[2]+3*m_w, l*m_w, 0,
+        0, l*m_w, m_w*l*l+I_body[2], 0,
+        0, 0, 0, I_body[3]+2*I_wheel[3]+d*d*m_w/2+I_wheel[2]*d*d/(2*r*r);
 
     T << 
-        1/r, -1, -d/(2*r),
-        1/r, -1, d/(2*r), 
-        0, 1, 0, 
+        1, 0, 0, 0, 
+        0, 1/r, -1, d/(2*r),
+        0, 1/r, -1, -d/(2*r), 
+        0, 0, 1, 0;
         
 
     // x = T_inv * x_hat where x is the real controllable state variables (RW, LW, theta_y) and x_hat si the theretical state variable (p, theta_y, theta_z)
@@ -140,36 +171,41 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
 
     // TODO: B coefficient should take into account inertias since u is not an acceleration but an effort
     B <<
-        1, 0,
-        0, 1,
+        0, 0,
+        -1, 0,
+        0, -1,
         0, 0;
 
-    C << 1, 0, 0,
-        0, 1, 0, 
-        0, 0, 1;
+    C << 
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0, 
+        0, 0, 0, 1;
  
     D.setZero();
 
     Q << 
-        1, 0, 0,
-        0, 1, 0,
-        0, 0, 0;
+        Q_diag[0], 0, 0, 0,
+        0, Q_diag[1], 0, 0,
+        0, 0, Q_diag[2], 0,
+        0, 0, 0, Q_diag[3]; 
+
     
     R <<
-        1, 0,
-        0, 1;
+        R_diag[0], 0,
+        0, R_diag[1];
 
     const int s_dim = TwoWheelDynamic::STATE_DIM, c_dim = TwoWheelDynamic::CON_DIM;
 
-
-    std::shared_ptr<ct::core::ControlledSystem<s_dim, c_dim>> system_dynamics(new TwoWheelDynamic(A, B));
+    std::shared_ptr<ct::core::ControlledSystem<s_dim, c_dim>> system_dynamics(new TwoWheelDynamic(I_body, I_wheel, m_b, m_w, l, l / 2 + r, r, d));
     
     std::shared_ptr<ct::core::SystemLinearizer<s_dim, c_dim>> linearizer(new ct::core::SystemLinearizer<s_dim, c_dim>(system_dynamics));
 
     std::shared_ptr<ct::optcon::CostFunctionQuadratic<s_dim, c_dim>> cost_fun( new ct::optcon::CostFunctionAnalytical<s_dim, c_dim>() );
 
-    std::shared_ptr<ct::optcon::TermQuadratic<s_dim, c_dim>> final_cost(Q,R);
-    std::shared_ptr<ct::optcon::TermQuadratic<s_dim, c_dim>> inter_cost(Q,R);
+    
+    std::shared_ptr<ct::optcon::TermQuadratic<s_dim, c_dim>> final_cost( new ct::optcon::TermQuadratic<s_dim, c_dim>(Q,R) );
+    std::shared_ptr<ct::optcon::TermQuadratic<s_dim, c_dim>> inter_cost( new ct::optcon::TermQuadratic<s_dim, c_dim>(Q,R) );
     // TODO: add config file dir
     cost_fun->addFinalTerm(final_cost);
     cost_fun->addIntermediateTerm(inter_cost);
@@ -177,13 +213,15 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
     ct::core::StateVector<s_dim> x0;
     x0.setZero();
 
-    ct::core::Time time_horizon = 3;
+
+    //TODO: 10 is the number of iteration
+    ct::core::Time time_horizon = Hp/update_rate;
 
     ct::optcon::ContinuousOptConProblem<s_dim, c_dim> optConProblem(
         time_horizon, x0, system_dynamics, cost_fun, linearizer);
 
     ct::optcon::NLOptConSettings ilqr_settings;
-    ilqr_settings.dt = 0.01;  // the control discretization in [sec]
+    ilqr_settings.dt = 1/update_rate;  // the control discretization in [sec]
     ilqr_settings.integrator = ct::core::IntegrationType::EULERCT;
     ilqr_settings.discretization = ct::optcon::NLOptConSettings::APPROXIMATION::FORWARD_EULER;
     ilqr_settings.max_iterations = 10;
@@ -192,8 +230,15 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
     ilqr_settings.printSummary = true;
     size_t K = ilqr_settings.computeK(time_horizon);
 
-    // ct::optcon::NLOptConSolver<s_dim, c_dim>::Policy_t init_controller()
+    ct::core::FeedbackArray<s_dim, c_dim> u0_fb(K, ct::core::FeedbackMatrix<s_dim, c_dim>::Zero());
+    ct::core::ControlVectorArray<c_dim> u0_ff(K, ct::core::ControlVector<c_dim>::Zero());
+    ct::core::StateVectorArray<s_dim> x_ref_init(K + 1, x0);
+    ct::optcon::NLOptConSolver<s_dim, c_dim>::Policy_t init_controller(x_ref_init, u0_ff, u0_fb, ilqr_settings.dt);
+
     ct::optcon::NLOptConSolver<s_dim, c_dim> nl_solver(optConProblem, ilqr_settings);
+
+    nl_solver.setInitialGuess(init_controller);
+
     nl_solver.solve();
     ct::core::StateFeedbackController<s_dim, c_dim> nl_controller = nl_solver.getSolution(); 
 
@@ -201,7 +246,7 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
 
     // Init MPC 
     // Reuse ilqr settings
-    ilqr_settings.max_iterations = 1;
+    ilqr_settings.max_iterations = 2;
     ilqr_settings.printSummary = false;
 
     ct::optcon::mpc_settings mpc_settings;
@@ -210,18 +255,12 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
     mpc_settings.postTruncation_ = true;
     mpc_settings.measureDelay_ = true;
     mpc_settings.delayMeasurementMultiplier_ = 1.0;
-    mpc_settings.mpc_mode = ct::optcon::MPC_MODE::FIXED_FINAL_TIME;
+    mpc_settings.mpc_mode = ct::optcon::MPC_MODE::CONSTANT_RECEDING_HORIZON;
     mpc_settings.coldStart_ = false;
 
-    ct::optcon::MPC<ct::optcon::NLOptConSolver<s_dim, c_dim>> mpc(optConProblem, ilqr_settings, mpc_settings);
+    _mpc = std::make_unique<ct::optcon::MPC<ct::optcon::NLOptConSolver<s_dim, c_dim>>>(optConProblem, ilqr_settings, mpc_settings);
 
-    mpc.setInitialGuess(nl_controller);
-
-
-
-    
-
-    
+    _mpc->setInitialGuess(nl_controller);
 
     // Init B
     // *B = {{I_wheel[2]+3*m_w, l*m_w, 0}, 
@@ -238,11 +277,12 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
     // T->print();
     // std::cout << "T out: " << std::endl;
     // T_out->print();
-
+    
     return CallbackReturn::SUCCESS;
 }
 
 rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWheelMPCController::on_activate(const rclcpp_lifecycle::State & previous_state){
+    start_time = (double)(1e-9 * node_->get_clock()->now().nanoseconds());
     return CallbackReturn::SUCCESS;
 }
        
@@ -252,19 +292,76 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn TwoWhe
 }
 
 controller_interface::return_type TwoWheelMPCController::update(){
+    last_pos = pos;
     
+    x = this->state_interfaces_[2].get_value();
+    y = this->state_interfaces_[3].get_value();
+    z = this->state_interfaces_[4].get_value();
+    w = this->state_interfaces_[5].get_value();
+    pos(0) = state_interfaces_.at(0).get_value();
+    pos(1) = state_interfaces_.at(1).get_value();
+
+    if(std::abs(2*(w*y - z*x)) < 1){
+        pos(2) = std::asin(2*(w*y - z*x));
+    }else{
+        pos(2) = std::asin(2*(w*y - z*x) + std::copysign(1,(w*y - z*x)));
+    }
+
+    // Estimate speed from positions, maybe some more advanced method?
+    state << pos(2), (pos(0) - last_pos(0)) * update_rate, (pos(1) - last_pos(1)) * update_rate, (pos(2) - last_pos(2)) * update_rate;
+    error = -(goal - state);
+    cur_time = (double)(1e-9 * node_->get_clock()->now().nanoseconds());
+
+    
+    _mpc->prepareIteration(cur_time);
+
+    success = _mpc->finishIteration(error, cur_time - start_time, new_policy, ts_new_policy);
+
+    if(!success){
+        RCLCPP_ERROR(node_->get_logger(), "MPC couldn't find a solution");
+        return controller_interface::return_type::ERROR;
+    }
+
+
+    auto ctrl = _mpc->getSolver().getControlTrajectory();
+    auto traj = _mpc->getSolver().getStateTrajectory();
+    // new_policy.computeControl(error, cur_time - start_time, control);
+    // ct::core::DiscreteArray<ct::core::FeedbackMatrix<4,2>> feedback = new_policy.K();
+
+    control = ctrl[0];
+
+    // std::cout << "\nerror: \n" << error << "\ncommand: \n" << control << std::endl;
+    
+    // ctrl.print();
+    traj.print();
+
+
+    for(long int i = 0; i < 2; i++){
+        command_interfaces_.at(i).set_value(control(i));
+    }
+
+    _pub_msg.p = pos(0);
+    _pub_msg.thetay = pos(1);
+    _pub_msg.thetaz = pos(2);
+    _pub_msg.v = state(1);
+    _pub_msg.omegay = state(2);
+    _pub_msg.omegaz = state(3);
+
+    _state_pub->publish(_pub_msg);
+
 }
 
-void TwoWheelMPCController::subCallback(const two_wheel_control_msgs::msg::Command::SharedPtr msg){
+// TODO: check T
+void TwoWheelMPCController::subCallback(const geometry_msgs::msg::Twist::SharedPtr msg){
     
-    
-    // q_w->at(0) = msg->p;
-    // q_w->at(2) = msg->thetaz;
+    goal(0) = 0;
+    goal(1) = msg->linear.x;
+    goal(2) = 0;
+    goal(3) = msg->angular.z;
 
-    // q_w_dot->at(0) = msg->p_dot;
-    // q_w_dot->at(2) = msg->thetaz_dot;
+    goal = T * goal;
     
-    // RCLCPP_INFO(this->node_->get_logger(), "Received new command p:\n%.4f\n%.4f\n v: \n%.4f\n%.4f", q_w->at(0), q_w->at(2), q_w_dot->at(0), q_w_dot->at(2));
+    RCLCPP_INFO(this->node_->get_logger(), "Received new goal wr: %.2f wl: %.2f ",goal(1), goal(2));
 }
 
 void TwoWheelMPCController::updateOdom(){

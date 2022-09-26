@@ -60,7 +60,7 @@ ament_target_dependencies(${PROJECT_NAME}
 )
 target_compile_definitions(${PROJECT_NAME} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
 pluginlib_export_plugin_description_file(controller_interface two_wheel_ID_controller.xml)
-pluginlib_export_plugin_description_file(controller_interface two_wheel_ID_controller.xml)
+pluginlib_export_plugin_description_file(controller_interface two_wheel_MPC_controller.xml)
 
 install(DIRECTORY 
   include/  
