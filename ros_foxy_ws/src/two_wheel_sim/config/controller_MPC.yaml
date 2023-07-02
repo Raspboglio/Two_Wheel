@@ -1,0 +1,46 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100 
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    two_wheel_control:
+      type: two_wheel_control/TwoWheelMPCController 
+
+    use_sim_time: true
+      
+
+
+two_wheel_control:
+  ros__parameters:
+    update_rate: 100.0
+
+    body_I_diag:
+      - 3.3
+      - 2.0
+      - 2.0
+    wheel_I_diag:
+      - 0.00025
+      - 0.0005
+      - 0.00025
+    body_mass: 20.0
+    wheel_mass: 0.1
+    body_height: 0.5
+    wheel_radius: 0.1
+    wheel_distance: 1.01
+
+    Q_diag:
+      - 100.0
+      - 0.2
+      - 0.2
+      - 10.0
+
+    R_diag:
+      - 0.0
+      - 0.0
+
+    max_angle: 0.7
+
+    prediction_horizon: 10.0
+    

@@ -1,0 +1,7 @@
+<library path="two_wheel_control">
+    <class name="two_wheel_control/TwoWheelSldingMPCController" type="two_wheel_controller::TwoWheelSlidingMPCController" base_class_type="controller_interface::ControllerInterface">
+        <description>
+            Sliding and MPC controller (sliding is used for the balancing control) for the two wheel robot
+        </description>
+    </class>
+</library>
