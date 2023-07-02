@@ -39,7 +39,9 @@ add_library(${PROJECT_NAME}
   SHARED
   src/two_wheel_ID_controller.cpp
   src/two_wheel_MPC_controller.cpp
+  src/two_wheel_Mixed_controller.cpp
 )
+
 
 target_include_directories(${PROJECT_NAME}
   PRIVATE
