@@ -1,0 +1,28 @@
+balancing_controller:
+  ros__parameters:
+
+    update_frequency: 100.0
+
+    body_lenght: 
+      - 0.4
+      - 1.0
+      - 1.0
+
+    robot_inertia:
+      - 3.3
+      - 2.0
+      - 2.0
+
+    body_mass: 20.0
+
+    wheel_mass: 0.1
+
+    wheel_radius: 0.2
+
+    k_gains:
+      - 7.0
+      - 8.0
+
+    nu_gain: 1.0
+    
+    use_sim_time: True

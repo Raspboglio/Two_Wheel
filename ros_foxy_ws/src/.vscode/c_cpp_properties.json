@@ -1,0 +1,23 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/lorenzo/Two_Wheel/ros_foxy_ws/install/include/**",
+        "/opt/ros/foxy/include/**",
+        "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_control/include/**",
+        "/home/lorenzo/Two_Wheel/ros_foxy_ws/src/two_wheel_test/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

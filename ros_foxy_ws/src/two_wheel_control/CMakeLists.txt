@@ -35,21 +35,35 @@ find_package(tf2_msgs REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
-add_library(${PROJECT_NAME}
+add_executable(two_wheel_sliding_balance
+  src/two_wheel_sliding_balance.cpp
+)
+
+target_include_directories(two_wheel_sliding_balance
+  PRIVATE
+  include
+)
+
+ament_target_dependencies(two_wheel_sliding_balance
+  rclcpp
+  two_wheel_control_msgs
+)
+
+add_library(two_wheel_control
   SHARED
   src/two_wheel_ID_controller.cpp
   src/two_wheel_MPC_controller.cpp
-  src/two_wheel_Mixed_controller.cpp
+  src/two_wheel_EKF.cpp
+  src/two_wheel_input_forward.cpp
 )
 
 
-target_include_directories(${PROJECT_NAME}
+target_include_directories(two_wheel_control
   PRIVATE
   include
-  include/libmpc/include
 )
 
-ament_target_dependencies(${PROJECT_NAME}
+ament_target_dependencies(two_wheel_control
   controller_interface
   hardware_interface
   pluginlib
@@ -60,18 +74,34 @@ ament_target_dependencies(${PROJECT_NAME}
   nav_msgs
   tf2_msgs
 )
-target_compile_definitions(${PROJECT_NAME} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
+
+target_compile_definitions(two_wheel_control PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
 pluginlib_export_plugin_description_file(controller_interface two_wheel_ID_controller.xml)
 pluginlib_export_plugin_description_file(controller_interface two_wheel_MPC_controller.xml)
+pluginlib_export_plugin_description_file(controller_interface two_wheel_EKF.xml)
+pluginlib_export_plugin_description_file(controller_interface two_wheel_input_forward.xml)
 
 install(DIRECTORY 
   include/  
   DESTINATION include
 )
 
+install(DIRECTORY
+  config
+  launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
 install(
   TARGETS
-  ${PROJECT_NAME}
+  two_wheel_sliding_balance
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(
+  TARGETS
+  two_wheel_control
+  two_wheel_sliding_balance
   RUNTIME DESTINATION bin
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -91,7 +121,7 @@ ament_export_include_directories(
   include
 )
 ament_export_libraries(
-  ${PROJECT_NAME}
+  two_wheel_control
 )
 
 ament_package()

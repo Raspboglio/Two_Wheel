@@ -11,19 +11,22 @@ import xacro
 def generate_launch_description():
     gazebo_prefix = get_package_share_directory('gazebo_ros')
     two_wheel_prefix = get_package_share_directory('two_wheel_sim')
+    two_wheel_control_prefix = get_package_share_directory('two_wheel_control')
     gazebo_server = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([gazebo_prefix,'/launch/gzserver.launch.py']),
         # launch_arguments={'world':PathJoinSubstitution([two_wheel_prefix,'worlds','test_world'])}.items()
         launch_arguments={'pause' : 'true'}.items()
     )
+
     gazebo_client = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([gazebo_prefix,'/launch/gzclient.launch.py']),
     )
 
+
     
     two_wheel_urdf = Command([
         "xacro ",
-        PathJoinSubstitution([two_wheel_prefix ,"urdf","two_wheel_MPC.xacro.urdf"])
+        PathJoinSubstitution([two_wheel_prefix ,"urdf","two_wheel_mixed.xacro.urdf"])
     ])
     
     robot_state_publisher = Node(
@@ -52,12 +55,21 @@ def generate_launch_description():
         output='screen'
     )
     
-    load_two_wheel_controller = ExecuteProcess(
+    load_two_wheel_estimator = ExecuteProcess(
         cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
-             'two_wheel_control'],
+             'two_wheel_ekf'],
         output='screen'
     )
 
+    load_two_wheel_forward = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
+             'two_wheel_forward'],
+        output='screen'
+    )
+
+    balancing_controller = IncludeLaunchDescription(
+        launch_description_source=PythonLaunchDescriptionSource([two_wheel_control_prefix,"/launch/sliding_balance.launch.py"])
+        )
     
 
     return LaunchDescription([
@@ -65,6 +77,8 @@ def generate_launch_description():
         gazebo_client, 
         robot_state_publisher,
         spawn_node,
+        balancing_controller,
         load_joint_state_controller,
-        load_two_wheel_controller,
+        load_two_wheel_estimator,
+        load_two_wheel_forward,
     ])

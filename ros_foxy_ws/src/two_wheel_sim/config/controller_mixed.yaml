@@ -1,0 +1,26 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100 
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    two_wheel_ekf:
+      type: two_wheel_control/TwoWheelEKF
+
+    two_wheel_forward:
+      type: two_wheel_control/TwoWheelInputForward
+
+    use_sim_time: true
+      
+
+two_wheel_ekf:
+  ros__parameters:
+    update_frequency: 100.0
+
+    body_lenght:
+      - 0.4
+      - 1.0
+      - 1.0
+      
+    wheel_radius: 0.1

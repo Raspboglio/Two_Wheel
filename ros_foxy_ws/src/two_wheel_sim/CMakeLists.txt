@@ -26,7 +26,7 @@ install(DIRECTORY
   config
   worlds
   DESTINATION share/${PROJECT_NAME}
-  )
+)
 
 
 if(BUILD_TESTING)

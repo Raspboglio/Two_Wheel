@@ -22,6 +22,9 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Command.msg"
   "msg/State.msg"
   "msg/TuningCommand.msg"
+  "msg/MixedState.msg"
+  "msg/InputCommand.msg"
+  "msg/AccelerationReference.msg"
 )
 # uncomment the following section in order to fill in
 # further dependencies manually.
