@@ -112,16 +112,16 @@ private:
     void updateCallback();
 
     double s, a, b, y, y_dot;
-    double Fx;
+    double Fx, Mz;
     sliding_parameter params;
     sliding_gain gains;
     void slidingSurface();
 
-    std::vector<double> aref, aref_dot, aref_ddot;
+    std::vector<double> aref, aref_dot, aref_ddot, yawref_ddot;
     rclcpp::Subscription<two_wheel_control_msgs::msg::AccelerationReference>::SharedPtr _reference_sub;
     void referenceCallback(const two_wheel_control_msgs::msg::AccelerationReference::SharedPtr msg);
 
-    double aprev, aprev_dot, acur, acur_dot, acur_ddot;
+    double aprev, aprev_dot, acur, acur_dot, acur_ddot, yawcur_ddot;
     Eigen::Matrix<double, 3, 1> ref;
     void generateRef();
 

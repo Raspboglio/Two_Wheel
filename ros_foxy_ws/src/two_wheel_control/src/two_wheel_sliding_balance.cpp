@@ -10,8 +10,9 @@ void TwoWheelSlidingBalance::updateCallback(){
 
     generateRef();
     slidingSurface();
-    command_msg.mr = params.rw / 2 * (Fx);
-    command_msg.ml = params.rw / 2 * (Fx);
+    Mz = yawcur_ddot * params.inertia[2];
+    command_msg.mr = params.rw / 2 * (Fx + Mz);
+    command_msg.ml = params.rw / 2 * (Fx - Mz);
     _command_pub->publish(command_msg);
 }
 
@@ -36,19 +37,21 @@ void TwoWheelSlidingBalance::generateRef(){
         acur = aref[0];
         acur_dot = (acur - aprev) * update_frequency;
         acur_ddot = (acur_dot - aprev_dot) * update_frequency;
-
+        yawcur_ddot = yawref_ddot[0];
         if(aref.size() > 1){
             //Partial Trajectory 
             aref.erase(aref.begin());
+            yawref_ddot.erase(yawref_ddot.begin());
         }
     }else{
         //Full Trajectory
         acur = aref[0];
         acur_dot = aref_dot[0];
         acur_ddot = aref_ddot[0];
-
+        yawcur_ddot = yawref_ddot[0];
         if(aref.size() > 1){
             aref.erase(aref.begin());
+            yawref_ddot.erase(yawref_ddot.begin());
         }
         aref_dot.erase(aref_dot.begin());
         aref_ddot.erase(aref_ddot.begin());
@@ -81,6 +84,13 @@ void TwoWheelSlidingBalance::referenceCallback(const two_wheel_control_msgs::msg
         RCLCPP_ERROR(get_logger(), "In TwoWheelSlidingBalance reference acceleration vector can't be empty, keeping last");
         return;
     }
+    if(msg->yaw_ddot.size() == 0){
+        RCLCPP_ERROR(get_logger(), "In TwoWheelSlidingBalance reference yaw acceleration vector can't be empty, keeping last");
+        return;
+    }
+    if(msg->acc.size() != msg->yaw_ddot.size()){
+        RCLCPP_ERROR(get_logger(), "In TwoWheelSlidingBalance reference acceleration and reference yaw acceleration must have the same dimension, keeping last");
+    }
     // If at least one derivative reference is != 0 the dimension must agree
     if(msg->acc_dot.size() != 0 || msg->acc_ddot.size() != 0){
         if(msg->acc.size() != msg->acc_dot.size() || msg->acc.size() != msg->acc_ddot.size()){
@@ -91,6 +101,7 @@ void TwoWheelSlidingBalance::referenceCallback(const two_wheel_control_msgs::msg
     aref = msg->acc;
     aref_dot = msg->acc_dot;
     aref_ddot = msg->acc_ddot;
+    yawref_ddot = msg->yaw_ddot;
 }
 
 double TwoWheelSlidingBalance::accToAngle(double acc){

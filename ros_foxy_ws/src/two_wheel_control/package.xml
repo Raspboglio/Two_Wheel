@@ -18,6 +18,8 @@
   <depend>control_toolbox</depend>
   <depend>nav_msgs</depend>
   <depend>tf2_msgs</depend>
+  <depend>hpipm</depend>
+  <depend>blasfeo</depend>
 
   <!-- Non ROS2 dependencies 
   <depend>armadillo</depend>
